@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Thu May 20 16:22:40 IST 2021
+# Date created:         Thu May 20 19:01:28 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -54,14 +54,6 @@ spec:
       riskProfile: Default risk profile
       template: "${folder.fv}"
       folder: "${folder.fv}"
-    - name: gate teask
-      type: xlrelease.GateTask
-      conditions:
-      - name: New Condition
-        type: xlrelease.GateCondition
-      dependencies:
-      - type: xlrelease.Dependency
-        targetId: "${folder.fv}"
     - name: jenkins
       type: jenkins.Build
       jenkinsServer: localjenkins
