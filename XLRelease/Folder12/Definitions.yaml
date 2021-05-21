@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Fri May 21 14:41:05 IST 2021
+# Date created:         Fri May 21 15:29:44 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -136,18 +136,18 @@ spec:
   releaseTitle: Release created by a trigger 1
   template: Test template 1
   gitRepository: git_config_at_folder_level
-  commitId: 467a35efc71d34783c6743757277ff83581d5493
+  commitId: 068c3ba28c9c53e86f94699539484f8c9f8b27b9
 - name: Trigger 1
   type: git.Poll
   releaseTitle: release by gr
   template: Test template 1
   releaseFolder: Folder_3
   gitRepository: git_config_at_folder_level
-  commitId: 467a35efc71d34783c6743757277ff83581d5493
+  commitId: 068c3ba28c9c53e86f94699539484f8c9f8b27b9
 - name: Trigger 2
   type: git.Poll
   releaseTitle: Release to be created under 'folder3' by the trigger
   template: Test template 1
   releaseFolder: Folder_3
   gitRepository: git_config_at_folder_level
-  commitId: 467a35efc71d34783c6743757277ff83581d5493
+  commitId: 068c3ba28c9c53e86f94699539484f8c9f8b27b9
