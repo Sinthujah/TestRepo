@@ -31,3 +31,12 @@ spec:
     filters:
     - type: xlrelease.DateFilter
       timeFrame: LAST_MONTH
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.variable under folder_gr
+    value: abc
+- name: Jira config
+  type: jira.Server
+  url: https://digitalai.atlassian.net/
+  username: sinthuja@digital.ai
+  password: !value "jira_Server_Jira_config_password"
