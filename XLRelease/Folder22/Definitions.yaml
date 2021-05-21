@@ -1,0 +1,19 @@
+# Exported from:        http://minserver:5516/
+# Release version:      10.2.0-SNAPSHOT
+# Date created:         Fri May 21 15:34:35 IST 2021
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: Folder_2
+spec:
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.variable under folder_gr
+    value: abc
+- name: Jira config
+  type: jira.Server
+  url: https://digitalai.atlassian.net/
+  username: sinthuja@digital.ai
+  password: !value "jira_Server_Jira_config_password"
