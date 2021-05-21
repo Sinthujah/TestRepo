@@ -33,7 +33,7 @@ spec:
       timeFrame: LAST_MONTH
 - folderVariables:
   - type: xlrelease.StringVariable
-    key: folder.variable under folder_gr
+    key: folder.variable under folder_gr1
     value: abc
 - name: Jira config
   type: jira.Server
