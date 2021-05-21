@@ -27,7 +27,7 @@ spec:
     token: !value "xlrelease_GitHubOAuth2Token_token"
 - name: My Dashboard
   type: xlrelease.BlankDashboard
-  description: testing dashboard
+  description: test dashboard
   owner: admin
   tiles:
   - name: Active releases
