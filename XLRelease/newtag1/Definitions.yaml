@@ -1,0 +1,50 @@
+# Exported from:        http://minserver:5516/
+# Release version:      10.2.0-SNAPSHOT
+# Date created:         Fri May 21 18:03:05 IST 2021
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: Folder_1
+spec:
+- name: fol1_webhook_event
+  type: events.PostWebhookEndpoint
+  path: github_push2
+  authentication:
+    type: events.NoAuthentication
+- name: git_config_at_folder_level
+  type: git.Repository
+  variableMapping:
+    password: "${global.github_token}"
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
+- name: Testing git hub
+  type: xlrelease.GitHubScmConnectorConfig
+  repository: Sinthujah/TestRepo
+  credential:
+    type: xlrelease.GitHubOAuth2Token
+    token: !value "xlrelease_GitHubOAuth2Token_token"
+- name: My Dashboard
+  type: xlrelease.BlankDashboard
+  description: testing dashboard
+  owner: admin
+  tiles:
+  - name: Active releases
+    type: live.ReleasesTile
+    row: 0
+    col: 0
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: Folder_1
+  - name: Current applications
+    type: deployment.CurrentApplicationsTile
+    row: 0
+    col: 2
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
