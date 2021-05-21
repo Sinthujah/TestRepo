@@ -25,7 +25,7 @@ spec:
   credential:
     type: xlrelease.GitHubOAuth2Token
     token: !value "xlrelease_GitHubOAuth2Token_token"
-- name: My Dashboard
+- name: My Dashboard1
   type: xlrelease.BlankDashboard
   description: testing dashboard
   owner: admin
