@@ -101,7 +101,7 @@ spec:
       - name: task 2
         type: xlrelease.Task
   riskProfile: Default risk profile
-- name: 2nd dashboard
+- name: Second dashboard
   type: xlrelease.BlankDashboard
   owner: admin
 - name: My Dashboard
