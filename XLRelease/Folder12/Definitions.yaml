@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Fri May 21 16:43:37 IST 2021
+# Date created:         Mon Jun 14 17:31:12 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,26 +8,105 @@ kind: Templates
 metadata:
   home: Folder_1
 spec:
-- name: fol1_webhook_event
-  type: events.PostWebhookEndpoint
-  path: github_push2
-  authentication:
-    type: events.NoAuthentication
-- name: git_config_at_folder_level
-  type: git.Repository
-  variableMapping:
-    password: "${global.github_token}"
-  url: https://github.com/Sinthujah/TestRepo
-  username: sinthujah
-- name: Testing git hub
-  type: xlrelease.GitHubScmConnectorConfig
-  repository: Sinthujah/TestRepo
-  credential:
-    type: xlrelease.GitHubOAuth2Token
-    token: !value "xlrelease_GitHubOAuth2Token_token"
-- name: My Dashboard1
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.ffff
+    value: !value "xlrelease_PasswordStringVariable_folder_ffff_value"
+  - type: xlrelease.StringVariable
+    key: folder.fv
+    value: def
+- template: Template 3
+  scheduledStartDate: 2021-06-07T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: gate task
+      type: xlrelease.GateTask
+    - name: rrr
+      type: xlrelease.Task
+  riskProfile: Default risk profile
+- template: Template 5
+  scheduledStartDate: 2021-06-07T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: task group
+      type: xlrelease.SequentialGroup
+      tasks:
+      - name: task 1
+        type: xlrelease.Task
+      - name: task 2
+        type: xlrelease.Task
+  riskProfile: Default risk profile
+- template: Test Template 2
+  scheduledStartDate: 2021-04-29T09:00:00+05:30
+  dueDate: 2021-04-29T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Task 12
+      type: xlrelease.Task
+  riskProfile: Default risk profile
+- template: Test template 1
+  scheduledStartDate: 2021-04-28T09:00:00+05:30
+  dueDate: 2021-04-28T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: "${folder.variable under folder_gr}"
+      type: xlrelease.Task
+    - name: create release task 1
+      type: xlrelease.CreateReleaseTask
+      riskProfile: Default risk profile
+      template: "${folder.fv}"
+      folder: "${folder.fv}"
+    - name: jenkins
+      type: jenkins.Build
+      jenkinsServer: localjenkins
+      jobName: test
+      variableMapping:
+        pythonScript.apiToken: "${folder.ffff}"
+    - name: jython task
+      type: xlrelease.ScriptTask
+      script: print(folderVariables)
+  riskProfile: Default risk profile
+- template: template 4
+  scheduledStartDate: 2021-06-07T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: task 1
+      type: xlrelease.Task
+      taskFailureHandlerEnabled: true
+      taskRecoverOp: RUN_SCRIPT
+    - name: task 2
+      type: xlrelease.CreateReleaseTask
+      newReleaseTitle: via a task
+      riskProfile: Default risk profile
+      template: Test Folder/TestTemplate1
+      folder: Folder_2
+  scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_template_4_scriptUserPassword"
+  riskProfile: Default risk profile
+- template: template 6
+  scheduledStartDate: 2021-06-07T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: group 1
+      type: xlrelease.ParallelGroup
+      tasks:
+      - name: tsak 1
+        type: xlrelease.Task
+      - name: task 2
+        type: xlrelease.Task
+  riskProfile: Default risk profile
+- name: 2nd dashboard
   type: xlrelease.BlankDashboard
-  description: testing dashboard
+  owner: admin
+- name: My Dashboard
+  type: xlrelease.BlankDashboard
+  description: Sinthuja dashboard
   owner: admin
   tiles:
   - name: Active releases
