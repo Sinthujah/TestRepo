@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Tue Jun 29 16:36:40 IST 2021
+# Date created:         Tue Jun 29 16:38:09 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,10 +8,73 @@ kind: Templates
 metadata:
   home: Folder_1
 spec:
-- folderVariables:
-  - type: xlrelease.PasswordStringVariable
-    key: folder.ffff
-    value: !value "xlrelease_PasswordStringVariable_folder_ffff_value"
-  - type: xlrelease.StringVariable
-    key: folder.fv
-    value: def
+- name: Trigger using webhook event
+  type: events.EventBasedTrigger
+  enabled: false
+  mappedProperties:
+  - type: xlrelease.StringValue
+    targetProperty: releaseTitle
+    value: Release created by the webhook event trigger under long folder name
+  - type: xlrelease.StringValue
+    targetProperty: template
+    value: Test template 1
+  - type: xlrelease.StringValue
+    targetProperty: releaseFolder
+    value: Long folder name kdweh12u3oi21embckjfih243iu1834989e3bekj32keh32e9832e21ekj21eh
+      e3iu2ye832 ej32geiy328ey9832 iuiu32yeiu32 iueiu32yeiu32e geiu32eiuy32ue iueiu32yeiu32eiu32e
+      jchdsiuyfiewy3 22n3iue32e ueiu32iueiu32he32ehjbjbej32eiu32uyei8 iuhduihiuew
+      iuei
+  triggerActionType: xlrelease.CreateReleaseFromTemplateAction
+  eventSource: testing webhook
+  eventType: events.HttpRequestEvent
+- name: Trigger with empty folder test 1
+  type: events.EventBasedTrigger
+  enabled: false
+  mappedProperties:
+  - type: xlrelease.StringValue
+    targetProperty: releaseTitle
+    value: release 1234
+  - type: xlrelease.StringValue
+    targetProperty: template
+    value: Test template 1
+  triggerActionType: xlrelease.CreateReleaseFromTemplateAction
+  eventSource: fol1_webhook_event
+  eventType: events.HttpRequestEvent
+- name: Webhook event Trigger - no folder selected
+  type: events.EventBasedTrigger
+  enabled: false
+  mappedProperties:
+  - type: xlrelease.StringValue
+    targetProperty: releaseTitle
+    value: Release - no folder selected
+  - type: xlrelease.StringValue
+    targetProperty: template
+    value: Test template 1
+  triggerActionType: xlrelease.CreateReleaseFromTemplateAction
+  eventSource: fol1_webhook_event
+  eventType: events.HttpRequestEvent
+- name: Git poll trigger - no folder
+  type: git.Poll
+  description: testing the triggers
+  enabled: false
+  periodicity: "5"
+  releaseTitle: Release created by a trigger 1
+  template: Test template 1
+  gitRepository: My test git repo
+  commitId: b019ebca2e2a3a82282d86acb56294523bed68cb
+- name: Trigger 1
+  type: git.Poll
+  enabled: false
+  releaseTitle: release by gr
+  template: Test template 1
+  releaseFolder: Folder_3
+  gitRepository: git_config_at_folder_level
+  commitId: b019ebca2e2a3a82282d86acb56294523bed68cb
+- name: Trigger 2
+  type: git.Poll
+  enabled: false
+  releaseTitle: Release to be created under 'folder3' by the trigger
+  template: Test template 1
+  releaseFolder: Folder_3
+  gitRepository: git_config_at_folder_level
+  commitId: b019ebca2e2a3a82282d86acb56294523bed68cb
