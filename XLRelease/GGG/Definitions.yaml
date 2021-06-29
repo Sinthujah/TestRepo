@@ -1,0 +1,74 @@
+# Exported from:        http://minserver:5516/
+# Release version:      10.2.0-SNAPSHOT
+# Date created:         Tue Jun 29 17:46:10 IST 2021
+
+---
+apiVersion: xl-release/v1
+kind: Permissions
+metadata:
+  home: Versioning test folder
+spec:
+- directory: "."
+  teams:
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
