@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Tue Jun 29 16:33:03 IST 2021
+# Date created:         Tue Jun 29 16:36:40 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,81 +8,10 @@ kind: Templates
 metadata:
   home: Folder_1
 spec:
-- name: 2nd dashboard
-  type: xlrelease.BlankDashboard
-  owner: admin
-- name: Dashboard 2
-  type: xlrelease.BlankDashboard
-  owner: admin
-- name: My Dashboard
-  type: xlrelease.BlankDashboard
-  description: Sinthuja dashboard
-  owner: admin
-  tiles:
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: Folder_1
-  - name: Current applications
-    type: deployment.CurrentApplicationsTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-- name: My Dashboard 1
-  type: xlrelease.BlankDashboard
-  description: Sinthuja dashboard
-  owner: admin
-  tiles:
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: Folder_1
-  - name: Current applications
-    type: deployment.CurrentApplicationsTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-- name: My Dashboard one
-  type: xlrelease.BlankDashboard
-  description: Sinthuja dashboard
-  owner: admin
-  tiles:
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: Folder_1
-  - name: Current applications
-    type: deployment.CurrentApplicationsTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-- name: Second dashboard
-  type: xlrelease.BlankDashboard
-  owner: admin
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.ffff
+    value: !value "xlrelease_PasswordStringVariable_folder_ffff_value"
+  - type: xlrelease.StringVariable
+    key: folder.fv
+    value: def
