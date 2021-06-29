@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.2.0-SNAPSHOT
-# Date created:         Tue Jun 29 16:15:57 IST 2021
+# Date created:         Tue Jun 29 16:27:15 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,64 +8,9 @@ kind: Templates
 metadata:
   home: Folder_1
 spec:
-- name: fol1_webhook_event
-  type: events.PostWebhookEndpoint
-  path: github_push2
-  authentication:
-    type: events.NoAuthentication
-- name: git_config_at_folder_level
-  type: git.Repository
-  variableMapping:
-    password: "${global.github_token}"
-  url: https://github.com/ASROrg/TestRepo1
-  username: sinthujah
-  proxyHost: 192.168.0.113
-  proxyPort: "80"
-  proxyUsername: Administrator
-  proxyPassword: !value "git_Repository_git_config_at_folder_level_proxyPassword"
-  proxyDomain: WinGate
-- name: new connection
-  type: git.Repository
-  variableMapping:
-    password: "${global.github_token}"
-  url: https://github.com/Sinthujah/TestRepo
-  username: sinthujah
-- name: folder_level_jenkins_config
-  type: jenkins.Server
-  url: http://192.168.0.147:8080
-  username: testuser
-  password: !value "jenkins_Server_folder_level_jenkins_config_password"
-  proxyHost: 192.168.0.113
-  proxyPort: "80"
-  proxyUsername: Administrator
-  proxyPassword: !value "jenkins_Server_folder_level_jenkins_config_proxyPassword"
-  proxyDomain: WinGate
-- name: folder_level_jira
-  type: jira.Server
-  variableMapping:
-    apiToken: "${global.JiraToken}"
-  url: https://digitalai.atlassian.net/
-  username: sinthuja@digital.ai
-  password: !value "jira_Server_folder_level_jira_password"
-  proxyHost: 192.168.0.113
-  proxyPort: "80"
-  proxyUsername: Administrator
-  proxyPassword: !value "jira_Server_folder_level_jira_proxyPassword"
-  proxyDomain: WinGate
-- name: folder_level_nexus
-  type: nexus.Server
-  url: http://192.168.0.147:8081/
-  username: admin
-  password: !value "nexus_Server_folder_level_nexus_password"
-  proxyHost: 192.168.0.113
-  proxyPort: "80"
-  proxyUsername: Administrator
-  proxyPassword: !value "nexus_Server_folder_level_nexus_proxyPassword"
-  proxyDomain: WinGate
-  serverVersion: Nexus v3+
-- name: Testing git hub
-  type: xlrelease.GitHubScmConnectorConfig
-  repository: Sinthujah/TestRepo
-  credential:
-    type: xlrelease.GitHubOAuth2Token
-    token: !value "xlrelease_GitHubOAuth2Token_token"
+- pattern: jhkewhf ew fi ewfyewo ffoewf ewyfo ewfoewyf ew foyoewyf oewf ewfoewuofuewo
+    ckdsckdshofiuwe foewfw dcwlefoiuewof dchewofcoe o fwlehfohoewfo wef oewfoewuf
+    ifbyiewufi ew fef iyewi f ewif yiew fy ewi yfiw yeifdisycidsciewqf ec eofyoewf
+    dskcdskvcoiewyovc dskjc
+  stages:
+  - stage: New Stage
