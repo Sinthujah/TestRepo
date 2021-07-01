@@ -10,7 +10,7 @@ metadata:
 spec:
 - directory: "."
   teams:
-  - name: Folder Owner
+  - name: Folder Owner1
     users:
     - admin
     permissions:
