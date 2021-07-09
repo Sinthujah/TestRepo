@@ -8,6 +8,6 @@ kind: Templates
 metadata:
   home: hs1
 spec:
-- name: My Dashboard
+- name: My Dashboard 2
   type: xlrelease.BlankDashboard
   owner: admin
