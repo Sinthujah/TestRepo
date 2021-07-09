@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
-# Release version:      10.2.0-SNAPSHOT
-# Date created:         Thu Jul 01 19:15:44 IST 2021
+# Release version:      10.2.0-706.113
+# Date created:         Fri Jul 09 16:49:24 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,93 +8,12 @@ kind: Templates
 metadata:
   home: Folder_1
 spec:
-- template: Template 3
-  scheduledStartDate: 2021-06-07T09:00:00+05:30
-  dueDate: 2021-06-07T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: gate task
-      type: xlrelease.GateTask
-    - name: rrr
-      type: xlrelease.Task
-  riskProfile: Default risk profile
-- template: Template 5
-  scheduledStartDate: 2021-06-07T09:00:00+05:30
-  dueDate: 2021-06-07T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: task group
-      type: xlrelease.SequentialGroup
-      tasks:
-      - name: task 1
-        type: xlrelease.Task
-      - name: task 2
-        type: xlrelease.Task
-  riskProfile: Default risk profile
-- template: Test Template 2
-  scheduledStartDate: 2021-04-29T09:00:00+05:30
-  dueDate: 2021-04-29T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: Task 12
-      type: xlrelease.Task
-  riskProfile: Default risk profile
-- template: Test template 1
-  scheduledStartDate: 2021-04-28T09:00:00+05:30
-  dueDate: 2021-04-28T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: "${folder.variable under folder_gr}"
-      type: xlrelease.Task
-    - name: create release task 1
-      type: xlrelease.CreateReleaseTask
-      riskProfile: Default risk profile
-      template: "${folder.fv}"
-      folder: "${folder.fv}"
-    - name: jenkins
-      type: jenkins.Build
-      jenkinsServer: localjenkins
-      jobName: test
-      variableMapping:
-        pythonScript.apiToken: "${folder.ffff}"
-    - name: jython task
-      type: xlrelease.ScriptTask
-      script: print(folderVariables)
-  riskProfile: Default risk profile
-- template: template 4
-  scheduledStartDate: 2021-06-07T09:00:00+05:30
-  dueDate: 2021-06-07T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: task 1
-      type: xlrelease.Task
-      taskFailureHandlerEnabled: true
-      taskRecoverOp: RUN_SCRIPT
-    - name: task 2
-      type: xlrelease.CreateReleaseTask
-      newReleaseTitle: via a task
-      riskProfile: Default risk profile
-      template: Test Folder/TestTemplate1
-      folder: Folder_2
-  scriptUsername: admin
-  scriptUserPassword: !value "xlrelease_Release_template_4_scriptUserPassword"
-  riskProfile: Default risk profile
-- template: template 6
-  scheduledStartDate: 2021-06-07T09:00:00+05:30
-  dueDate: 2021-06-07T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: group 1
-      type: xlrelease.ParallelGroup
-      tasks:
-      - name: tsak 1
-        type: xlrelease.Task
-      - name: task 2
-        type: xlrelease.Task
-  riskProfile: Default risk profile
+- pattern: jhkewhf ew fi ewfyewo ffoewf ewyfo ewfoewyf ew foyoewyf oewf ewfoewuofuewo
+    ckdsckdshofiuwe foewfw dcwlefoiuewof dchewofcoe o fwlehfohoewfo wef oewfoewuf
+    ifbyiewufi ew fef iyewi f ewif yiew fy ewi yfiw yeifdisycidsciewqf ec eofyoewf
+    dskcdskvcoiewyovc dskjc
+  stages:
+  - stage: New Stage
+- pattern: pattern1
+  stages:
+  - stage: New Stage
