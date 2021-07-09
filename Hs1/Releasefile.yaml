@@ -1,0 +1,16 @@
+# Exported from:        http://qe-centos-ha2:5516/
+# Release version:      10.2.0-708.113
+# Date created:         Fri Jul 09 11:41:11 CEST 2021
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: hs1
+spec:
+- name: folder_git
+  type: git.Repository
+  variableMapping:
+    password: "${global.github_token}"
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
