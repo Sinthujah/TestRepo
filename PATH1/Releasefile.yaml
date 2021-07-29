@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: Versioning test folder
 spec:
-- pattern: Pattern_1
+- pattern: Pattern_1_edited
   stages:
   - stage: New Stage
     transition:
