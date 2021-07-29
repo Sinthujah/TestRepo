@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.3.0-SNAPSHOT
-# Date created:         Thu Jul 29 16:25:21 IST 2021
+# Date created:         Thu Jul 29 16:31:53 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,8 +8,19 @@ kind: Templates
 metadata:
   home: Versioning test folder
 spec:
-- template: temp 1
-  scheduledStartDate: 2021-07-29T09:00:00+05:30
-  phases:
-  - phase: New Phase
-  riskProfile: Default risk profile
+- pattern: Pattern_1
+  stages:
+  - stage: New Stage
+    transition:
+      name: New Transition
+      type: delivery.Transition
+      conditions:
+      - type: delivery.ConditionGroup
+        operator: OR
+        conditions:
+        - type: delivery.ConditionGroup
+          operator: AND
+          conditions:
+          - type: delivery.ItemsCompletionCondition
+  - stage: New Stage (1)
+  - stage: New Stage (2)
