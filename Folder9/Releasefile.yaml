@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.3.0-SNAPSHOT
-# Date created:         Fri Aug 27 15:22:53 IST 2021
+# Date created:         Fri Aug 27 16:35:46 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,30 @@ kind: Templates
 metadata:
   home: Folder_9
 spec:
+- template: Template91
+  scheduledStartDate: 2021-08-27T09:00:00+05:30
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
+- template: Template_9
+  scheduledStartDate: 2021-08-25T09:00:00+05:30
+  dueDate: 2021-08-25T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: CreateDeliverytask
+      type: delivery.CreateDelivery
+      ^title: testname
+      pattern: Folder_9/pattern9
+      folder: Folder_9/Subfolder9
+    - name: Find Delivery task
+      type: delivery.FindDelivery
+    - name: Find or Create Delivery task
+      type: delivery.FindOrCreateDelivery
+      searchStrategy: Search by criteria
+      pattern: Folder_9/Subfolder9/patterninsubfolder
+      folder: Folder_9
+  riskProfile: Default risk profile
 - template: Template_9_edit
   scheduledStartDate: 2021-08-25T09:00:00+05:30
   phases:
