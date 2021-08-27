@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.3.0-SNAPSHOT
-# Date created:         Fri Aug 27 16:35:46 IST 2021
+# Date created:         Fri Aug 27 16:37:48 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -9,6 +9,11 @@ metadata:
   home: Folder_9
 spec:
 - template: Template91
+  scheduledStartDate: 2021-08-27T09:00:00+05:30
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
+- template: Template92
   scheduledStartDate: 2021-08-27T09:00:00+05:30
   phases:
   - phase: New Phase
