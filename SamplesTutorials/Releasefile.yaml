@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5518/
 # Release version:      10.3.0-908.113
-# Date created:         Fri Sep 17 18:09:27 IST 2021
+# Date created:         Fri Sep 17 18:11:55 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -30,7 +30,7 @@ spec:
 - pattern: pattern 13
   plannedDuration: 720
   stages:
-  - stage: New Stage
+  - stage: 1st stage
     transition:
       name: New Transition
       type: delivery.Transition
@@ -39,7 +39,7 @@ spec:
   trackedItems:
   - trackedItem: tracked item1
   - trackedItem: tracked item2
-- template: Configure Release
+- template: Configure Release -edited
   scheduledStartDate: 2021-09-14T09:00:00+05:30
   phases:
   - phase: Setup mail server
@@ -841,10 +841,10 @@ spec:
 - name: Git poll trigger
   type: git.Poll
   releaseTitle: trigger based release
-  template: Configure Release
+  template: Configure Release -edited
   gitRepository: My Git repo
   branch: main
-  commitId: 8ae5fcc38e3b7d90f87c3c67e784a4bdb710d1b3
+  commitId: f5164b80813c946877ab4affab6603dbe2a913e6
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
