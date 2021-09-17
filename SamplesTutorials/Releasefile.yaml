@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5518/
 # Release version:      10.3.0-908.113
-# Date created:         Fri Sep 17 18:11:55 IST 2021
+# Date created:         Fri Sep 17 18:15:13 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -24,9 +24,10 @@ spec:
     - n2
 - name: My Git repo
   type: git.Repository
+  variableMapping:
+    password: "${global.github token}"
   url: https://github.com/Sinthujah/TestRepo
   username: sinthujah
-  password: !value "git_Repository_My_Git_repo_password"
 - pattern: pattern 13
   plannedDuration: 720
   stages:
@@ -844,7 +845,7 @@ spec:
   template: Configure Release -edited
   gitRepository: My Git repo
   branch: main
-  commitId: f5164b80813c946877ab4affab6603dbe2a913e6
+  commitId: aa1c1f8267979ffbae25b140bdca0881a20cd875
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
