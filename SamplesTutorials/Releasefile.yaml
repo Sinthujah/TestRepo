@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5518/
 # Release version:      10.3.0-908.113
-# Date created:         Fri Sep 17 18:15:13 IST 2021
+# Date created:         Fri Sep 17 18:15:21 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -845,7 +845,7 @@ spec:
   template: Configure Release -edited
   gitRepository: My Git repo
   branch: main
-  commitId: aa1c1f8267979ffbae25b140bdca0881a20cd875
+  commitId: 94289e11b6a8f05c4ce86726eaa7fc8dcdf84fce
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
