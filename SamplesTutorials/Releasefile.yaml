@@ -11,7 +11,7 @@ spec:
 - folderVariables:
   - type: xlrelease.ListStringVariable
     key: folder.multi select variable
-    label: dddd
+    label: ddddeeee
     valueProvider:
       type: xlrelease.ListOfStringValueProviderConfiguration
       values:
