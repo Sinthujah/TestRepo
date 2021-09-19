@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5518/
 # Release version:      10.3.0-908.113
-# Date created:         Fri Sep 17 18:15:21 IST 2021
+# Date created:         Sun Sep 19 17:19:10 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -9,8 +9,6 @@ metadata:
   home: Samples & Tutorials
 spec:
 - folderVariables:
-  - type: xlrelease.StringVariable
-    key: folder.text
   - type: xlrelease.ListStringVariable
     key: folder.multi select variable
     label: dddd
@@ -22,6 +20,8 @@ spec:
       - n3
     value:
     - n2
+  - type: xlrelease.StringVariable
+    key: folder.text
 - name: My Git repo
   type: git.Repository
   variableMapping:
@@ -42,6 +42,7 @@ spec:
   - trackedItem: tracked item2
 - template: Configure Release -edited
   scheduledStartDate: 2021-09-14T09:00:00+05:30
+  dueDate: 2021-09-14T10:00:00+05:30
   phases:
   - phase: Setup mail server
     tasks:
@@ -138,6 +139,7 @@ spec:
 
     For more information, please read [Perform canary deployments](https://docs.xebialabs.com/xl-release/how-to/perform-canary-deployments.html) on our documentation site.
   scheduledStartDate: 2018-01-23T13:30:00+05:30
+  dueDate: 2018-01-23T14:30:00+05:30
   phases:
   - phase: Canary phase
     tasks:
@@ -237,6 +239,7 @@ spec:
   riskProfile: Default risk profile
 - template: Guided Tour for Release Managers
   scheduledStartDate: 2021-09-14T09:00:00+05:30
+  dueDate: 2021-09-14T10:00:00+05:30
   phases:
   - phase: Designing a release
     tasks:
@@ -431,6 +434,7 @@ spec:
 - template: Sample Release Template
   description: Major and minor release template using manual deployments.
   scheduledStartDate: 2021-09-14T09:00:00+05:30
+  dueDate: 2021-09-14T10:00:00+05:30
   phases:
   - phase: QA
     tasks:
@@ -587,6 +591,7 @@ spec:
 - template: Sample Release Template with XL Deploy
   description: Major and minor release template.
   scheduledStartDate: 2021-09-14T09:00:00+05:30
+  dueDate: 2021-09-14T10:00:00+05:30
   phases:
   - phase: QA
     tasks:
@@ -731,6 +736,7 @@ spec:
   riskProfile: Default risk profile
 - template: Welcome to Release!
   scheduledStartDate: 2021-09-14T09:00:00+05:30
+  dueDate: 2021-09-14T10:00:00+05:30
   phases:
   - phase: Introduction
     tasks:
@@ -832,6 +838,7 @@ spec:
   riskProfile: Default risk profile
 - template: template me
   scheduledStartDate: 2021-09-17T09:00:00+05:30
+  dueDate: 2021-09-17T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
@@ -845,7 +852,7 @@ spec:
   template: Configure Release -edited
   gitRepository: My Git repo
   branch: main
-  commitId: 94289e11b6a8f05c4ce86726eaa7fc8dcdf84fce
+  commitId: 277938e77afd8fc23d89eac2d4b3bb6b2bdd3ba1
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
