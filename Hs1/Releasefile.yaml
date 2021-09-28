@@ -10,7 +10,7 @@ metadata:
 spec:
 - folderVariables:
   - type: xlrelease.ListStringVariable
-    key: folder.variable1
+    key: folder.variable3
     valueProvider:
       type: xlrelease.ListOfStringValueProviderConfiguration
       values:
@@ -28,7 +28,7 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: test1
+    - name: task2
       type: xlrelease.Task
   riskProfile: Default risk profile
 - name: Dashboard 1
