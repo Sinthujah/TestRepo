@@ -14,7 +14,7 @@ spec:
     valueProvider:
       type: xlrelease.ListOfStringValueProviderConfiguration
       values:
-      - value1
+      - value4
       - value2
     value:
     - value1
@@ -34,7 +34,7 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: test1
+    - name: mytaks
       type: xlrelease.Task
   riskProfile: Default risk profile
 - name: Dashboard 1
