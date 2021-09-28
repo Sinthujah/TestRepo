@@ -1,6 +1,6 @@
-# Exported from:        http://qe-centos-ha2:5516/
-# Release version:      10.2.0-708.113
-# Date created:         Fri Jul 09 11:44:39 CEST 2021
+# Exported from:        http://qe-centos-ha1:5516/
+# Release version:      10.3.0-923.113
+# Date created:         Tue Sep 28 12:04:43 CEST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,46 @@ kind: Templates
 metadata:
   home: hs1
 spec:
+- folderVariables:
+  - type: xlrelease.ListStringVariable
+    key: folder.variable1
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - value1
+      - value2
+    value:
+    - value1
+- name: My_git_repo
+  type: git.Repository
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
+  password: !value "git_Repository_My_git_repo_password"
+- template: Template 122
+  scheduledStartDate: 2021-09-28T05:30:00+02:00
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: test1
+      type: xlrelease.Task
+  riskProfile: Default risk profile
+- name: Dashboard 1
+  type: xlrelease.BlankDashboard
+  owner: admin
+  tiles:
+  - name: Active releases by risk
+    type: live.ReleasesByRiskTile
+    row: 0
+    col: 0
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: ./
+  - name: Avg. task duration
+    type: xlrelease.AvgTaskDurationTile
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
