@@ -8,11 +8,11 @@ kind: Templates
 metadata:
   home: Version Control
 spec:
-- template: new template 1
+- template: new template 2
   scheduledStartDate: 2021-09-28T09:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
-    - name: task1
+    - name: task2
       type: xlrelease.Task
   riskProfile: Default risk profile
