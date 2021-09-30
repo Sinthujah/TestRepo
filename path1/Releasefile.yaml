@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: VersionControl
 spec:
-- pattern: new pattern 1
+- pattern: new pattern 2
   stages:
   - stage: New Stage
 - template: new template 1
