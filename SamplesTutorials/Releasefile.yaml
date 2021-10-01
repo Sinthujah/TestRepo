@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5518/
 # Release version:      10.3.0-908.113
-# Date created:         Sun Sep 19 17:19:10 IST 2021
+# Date created:         Fri Oct 01 17:54:47 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -11,7 +11,7 @@ spec:
 - folderVariables:
   - type: xlrelease.ListStringVariable
     key: folder.multi select variable
-    label: ddddeeee
+    label: dddd
     valueProvider:
       type: xlrelease.ListOfStringValueProviderConfiguration
       values:
@@ -24,10 +24,9 @@ spec:
     key: folder.text
 - name: My Git repo
   type: git.Repository
-  variableMapping:
-    password: "${global.github token}"
   url: https://github.com/Sinthujah/TestRepo
   username: sinthujah
+  password: !value "git_Repository_My_Git_repo_password"
 - pattern: pattern 13
   plannedDuration: 720
   stages:
@@ -852,7 +851,7 @@ spec:
   template: Configure Release -edited
   gitRepository: My Git repo
   branch: main
-  commitId: 277938e77afd8fc23d89eac2d4b3bb6b2bdd3ba1
+  commitId: 311f4d3baff658d25747587a9dd0aa46c54024d1
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
