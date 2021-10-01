@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.3.0-SNAPSHOT
-# Date created:         Fri Oct 01 18:00:02 IST 2021
+# Date created:         Fri Oct 01 18:01:12 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -22,11 +22,13 @@ spec:
   riskProfile: Default risk profile
 - template: template 11
   scheduledStartDate: 2021-09-30T09:00:00+05:30
+  dueDate: 2021-09-30T10:00:00+05:30
   phases:
   - phase: New Phase
   riskProfile: Default risk profile
 - template: template11
   scheduledStartDate: 2021-09-30T09:00:00+05:30
+  dueDate: 2021-09-30T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
