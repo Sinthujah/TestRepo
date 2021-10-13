@@ -1,6 +1,6 @@
-# Exported from:        http://minserver:5518/
-# Release version:      10.3.0-908.113
-# Date created:         Fri Oct 01 17:54:47 IST 2021
+# Exported from:        http://minserver:5516/
+# Release version:      10.4.0-SNAPSHOT
+# Date created:         Wed Oct 13 16:11:16 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,53 +8,25 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- folderVariables:
-  - type: xlrelease.ListStringVariable
-    key: folder.multi select variable
-    label: dddd
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - n1
-      - n2
-      - n3
-    value:
-    - n2
-  - type: xlrelease.StringVariable
-    key: folder.text
-- name: My Git repo
-  type: git.Repository
-  url: https://github.com/Sinthujah/TestRepo
-  username: sinthujah
-  password: !value "git_Repository_My_Git_repo_password"
-- pattern: pattern 13
-  plannedDuration: 720
+- pattern: pattern1
   stages:
-  - stage: 1st stage
-    transition:
-      name: New Transition
-      type: delivery.Transition
-  - stage: New Stage (2)
-  - stage: New Stage (3)
-  trackedItems:
-  - trackedItem: tracked item1
-  - trackedItem: tracked item2
-- template: Configure Release -edited
-  scheduledStartDate: 2021-09-14T09:00:00+05:30
-  dueDate: 2021-09-14T10:00:00+05:30
+  - stage: stgae1
+- template: Configure Release
+  scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
   - phase: Setup mail server
     tasks:
     - name: Configure email address and mail server
       type: xlrelease.Task
-      description: "In order to use Digital.ai Release effectively, a mail server\
-        \ has to be configured. \n\nThis task consists of two steps:\n\n1. To check\
-        \ if mails are sent correctly, configure the email address of the `admin`\
-        \ user. Go to the [Profile](#/profile) and enter the email address. Then press\
-        \ the **Save** button.\n2. Configure the SMTP server. Go to the [SMTP Server](#/smtp)\
-        \ screen and enter the relevant settings. Press **Save** to confirm. \n\n\
-        Now complete this task by pressing the **Complete** button and confirming.\
-        \ An email will be sent and we will confirm its delivery in the next task."
+      description: |-
+        In order to use Digital.ai Release effectively, a mail server has to be configured.
+
+        This task consists of two steps:
+
+        1. To check if mails are sent correctly, configure the email address of the `admin` user. Go to the [Profile](#/profile) and enter the email address. Then press the **Save** button.
+        2. Configure the SMTP server. Go to the [SMTP Server](#/smtp) screen and enter the relevant settings. Press **Save** to confirm.
+
+        Now complete this task by pressing the **Complete** button and confirming. An email will be sent and we will confirm its delivery in the next task.
       owner: admin
       waitForScheduledStartDate: false
     - name: Check email
@@ -78,33 +50,46 @@ spec:
     tasks:
     - name: Configure users
       type: xlrelease.Task
-      description: "Digital.ai Release is a collaboration tool, so we need to get\
-        \ some users into the system. There are two ways to set up the users. This\
-        \ task explains how to configure users directly in Release.\n\nIt is also\
-        \ possible to integrate with Active Directory or another type of LDAP server.\
-        \ See the [Administration Manual](https://docs.xebialabs.com/xl-release/how-to/configure-ldap-security-for-xl-release.html)\
-        \ for more details on this subject. \n\n### Creating users\n\nGo to the [Users](#/users)\
-        \ screen and add a user. You can specify the email address right away.\n\n\
-        After pressing Save, the newly created user can log in."
+      description: |-
+        Digital.ai Release is a collaboration tool, so we need to get some users into the system. There are two ways to set up the users. This task explains how to configure users directly in Release.
+
+        It is also possible to integrate with Active Directory or another type of LDAP server. See the [Administration Manual](https://docs.xebialabs.com/xl-release/how-to/configure-ldap-security-for-xl-release.html) for more details on this subject.
+
+        ### Creating users
+
+        Go to the [Users](#/users) screen and add a user. You can specify the email address right away.
+
+        After pressing Save, the newly created user can log in.
       owner: admin
       waitForScheduledStartDate: false
     - name: Define roles & global permissions
       type: xlrelease.Task
-      description: "### Roles\n\nUsers can be grouped in **Roles** to assign them\
-        \ fine-grained permissions.\n\nGo to the [Roles](#/roles) screen to create\
-        \ roles and assign users to them. If you are connected to Active Directory\
-        \ or LDAP, you can also add LDAP groups to roles.\n\nDefine a role **Release\
-        \ Managers**, and add all users that will be using Release as a release manager.\n\
-        \nPlease use the name \"Release Managers\", so the standard templates will\
-        \ be available to them.\n\nAfter defining the role, press **Save**\n\n###\
-        \ Global permissions\n\nGo the [Permissions](#/permissions) screen to assign\
-        \ global permissions to the roles. \n\nTo the Release Managers role, assign\
-        \ the permissions **Create Template** and **Create Release** (at least).\n\
-        \nPress Save to apply the changes.\n\n### Release permissions\n\nOn the release\
-        \ level, permissions are defined on **teams**. Teams are like roles, but specific\
-        \ to a particular release. Teams and team permissions can be configured on\
-        \ a release or on a release template.\n\nTeams may contain both users and\
-        \ roles."
+      description: |-
+        ### Roles
+
+        Users can be grouped in **Roles** to assign them fine-grained permissions.
+
+        Go to the [Roles](#/roles) screen to create roles and assign users to them. If you are connected to Active Directory or LDAP, you can also add LDAP groups to roles.
+
+        Define a role **Release Managers**, and add all users that will be using Release as a release manager.
+
+        Please use the name "Release Managers", so the standard templates will be available to them.
+
+        After defining the role, press **Save**
+
+        ### Global permissions
+
+        Go the [Permissions](#/permissions) screen to assign global permissions to the roles.
+
+        To the Release Managers role, assign the permissions **Create Template** and **Create Release** (at least).
+
+        Press Save to apply the changes.
+
+        ### Release permissions
+
+        On the release level, permissions are defined on **teams**. Teams are like roles, but specific to a particular release. Teams and team permissions can be configured on a release or on a release template.
+
+        Teams may contain both users and roles.
       owner: admin
       waitForScheduledStartDate: false
     color: '#009CDB'
@@ -125,120 +110,11 @@ spec:
       owner: admin
       waitForScheduledStartDate: false
     color: '#68b749'
-  - phase: fff
-    color: '#0079BC'
   tags:
   - tutorial
   riskProfile: Default risk profile
-- template: "Deployment pattern: Canary Release"
-  description: |-
-    This XL Release template shows the **Canary Deployment Pattern**
-
-    The Canary Release deployment pattern is a pattern where a small subset on your production environment is used to test out new features. The environment is split into a 'canary' part and a 'main' part. The canary part is typically small and allows for fast deployments. A load balancer is used to direct traffic to all parts of the application, deciding which users go to the new version in the canary section and which users remain on the stable main section.
-
-    For more information, please read [Perform canary deployments](https://docs.xebialabs.com/xl-release/how-to/perform-canary-deployments.html) on our documentation site.
-  scheduledStartDate: 2018-01-23T13:30:00+05:30
-  dueDate: 2018-01-23T14:30:00+05:30
-  phases:
-  - phase: Canary phase
-    tasks:
-    - name: Deploy to Canary environment
-      type: xldeploy.Deploy
-      deploymentPackage: "${application}/${newVersion}"
-      deploymentEnvironment: "${canaryEnvironment}"
-      description: |-
-        Use XL Deploy to deploy to the Canary environment.
-
-        Configure the XL Deploy server in **Settings > Shared Configuration**.
-    - name: Run tests
-      type: xlrelease.Task
-      description: "### Run acceptance tests\n\nPerform the acceptance tests before\
-        \ taking this version into production.\n\n**Application version:** `${application}/${newVersion}`\
-        \   \n**Environment:** `${canaryEnvironment}`"
-    - name: Confirm full deployment
-      type: xlrelease.UserInputTask
-      description: "**Main environment:** `${mainEnvironment}`  \n**Current version:**\
-        \ `${application}/${currentVersion}`  \n**New version:** `${application}/${newVersion}`\n\
-        \nThe new version has been tested on the Canary environment and is ready to\
-        \ be deployed to the Main environment.\n\nIf tests were not successful, the\
-        \ Canary environment can be rolled back.\n\nPlease confirm the switch by selecting\
-        \ the action below and completing this task"
-      variables:
-      - action
-    color: '#FFAB00'
-  - phase: Rollout phase
-    tasks:
-    - name: Deploy to Main environment
-      type: xlrelease.SequentialGroup
-      description: This block is executed only if tests were successful and the new
-        version can be deployed to the Main environment.
-      precondition: "releaseVariables['action'] == 'Deploy to Main'"
-      tasks:
-      - name: Deploy to Main environment
-        type: xldeploy.Deploy
-        deploymentPackage: "${application}/${newVersion}"
-        deploymentEnvironment: "${mainEnvironment}"
-        description: Use XL Deploy to deploy to the Main environment.
-      - name: Send notification that new version is live
-        type: xlrelease.NotificationTask
-        precondition: "False"
-        subject: "${application}/${newVersion} is now live!"
-        body: "**${application}/${newVersion}** has been deployed to **${mainEnvironment}**\
-          \ and is now live!"
-    - name: Rollback Canary environment
-      type: xlrelease.SequentialGroup
-      description: This block is executed only if tests failed and the Canary environment
-        needs to be rolled back.
-      precondition: "releaseVariables['action'] == 'Rollback Canary environment'"
-      tasks:
-      - name: Rollback Canary environment
-        type: xldeploy.Deploy
-        deploymentPackage: "${application}/${currentVersion}"
-        deploymentEnvironment: "${canaryEnvironment}"
-        description: Use XL Deploy to rollback the Canary environment to the original
-          version.
-    color: '#498500'
-  variables:
-  - type: xlrelease.StringVariable
-    key: application
-    label: Application name
-    description: The name of the application in XL Deploy.
-    value: PetClinic-war
-  - type: xlrelease.StringVariable
-    key: newVersion
-    label: New version
-    description: The version of the application in XL Deploy that will be deployed.
-  - type: xlrelease.StringVariable
-    key: currentVersion
-    label: Current version
-    description: The version of the application in XL Deploy that is currently running.
-  - type: xlrelease.StringVariable
-    key: canaryEnvironment
-    label: Canary environment
-    description: "The name of the Canary environment in XL Deploy, without the 'Environments/'\
-      \ prefix."
-    value: Canary Deployment/Canary
-  - type: xlrelease.StringVariable
-    key: mainEnvironment
-    label: Main environment
-    description: "The name of the Main environment in XL Deploy, without the 'Environments/'\
-      \ prefix."
-    value: Canary Deployment/Main
-  - type: xlrelease.StringVariable
-    key: action
-    requiresValue: false
-    showOnReleaseStart: false
-    label: Action
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - Deploy to Main
-      - Rollback Canary environment
-    value: Deploy to Main
-  riskProfile: Default risk profile
 - template: Guided Tour for Release Managers
-  scheduledStartDate: 2021-09-14T09:00:00+05:30
-  dueDate: 2021-09-14T10:00:00+05:30
+  scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
   - phase: Designing a release
     tasks:
@@ -266,36 +142,39 @@ spec:
       waitForScheduledStartDate: false
     - name: Using the Release Flow editor to design a release
       type: xlrelease.Task
-      description: "The Release Flow editor is the nerve center of your release. \n\
-        \nHere, you can add tasks, remove tasks, and drag-and-drop tasks.\n\nYou can\
-        \ model your release procedure as a general blueprint for how releases are\
-        \ done from the [Templates](#/templates) screen. You create actual releases\
-        \ from a template. When a release is in progress, you can still edit it, provided\
-        \ you have the right permissions.\n\nIf reality gets in the way of the process,\
-        \ you can still add tasks and phases, and change or remove them. XL Release\
-        \ keeps track of all changes in the release in the Activity Log. This is an\
-        \ audit trail that serves as a single source of truth for who did what, and\
-        \ when."
+      description: |-
+        The Release Flow editor is the nerve center of your release.
+
+        Here, you can add tasks, remove tasks, and drag-and-drop tasks.
+
+        You can model your release procedure as a general blueprint for how releases are done from the [Templates](#/templates) screen. You create actual releases from a template. When a release is in progress, you can still edit it, provided you have the right permissions.
+
+        If reality gets in the way of the process, you can still add tasks and phases, and change or remove them. XL Release keeps track of all changes in the release in the Activity Log. This is an audit trail that serves as a single source of truth for who did what, and when.
       owner: "${user}"
       waitForScheduledStartDate: false
     - name: Task types
       type: xlrelease.Task
-      description: "To add a task to a phase in a release, click the **Add Task**\
-        \ link at the bottom of the phase. After you add a task, you can drag-and-drop\
-        \ it into the desired position.\n\n### Manual tasks\nManual tasks must be\
-        \ performed by a person. After you are done with the task, you complete it\
-        \ by clicking **Complete**.\n* **Manual task** - A task with a description\
-        \ of what should be done.\n* **Gate task** - A checkpoint in a release flow.\
-        \ Gate tasks can contain checklists of sub-tasks to be done. Gate tasks are\
-        \ marked by a red border. \n\n### Automated tasks\nAutomated tasks are executed\
-        \ and completed by XL Release. No human intervention is required.\n* **Notification**\
-        \ - Send a custom email from XL Release.\n* **XL Deploy** - Perform a deployment\
-        \ using XebiaLabs XL Deploy.\n* ** Script** - Run a custom script written\
-        \ in Python.\n* **Jira tasks** - Create and update tickets in Atlassian Jira.\n\
-        * **Webhook** - Call a web service using XML or JSON without writing a script.\n\
-        \n### Execution\n* **Parallel Group** - Execute XL Release tasks in parallel.\n\
-        \n### Exercise\nAdd a notification task and configure it to send an email\
-        \ to yourself. Use drag-and-drop to place it somewhere in the release."
+      description: |-
+        To add a task to a phase in a release, click the **Add Task** link at the bottom of the phase. After you add a task, you can drag-and-drop it into the desired position.
+
+        ### Manual tasks
+        Manual tasks must be performed by a person. After you are done with the task, you complete it by clicking **Complete**.
+        * **Manual task** - A task with a description of what should be done.
+        * **Gate task** - A checkpoint in a release flow. Gate tasks can contain checklists of sub-tasks to be done. Gate tasks are marked by a red border.
+
+        ### Automated tasks
+        Automated tasks are executed and completed by XL Release. No human intervention is required.
+        * **Notification** - Send a custom email from XL Release.
+        * **XL Deploy** - Perform a deployment using XebiaLabs XL Deploy.
+        * ** Script** - Run a custom script written in Python.
+        * **Jira tasks** - Create and update tickets in Atlassian Jira.
+        * **Webhook** - Call a web service using XML or JSON without writing a script.
+
+        ### Execution
+        * **Parallel Group** - Execute XL Release tasks in parallel.
+
+        ### Exercise
+        Add a notification task and configure it to send an email to yourself. Use drag-and-drop to place it somewhere in the release.
       owner: "${user}"
       waitForScheduledStartDate: false
     - name: Teams
@@ -366,17 +245,16 @@ spec:
     tasks:
     - name: Parallel tasks
       type: xlrelease.Task
-      description: "When designing a release in the Release Flow editor, you will\
-        \ have noticed that the default flow in a phase is serial: all tasks are executed\
-        \ in order, one after the other.\n\nThe **Parallel group** allows you to model\
-        \ tasks that have to be executed in parallel. \n\nThe Parallel group is a\
-        \ container for a bunch of tasks that are to be executed simultaneously. \n\
-        \nIn the release editor, simply add a Parallel group using the **Add task**\
-        \ link. Then you can either drag existing tasks into the parallel group, or\
-        \ click on the inner Add task link to create a new task in the parallel group.\n\
-        \nThe next tasks in this release will be executed in parallel. Complete this\
-        \ task and you will notice that more than one task are shown in this release\
-        \ in the [Task overview](#/tasks)."
+      description: |-
+        When designing a release in the Release Flow editor, you will have noticed that the default flow in a phase is serial: all tasks are executed in order, one after the other.
+
+        The **Parallel group** allows you to model tasks that have to be executed in parallel.
+
+        The Parallel group is a container for a bunch of tasks that are to be executed simultaneously.
+
+        In the release editor, simply add a Parallel group using the **Add task** link. Then you can either drag existing tasks into the parallel group, or click on the inner Add task link to create a new task in the parallel group.
+
+        The next tasks in this release will be executed in parallel. Complete this task and you will notice that more than one task are shown in this release in the [Task overview](#/tasks).
       owner: "${user}"
       waitForScheduledStartDate: false
     - name: Complete the tasks in any order
@@ -432,8 +310,7 @@ spec:
   riskProfile: Default risk profile
 - template: Sample Release Template
   description: Major and minor release template using manual deployments.
-  scheduledStartDate: 2021-09-14T09:00:00+05:30
-  dueDate: 2021-09-14T10:00:00+05:30
+  scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
   - phase: QA
     tasks:
@@ -587,155 +464,8 @@ spec:
   - type: xlrelease.StringVariable
     key: package
   riskProfile: Default risk profile
-- template: Sample Release Template with XL Deploy
-  description: Major and minor release template.
-  scheduledStartDate: 2021-09-14T09:00:00+05:30
-  dueDate: 2021-09-14T10:00:00+05:30
-  phases:
-  - phase: QA
-    tasks:
-    - name: Wait for dependencies
-      type: xlrelease.GateTask
-      team: Release mgmt.
-    - name: Version passes automated tests
-      type: xlrelease.GateTask
-      description: Select the proper version to test
-      team: QA
-      conditions:
-      - name: Automated regression tests are green
-        type: xlrelease.GateCondition
-      - name: Release notes available
-        type: xlrelease.GateCondition
-    - name: Prepare QA environment
-      type: xlrelease.Task
-      team: Dev
-    - name: Deploy package to the QA environment
-      type: xldeploy.Deploy
-      deploymentPackage: "${packageId}"
-      deploymentEnvironment: "${QA environment}"
-      team: Dev
-    - name: Testing
-      type: xlrelease.ParallelGroup
-      tasks:
-      - name: Update test scenarios
-        type: xlrelease.Task
-        team: QA
-      - name: Regression tests
-        type: xlrelease.Task
-        team: QA
-    - name: Sign off by QA
-      type: xlrelease.GateTask
-      team: QA
-      conditions:
-      - name: Notify developers
-        type: xlrelease.GateCondition
-      - name: Notify Ops
-        type: xlrelease.GateCondition
-    - name: Notify stakeholders of successful QA
-      type: xlrelease.NotificationTask
-      team: QA
-      addresses:
-      - vagrant@localhost
-      subject: "Application ${packageId} passed QA!"
-      body: "The application is available on the ${QA environment} environment."
-    color: '#68b749'
-  - phase: UAT
-    tasks:
-    - name: Acceptance environment available
-      type: xlrelease.GateTask
-      team: Ops
-      conditions:
-      - name: Verify environment availability
-        type: xlrelease.GateCondition
-    - name: Prepare the ACC environment
-      type: xlrelease.Task
-      team: Ops
-    - name: Install test data on the ACC environment
-      type: xlrelease.Task
-      team: Ops
-    - name: "Deploy ${packageId} to ACC environment"
-      type: xldeploy.Deploy
-      deploymentPackage: "${packageId}"
-      deploymentEnvironment: "${ACC environment}"
-      team: Ops
-    - name: "Notify QA of installation on ${ACC environment}"
-      type: xlrelease.NotificationTask
-      team: QA
-      addresses:
-      - vagrant@localhost
-      subject: "Application ${packageId} is ready for acceptance testing on ${ACC\
-        \ environment}"
-      body: Have at it!
-    - name: Testing
-      type: xlrelease.ParallelGroup
-      tasks:
-      - name: Execute performance test
-        type: xlrelease.Task
-        team: QA
-      - name: Execute UA test
-        type: xlrelease.Task
-        team: QA
-    - name: Approve
-      type: xlrelease.GateTask
-      team: QA
-      conditions:
-      - name: Collect all signatures
-        type: xlrelease.GateCondition
-    color: '#ff9e3b'
-  - phase: Production
-    tasks:
-    - name: Go/no go meeting
-      type: xlrelease.Task
-      team: Release mgmt.
-    - name: Decide on upgrade slot
-      type: xlrelease.Task
-      description: Block all agendas
-      team: Release mgmt.
-    - name: Everybody available
-      type: xlrelease.GateTask
-      team: Release mgmt.
-      conditions:
-      - name: Invitations sent
-        type: xlrelease.GateCondition
-      - name: All participants accepted
-        type: xlrelease.GateCondition
-      - name: Set start time on XL Deploy task
-        type: xlrelease.GateCondition
-    - name: Run backups
-      type: xlrelease.Task
-      team: Ops
-    - name: "Deploy ${packageId} to PROD"
-      type: xldeploy.Deploy
-      deploymentPackage: "${packageId}"
-      deploymentEnvironment: Ops/Prod/PROD
-      team: Ops
-    - name: Execute smoke tests
-      type: xlrelease.Task
-      team: QA
-    - name: Notification
-      type: xlrelease.ParallelGroup
-      tasks:
-      - name: Alert marketing
-        type: xlrelease.Task
-        team: Release mgmt.
-      - name: "Application ${packageId} is live!"
-        type: xlrelease.NotificationTask
-        team: Release mgmt.
-        addresses:
-        - vagrant@localhost
-        subject: "Application ${packageId} is live!"
-    color: '#dd4b39'
-  variables:
-  - type: xlrelease.StringVariable
-    key: ACC environment
-  - type: xlrelease.StringVariable
-    key: QA environment
-  - type: xlrelease.StringVariable
-    key: packageId
-  riskProfile: Default risk profile
 - template: Welcome to Release!
-  scheduledStartDate: 2021-09-14T09:00:00+05:30
-  dueDate: 2021-09-14T10:00:00+05:30
+  scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
   - phase: Introduction
     tasks:
@@ -755,31 +485,33 @@ spec:
       waitForScheduledStartDate: false
     - name: Understanding tasks and releases. (Click me to continue)
       type: xlrelease.Task
-      description: "The **Tasks** screen shows a list of all active tasks for the\
-        \ current user -- presenting a list of \"to do\" items.\n\nAll tasks are steps\
-        \ in a **release**. \n\nReleases are at the heart of Digital.ai Release. A\
-        \ release represents a number of tasks with people working on it. Release\
-        \ allows you to plan, track and execute releases automatically and acts as\
-        \ a single source of truth for all people involved to make the release a success.\n\
-        \nA **task** can be either some activity done by a person, or an automated\
-        \ task that will integrate with other systems or run a script. Release makes\
-        \ it easy to model your current process and to transition gradually to a more\
-        \ automated procedure.\n\nThere are two types of tasks that are assigned to\
-        \ people: the manual task (such as this one), which indicates that something\
-        \ has to be done by somebody.\n\nThe other one is a **Gate**, which indicates\
-        \ a checkpoint in the release, i.e. a set of conditions that need to be met\
-        \ for the release to continue.\n\nClick on **Complete** on this task to see\
-        \ an example of a Gate task."
+      description: |-
+        The **Tasks** screen shows a list of all active tasks for the current user -- presenting a list of "to do" items.
+
+        All tasks are steps in a **release**.
+
+        Releases are at the heart of Digital.ai Release. A release represents a number of tasks with people working on it. Release allows you to plan, track and execute releases automatically and acts as a single source of truth for all people involved to make the release a success.
+
+        A **task** can be either some activity done by a person, or an automated task that will integrate with other systems or run a script. Release makes it easy to model your current process and to transition gradually to a more automated procedure.
+
+        There are two types of tasks that are assigned to people: the manual task (such as this one), which indicates that something has to be done by somebody.
+
+        The other one is a **Gate**, which indicates a checkpoint in the release, i.e. a set of conditions that need to be met for the release to continue.
+
+        Click on **Complete** on this task to see an example of a Gate task.
       owner: "${user}"
       waitForScheduledStartDate: false
     - name: "Gates: checkpoints in a release"
       type: xlrelease.GateTask
-      description: "This task is a 'gate': a set of conditions that need to be completed\
-        \ before we can continue.\n\nGates are similar to manual tasks, but have some\
-        \ additional properties\n* You can add conditions \n* You can add dependencies\
-        \ on other releases\n* Gates are colored red to stand out in the Release Flow\
-        \ editor and overviews.\n\nTick the boxes below to indicate the progress on\
-        \ this Gate task. When all boxes are ticked, you may complete the task."
+      description: |-
+        This task is a 'gate': a set of conditions that need to be completed before we can continue.
+
+        Gates are similar to manual tasks, but have some additional properties
+        * You can add conditions
+        * You can add dependencies on other releases
+        * Gates are colored red to stand out in the Release Flow editor and overviews.
+
+        Tick the boxes below to indicate the progress on this Gate task. When all boxes are ticked, you may complete the task.
       owner: "${user}"
       waitForScheduledStartDate: false
       conditions:
@@ -789,14 +521,12 @@ spec:
         type: xlrelease.GateCondition
     - name: Task assignment & teams
       type: xlrelease.Task
-      description: "Tasks are assigned to users. If a task is assigned to you and\
-        \ it is active (ie. needs to be done now) it will show up in the Tasks overview\
-        \ screen that is shown when you log in.\n\nTasks can also be assigned to **Teams**.\
-        \ The release manager defines the teams in a release. As the name implies,\
-        \ there can be several people in a team. If a task is assigned to a team,\
-        \ it means that it is a joint responsibility to complete the task. \n\nIf\
-        \ a task is assigned to a team you're in, but not to you directly, it will\
-        \ still show up in your task overview."
+      description: |-
+        Tasks are assigned to users. If a task is assigned to you and it is active (ie. needs to be done now) it will show up in the Tasks overview screen that is shown when you log in.
+
+        Tasks can also be assigned to **Teams**. The release manager defines the teams in a release. As the name implies, there can be several people in a team. If a task is assigned to a team, it means that it is a joint responsibility to complete the task.
+
+        If a task is assigned to a team you're in, but not to you directly, it will still show up in your task overview.
       owner: "${user}"
       waitForScheduledStartDate: false
     - name: Skipping and failing a task
@@ -813,19 +543,23 @@ spec:
       waitForScheduledStartDate: false
     - name: Continue with the tour
       type: xlrelease.Task
-      description: "We're now at the end of the general introduction for Digital.ai\
-        \ Release users.\n\nYou're now all set to work on tasks in Release. \n\nIf\
-        \ you're interested in using Digital.ai Release as a release manager, please\
-        \ continue with the guided tour. Like this introduction, the guided tour is\
-        \ an actual release in Release.\n\nTo start the tour, do the following: \n\
-        * Go to the [Templates](#/templates) page. (If the Templates page is not accessible,\
-        \ please consult with the administrator of the Digital.ai Release installation.)\n\
-        * Locate the template called **Guided tour for release managers**\n* Click\
-        \ on **New release from template**\n* In the **Create new release** page,\
-        \ enter a release name and your login name for the `user` variable at the\
-        \ bottom of the page.\n* Press **Create**\n\nYou will be taken to the Release\
-        \ Flow editor, showing all tasks in the Guided Tour release. The tour is now\
-        \ ready to be started.\n\n* Click on **Start Release** and the tour will begin."
+      description: |-
+        We're now at the end of the general introduction for Digital.ai Release users.
+
+        You're now all set to work on tasks in Release.
+
+        If you're interested in using Digital.ai Release as a release manager, please continue with the guided tour. Like this introduction, the guided tour is an actual release in Release.
+
+        To start the tour, do the following:
+        * Go to the [Templates](#/templates) page. (If the Templates page is not accessible, please consult with the administrator of the Digital.ai Release installation.)
+        * Locate the template called **Guided tour for release managers**
+        * Click on **New release from template**
+        * In the **Create new release** page, enter a release name and your login name for the `user` variable at the bottom of the page.
+        * Press **Create**
+
+        You will be taken to the Release Flow editor, showing all tasks in the Guided Tour release. The tour is now ready to be started.
+
+        * Click on **Start Release** and the tour will begin.
       owner: "${user}"
       waitForScheduledStartDate: false
     color: '#009CDB'
@@ -835,222 +569,6 @@ spec:
   - type: xlrelease.StringVariable
     key: user
   riskProfile: Default risk profile
-- template: template me
-  scheduledStartDate: 2021-09-17T09:00:00+05:30
-  dueDate: 2021-09-17T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: task 1
-      type: xlrelease.Task
-      description: test description
-  riskProfile: Default risk profile
-- name: Git poll trigger
-  type: git.Poll
-  releaseTitle: trigger based release
-  template: Configure Release -edited
-  gitRepository: My Git repo
-  branch: main
-  commitId: 311f4d3baff658d25747587a9dd0aa46c54024d1
-- notifications:
-  - notification: TASK_OVERDUE
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is overdue.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Release Admin
-    - Task Owner
-  - notification: TASK_FLAGGED
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-      **${release.flagComment}**
-    roles:
-    - Watcher
-    - Release Admin
-    - Task Team
-  - notification: AUDIT_REPORT_JOB_ABORTED
-    priority: Normal
-    subject: "[Release] Audit report was aborted"
-    body: |-
-      **Your audit report was aborted!**
-
-       Please try to generate it again or contact your Release administrator for assistance.
-  - notification: MANUAL_TASK_STARTED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Task Owner
-  - notification: TASK_FAILED
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has failed.
-
-      Other tasks could still be in progress, but the release will stop after they complete.
-
-      You can retry the task, reassign it to somebody else or abort the release.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: USER_MENTIONED
-    priority: Normal
-    subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-      \ ${task.title}"
-    body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-      \ in the **${release.title}** release:"
-  - notification: COMMENT_ADDED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-      ${comment.text}
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: AUDIT_REPORT_JOB_FAILED
-    priority: Normal
-    subject: "[Release] Audit report has failed"
-    body: |-
-      **Your audit report has failed!**
-
-       Please try to generate it again or contact your Release administrator for assistance.
-  - notification: RELEASE_FAILED
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The **${release.title}** release has failed due to a task failure.
-
-      The release is now stopped.
-
-      You can retry the failed task, reassign it to somebody else or abort the release.
-    roles:
-    - Release Admin
-  - notification: TASK_DUE_SOON
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Release Admin
-    - Task Owner
-  - notification: ACTIVE_TASK_UNASSIGNED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-      Please assign the task to a user or a team.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: RELEASE_FAILING
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The **${release.title}** release is failing due to a task failure.
-
-      Other tasks may still be in progress, but the release will stop after they complete.
-
-      You can retry the failed task, reassign it to somebody else or abort the release.
-    roles:
-    - Release Admin
-  - notification: RELEASE_FLAGGED
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-      **${release.flagComment}**
-    roles:
-    - Release Admin
-  - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-      Please assign the task to a user or a team.
-    roles:
-    - Watcher
-    - Release Admin
-  - notification: RELEASE_COMPLETED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been completed."
-    roles:
-    - Release Admin
-  - notification: TASK_WAITING_FOR_INPUT
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release needs your input.
-
-      Please enter the required information so the release can continue.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: AUDIT_REPORT_JOB_COMPLETED
-    priority: Normal
-    subject: "[Release] Report '${report.reportName}' is ready"
-    body: |-
-      **Your audit report is complete!**
-
-       '${report.reportName}' is ready for download.
-  - notification: RELEASE_STARTED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been started."
-    bulkSubject: "[Release] Multiple releases started"
-    bulkBody: |-
-      The following releases have been started:
-
-      ${#releases}
-      * [${title}](${url})
-      ${/releases}
-    roles:
-    - Release Admin
-  - notification: RELEASE_ABORTED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been aborted."
-    bulkSubject: "[Release] Multiple releases aborted"
-    bulkBody: |-
-      The following releases have been aborted:
-
-      ${#releases}
-      * [${title}](${url})
-      ${/releases}
-    roles:
-    - Release Admin
-  - notification: ACTIVE_TASK_ASSIGNED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: "The active task **${task.title}** in the **${release.title}** release is\
-      \ now assigned to ${task.ownerFullName}."
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
 ---
 apiVersion: xl-release/v1
 kind: Permissions
@@ -1059,36 +577,72 @@ metadata:
 spec:
 - directory: "."
   teams:
-  - name: QA
+  - name: Release Admin
     users:
     - admin
     permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_security
+    - release#lock_task
+    - folder#view
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
     - release#edit_task
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_task_description
+    - trigger#edit_trigger
     - release#view
+    - release#start
+    - release#edit_blackout
+    - template#view
+    - release#edit_failure_handler
+    - release#abort
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
   - name: Release mgmt.
     permissions:
     - release#edit
     - template#edit
     - release#start
     - release#reassign_task
-    - template#view
-    - template#create_release
     - release#abort
     - release#view
     - release#edit_task
-  - name: Team A
-    users:
-    - admin
-    permissions:
-    - folder#edit
-  - name: Dev
-    permissions:
-    - release#edit_task
-    - release#view
   - name: Ops
     permissions:
     - release#edit_task
     - release#view
+  - name: Release Managers
+    permissions:
+    - release#edit
+    - release#start
+    - release#reassign_task
+    - template#view
+    - template#create_release
+    - release#abort
+    - release#edit_security
+    - release#view
+    - release#edit_task
   - name: Folder Owner
     users:
     - admin
@@ -1098,6 +652,7 @@ spec:
     - folder#edit_configuration
     - delivery#edit
     - folder#view_versions
+    - folder#apply_changes
     - group#view
     - folder#edit_versions
     - folder#edit_notifications
@@ -1110,55 +665,16 @@ spec:
     - dashboard#edit
     - folder#edit
     - dashboard#view
-  - name: Release Managers
+  - name: Dev
     permissions:
-    - release#edit
-    - release#start
-    - release#reassign_task
-    - template#view
-    - template#create_release
-    - release#abort
-    - release#view
     - release#edit_task
-  - name: Release Admin
+    - release#view
+  - name: QA
     users:
     - admin
     permissions:
-    - release#edit_precondition
-    - release#edit
-    - release#edit_task_attachments
-    - release#task_transition
-    - trigger#view_trigger
-    - release#reassign_task
-    - release#edit_task_input_output_properties
-    - release#edit_task_tags
-    - release#edit_task_description
-    - trigger#edit_trigger
     - release#view
-    - release#lock_task
-    - release#start
-    - release#edit_blackout
-    - template#view
-    - release#edit_failure_handler
-    - folder#view
-    - release#abort
-    - release#edit_task_script
-    - release#edit_task_configuration_facet
-    - release#edit_task_flag
-    - release#edit_task_dates
     - release#edit_task
-  - name: Template Owner
-    users:
-    - admin
-    permissions:
-    - template#edit
-    - trigger#view_trigger
-    - template#lock_task
-    - template#view
-    - folder#view
-    - template#create_release
-    - template#edit_precondition
-    - template#edit_failure_handler
   - name: Release Manager
     users:
     - admin
