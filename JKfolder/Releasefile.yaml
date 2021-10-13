@@ -8,10 +8,11 @@ kind: Templates
 metadata:
   home: JK folder
 spec:
-- pattern: pattern 11
+- pattern: pattern 12
   stages:
   - stage: stage1
   - stage: stage2
+  - stage: stage3
 ---
 apiVersion: xl-release/v1
 kind: Permissions
