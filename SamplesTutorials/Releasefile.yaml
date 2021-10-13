@@ -8,9 +8,9 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- pattern: pattern1
+- pattern: pattern2
   stages:
-  - stage: stgae1
+  - stage: stage1
 - template: Configure Release
   scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
