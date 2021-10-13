@@ -13,7 +13,7 @@ spec:
   phases:
   - phase: Setup mail server
     tasks:
-    - name: Configure email address and mail server
+    - name: Configure email address and mail server-test
       type: xlrelease.Task
       description: |-
         In order to use Digital.ai Release effectively, a mail server has to be configured.
