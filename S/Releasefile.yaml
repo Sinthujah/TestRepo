@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Oct 13 16:03:24 IST 2021
+# Date created:         Wed Oct 13 16:08:57 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -13,7 +13,7 @@ spec:
   phases:
   - phase: Setup mail server
     tasks:
-    - name: Configure email address and mail server-test
+    - name: Configure email address and mail server
       type: xlrelease.Task
       description: |-
         In order to use Digital.ai Release effectively, a mail server has to be configured.
