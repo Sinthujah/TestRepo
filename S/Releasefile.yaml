@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Oct 13 16:08:57 IST 2021
+# Date created:         Wed Oct 13 16:09:50 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,9 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
+- pattern: pattern1
+  stages:
+  - stage: stgae1
 - template: Configure Release
   scheduledStartDate: 2021-10-13T09:00:00+05:30
   phases:
