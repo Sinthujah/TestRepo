@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Oct 25 17:03:09 IST 2021
+# Date created:         Tue Oct 26 15:07:38 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -31,6 +31,7 @@ spec:
   riskProfile: Default risk profile
 - template: Template 2
   scheduledStartDate: 2021-10-25T09:00:00+05:30
+  dueDate: 2021-10-25T10:00:00+05:30
   phases:
   - phase: New Phase
   riskProfile: Default risk profile
@@ -67,4 +68,4 @@ spec:
   releaseTitle: Release created by trigger
   template: Parent template 1
   gitRepository: My git repo
-  commitId: a40f2a2b4dd3aad7adc89f82b795ee570377bb35
+  commitId: 3ed4948fb463e359281034039da2e20fb2b744b0
