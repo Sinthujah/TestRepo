@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Oct 26 18:18:58 IST 2021
+# Date created:         Tue Oct 26 19:16:00 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,15 @@ kind: Templates
 metadata:
   home: parentfolder1
 spec:
+- directory: subfolder1
+  children:
+  - directory: grandchild1
+    children:
+    - directory: greatgrandchild1
+- directory: subfolder2
+  children:
+  - directory: grandchild2
+- directory: subfolder3
 - folderVariables:
   - type: xlrelease.StringVariable
     key: folder.variable1
@@ -68,1402 +77,465 @@ spec:
   releaseTitle: Release created by trigger
   template: Parent template 1
   gitRepository: My git repo
-  commitId: cc1c606afa175a9addaab70412aaa11cb0750b01
+  commitId: 9c242e000f7c8ec51d80bcd25ccaf92de31588d9
+---
+apiVersion: xl-release/v1
+kind: Permissions
+metadata:
+  home: parentfolder1
+spec:
+- directory: "."
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
 - directory: subfolder1
-  children:
-  - directory: grandchild1
-    children:
-    - directory: greatgrandchild1
-      children:
-      - notifications:
-        - notification: TASK_OVERDUE
-          priority: High
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release is overdue.
-
-            After the task is completed, please mark it as Completed in Release.
-          roles:
-          - Watcher
-          - Release Admin
-        - notification: TASK_FLAGGED
-          priority: High
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-            **${release.flagComment}**
-          roles:
-          - Watcher
-          - Release Admin
-          - Task Team
-        - notification: AUDIT_REPORT_JOB_ABORTED
-          priority: Normal
-          subject: "[Release] Audit report was aborted"
-          body: |-
-            **Your audit report was aborted!**
-
-             Please try to generate it again or contact your Release administrator for assistance.
-        - notification: MANUAL_TASK_STARTED
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-            After the task is completed, please mark it as Completed in Release.
-          roles:
-          - Watcher
-          - Task Owner
-        - notification: TASK_FAILED
-          priority: High
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release has failed.
-
-            Other tasks could still be in progress, but the release will stop after they complete.
-
-            You can retry the task, reassign it to somebody else or abort the release.
-          roles:
-          - Watcher
-          - Task Team
-          - Task Owner
-        - notification: USER_MENTIONED
-          priority: Normal
-          subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-            \ ${task.title}"
-          body: "**${mentionedByFullName}** mentioned you on the **${task.title}**\
-            \ task in the **${release.title}** release:"
-        - notification: COMMENT_ADDED
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-            ${comment.text}
-          roles:
-          - Watcher
-          - Task Team
-          - Task Owner
-        - notification: AUDIT_REPORT_JOB_FAILED
-          priority: Normal
-          subject: "[Release] Audit report has failed"
-          body: |-
-            **Your audit report has failed!**
-
-             Please try to generate it again or contact your Release administrator for assistance.
-        - notification: RELEASE_FAILED
-          priority: High
-          subject: "[Release] ${release.title}"
-          body: |-
-            The **${release.title}** release has failed due to a task failure.
-
-            The release is now stopped.
-
-            You can retry the failed task, reassign it to somebody else or abort the release.
-          roles:
-          - Release Admin
-        - notification: TASK_DUE_SOON
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-            After the task is completed, please mark it as Completed in Release.
-          roles:
-          - Watcher
-          - Release Admin
-          - Task Owner
-        - notification: ACTIVE_TASK_UNASSIGNED
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-            Please assign the task to a user or a team.
-          roles:
-          - Watcher
-          - Task Team
-          - Task Owner
-        - notification: RELEASE_FAILING
-          priority: High
-          subject: "[Release] ${release.title}"
-          body: |-
-            The **${release.title}** release is failing due to a task failure.
-
-            Other tasks may still be in progress, but the release will stop after they complete.
-
-            You can retry the failed task, reassign it to somebody else or abort the release.
-          roles:
-          - Release Admin
-        - notification: RELEASE_FLAGGED
-          priority: High
-          subject: "[Release] ${release.title}"
-          body: |-
-            The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-            **${release.flagComment}**
-          roles:
-          - Release Admin
-        - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-            Please assign the task to a user or a team.
-          roles:
-          - Watcher
-          - Release Admin
-        - notification: RELEASE_COMPLETED
-          priority: Normal
-          subject: "[Release] ${release.title}"
-          body: "The **${release.title}** release has been completed."
-          roles:
-          - Release Admin
-        - notification: TASK_WAITING_FOR_INPUT
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: |-
-            The **${task.title}** task in the **${release.title}** release needs your input.
-
-            Please enter the required information so the release can continue.
-          roles:
-          - Watcher
-          - Task Team
-          - Task Owner
-        - notification: AUDIT_REPORT_JOB_COMPLETED
-          priority: Normal
-          subject: "[Release] Report '${report.reportName}' is ready"
-          body: |-
-            **Your audit report is complete!**
-
-             '${report.reportName}' is ready for download.
-        - notification: RELEASE_STARTED
-          priority: Normal
-          subject: "[Release] ${release.title}"
-          body: "The **${release.title}** release has been started."
-          bulkSubject: "[Release] Multiple releases started"
-          bulkBody: |-
-            The following releases have been started:
-
-            ${#releases}
-            * [${title}](${url})
-            ${/releases}
-          roles:
-          - Release Admin
-        - notification: RELEASE_ABORTED
-          priority: Normal
-          subject: "[Release] ${release.title}"
-          body: "The **${release.title}** release has been aborted."
-          bulkSubject: "[Release] Multiple releases aborted"
-          bulkBody: |-
-            The following releases have been aborted:
-
-            ${#releases}
-            * [${title}](${url})
-            ${/releases}
-          roles:
-          - Release Admin
-        - notification: ACTIVE_TASK_ASSIGNED
-          priority: Normal
-          subject: "[Release] ${release.title}: ${task.title}"
-          body: "The active task **${task.title}** in the **${release.title}** release\
-            \ is now assigned to ${task.ownerFullName}."
-          roles:
-          - Watcher
-          - Task Team
-          - Task Owner
-    - notifications:
-      - notification: TASK_OVERDUE
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is overdue.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Release Admin
-      - notification: TASK_FLAGGED
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-          **${release.flagComment}**
-        roles:
-        - Watcher
-        - Release Admin
-        - Task Team
-      - notification: AUDIT_REPORT_JOB_ABORTED
-        priority: Normal
-        subject: "[Release] Audit report was aborted"
-        body: |-
-          **Your audit report was aborted!**
-
-           Please try to generate it again or contact your Release administrator for assistance.
-      - notification: MANUAL_TASK_STARTED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Task Owner
-      - notification: TASK_FAILED
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has failed.
-
-          Other tasks could still be in progress, but the release will stop after they complete.
-
-          You can retry the task, reassign it to somebody else or abort the release.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: USER_MENTIONED
-        priority: Normal
-        subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-          \ ${task.title}"
-        body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-          \ in the **${release.title}** release:"
-      - notification: COMMENT_ADDED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-          ${comment.text}
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: AUDIT_REPORT_JOB_FAILED
-        priority: Normal
-        subject: "[Release] Audit report has failed"
-        body: |-
-          **Your audit report has failed!**
-
-           Please try to generate it again or contact your Release administrator for assistance.
-      - notification: RELEASE_FAILED
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The **${release.title}** release has failed due to a task failure.
-
-          The release is now stopped.
-
-          You can retry the failed task, reassign it to somebody else or abort the release.
-        roles:
-        - Release Admin
-      - notification: TASK_DUE_SOON
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Release Admin
-        - Task Owner
-      - notification: ACTIVE_TASK_UNASSIGNED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-          Please assign the task to a user or a team.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: RELEASE_FAILING
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The **${release.title}** release is failing due to a task failure.
-
-          Other tasks may still be in progress, but the release will stop after they complete.
-
-          You can retry the failed task, reassign it to somebody else or abort the release.
-        roles:
-        - Release Admin
-      - notification: RELEASE_FLAGGED
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-          **${release.flagComment}**
-        roles:
-        - Release Admin
-      - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-          Please assign the task to a user or a team.
-        roles:
-        - Watcher
-        - Release Admin
-      - notification: RELEASE_COMPLETED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been completed."
-        roles:
-        - Release Admin
-      - notification: TASK_WAITING_FOR_INPUT
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release needs your input.
-
-          Please enter the required information so the release can continue.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: AUDIT_REPORT_JOB_COMPLETED
-        priority: Normal
-        subject: "[Release] Report '${report.reportName}' is ready"
-        body: |-
-          **Your audit report is complete!**
-
-           '${report.reportName}' is ready for download.
-      - notification: RELEASE_STARTED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been started."
-        bulkSubject: "[Release] Multiple releases started"
-        bulkBody: |-
-          The following releases have been started:
-
-          ${#releases}
-          * [${title}](${url})
-          ${/releases}
-        roles:
-        - Release Admin
-      - notification: RELEASE_ABORTED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been aborted."
-        bulkSubject: "[Release] Multiple releases aborted"
-        bulkBody: |-
-          The following releases have been aborted:
-
-          ${#releases}
-          * [${title}](${url})
-          ${/releases}
-        roles:
-        - Release Admin
-      - notification: ACTIVE_TASK_ASSIGNED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: "The active task **${task.title}** in the **${release.title}** release\
-          \ is now assigned to ${task.ownerFullName}."
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-  - notifications:
-    - notification: TASK_OVERDUE
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is overdue.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: TASK_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Team
-    - notification: AUDIT_REPORT_JOB_ABORTED
-      priority: Normal
-      subject: "[Release] Audit report was aborted"
-      body: |-
-        **Your audit report was aborted!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: MANUAL_TASK_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Task Owner
-    - notification: TASK_FAILED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has failed.
-
-        Other tasks could still be in progress, but the release will stop after they complete.
-
-        You can retry the task, reassign it to somebody else or abort the release.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: USER_MENTIONED
-      priority: Normal
-      subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-        \ ${task.title}"
-      body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-        \ in the **${release.title}** release:"
-    - notification: COMMENT_ADDED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-        ${comment.text}
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_FAILED
-      priority: Normal
-      subject: "[Release] Audit report has failed"
-      body: |-
-        **Your audit report has failed!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: RELEASE_FAILED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release has failed due to a task failure.
-
-        The release is now stopped.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: TASK_DUE_SOON
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Owner
-    - notification: ACTIVE_TASK_UNASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: RELEASE_FAILING
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release is failing due to a task failure.
-
-        Other tasks may still be in progress, but the release will stop after they complete.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: RELEASE_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Release Admin
-    - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: RELEASE_COMPLETED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been completed."
-      roles:
-      - Release Admin
-    - notification: TASK_WAITING_FOR_INPUT
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release needs your input.
-
-        Please enter the required information so the release can continue.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_COMPLETED
-      priority: Normal
-      subject: "[Release] Report '${report.reportName}' is ready"
-      body: |-
-        **Your audit report is complete!**
-
-         '${report.reportName}' is ready for download.
-    - notification: RELEASE_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been started."
-      bulkSubject: "[Release] Multiple releases started"
-      bulkBody: |-
-        The following releases have been started:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: RELEASE_ABORTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been aborted."
-      bulkSubject: "[Release] Multiple releases aborted"
-      bulkBody: |-
-        The following releases have been aborted:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: ACTIVE_TASK_ASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: "The active task **${task.title}** in the **${release.title}** release\
-        \ is now assigned to ${task.ownerFullName}."
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
+- directory: subfolder1/grandchild1
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
+- directory: subfolder1/grandchild1/greatgrandchild1
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
 - directory: subfolder2
-  children:
-  - directory: grandchild2
-    children:
-    - notifications:
-      - notification: TASK_OVERDUE
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is overdue.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Release Admin
-      - notification: TASK_FLAGGED
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-          **${release.flagComment}**
-        roles:
-        - Watcher
-        - Release Admin
-        - Task Team
-      - notification: AUDIT_REPORT_JOB_ABORTED
-        priority: Normal
-        subject: "[Release] Audit report was aborted"
-        body: |-
-          **Your audit report was aborted!**
-
-           Please try to generate it again or contact your Release administrator for assistance.
-      - notification: MANUAL_TASK_STARTED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Task Owner
-      - notification: TASK_FAILED
-        priority: High
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has failed.
-
-          Other tasks could still be in progress, but the release will stop after they complete.
-
-          You can retry the task, reassign it to somebody else or abort the release.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: USER_MENTIONED
-        priority: Normal
-        subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-          \ ${task.title}"
-        body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-          \ in the **${release.title}** release:"
-      - notification: COMMENT_ADDED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-          ${comment.text}
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: AUDIT_REPORT_JOB_FAILED
-        priority: Normal
-        subject: "[Release] Audit report has failed"
-        body: |-
-          **Your audit report has failed!**
-
-           Please try to generate it again or contact your Release administrator for assistance.
-      - notification: RELEASE_FAILED
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The **${release.title}** release has failed due to a task failure.
-
-          The release is now stopped.
-
-          You can retry the failed task, reassign it to somebody else or abort the release.
-        roles:
-        - Release Admin
-      - notification: TASK_DUE_SOON
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-          After the task is completed, please mark it as Completed in Release.
-        roles:
-        - Watcher
-        - Release Admin
-        - Task Owner
-      - notification: ACTIVE_TASK_UNASSIGNED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-          Please assign the task to a user or a team.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: RELEASE_FAILING
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The **${release.title}** release is failing due to a task failure.
-
-          Other tasks may still be in progress, but the release will stop after they complete.
-
-          You can retry the failed task, reassign it to somebody else or abort the release.
-        roles:
-        - Release Admin
-      - notification: RELEASE_FLAGGED
-        priority: High
-        subject: "[Release] ${release.title}"
-        body: |-
-          The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-          **${release.flagComment}**
-        roles:
-        - Release Admin
-      - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-          Please assign the task to a user or a team.
-        roles:
-        - Watcher
-        - Release Admin
-      - notification: RELEASE_COMPLETED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been completed."
-        roles:
-        - Release Admin
-      - notification: TASK_WAITING_FOR_INPUT
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: |-
-          The **${task.title}** task in the **${release.title}** release needs your input.
-
-          Please enter the required information so the release can continue.
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-      - notification: AUDIT_REPORT_JOB_COMPLETED
-        priority: Normal
-        subject: "[Release] Report '${report.reportName}' is ready"
-        body: |-
-          **Your audit report is complete!**
-
-           '${report.reportName}' is ready for download.
-      - notification: RELEASE_STARTED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been started."
-        bulkSubject: "[Release] Multiple releases started"
-        bulkBody: |-
-          The following releases have been started:
-
-          ${#releases}
-          * [${title}](${url})
-          ${/releases}
-        roles:
-        - Release Admin
-      - notification: RELEASE_ABORTED
-        priority: Normal
-        subject: "[Release] ${release.title}"
-        body: "The **${release.title}** release has been aborted."
-        bulkSubject: "[Release] Multiple releases aborted"
-        bulkBody: |-
-          The following releases have been aborted:
-
-          ${#releases}
-          * [${title}](${url})
-          ${/releases}
-        roles:
-        - Release Admin
-      - notification: ACTIVE_TASK_ASSIGNED
-        priority: Normal
-        subject: "[Release] ${release.title}: ${task.title}"
-        body: "The active task **${task.title}** in the **${release.title}** release\
-          \ is now assigned to ${task.ownerFullName}."
-        roles:
-        - Watcher
-        - Task Team
-        - Task Owner
-  - notifications:
-    - notification: TASK_OVERDUE
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is overdue.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: TASK_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Team
-    - notification: AUDIT_REPORT_JOB_ABORTED
-      priority: Normal
-      subject: "[Release] Audit report was aborted"
-      body: |-
-        **Your audit report was aborted!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: MANUAL_TASK_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Task Owner
-    - notification: TASK_FAILED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has failed.
-
-        Other tasks could still be in progress, but the release will stop after they complete.
-
-        You can retry the task, reassign it to somebody else or abort the release.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: USER_MENTIONED
-      priority: Normal
-      subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-        \ ${task.title}"
-      body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-        \ in the **${release.title}** release:"
-    - notification: COMMENT_ADDED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-        ${comment.text}
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_FAILED
-      priority: Normal
-      subject: "[Release] Audit report has failed"
-      body: |-
-        **Your audit report has failed!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: RELEASE_FAILED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release has failed due to a task failure.
-
-        The release is now stopped.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: TASK_DUE_SOON
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Owner
-    - notification: ACTIVE_TASK_UNASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: RELEASE_FAILING
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release is failing due to a task failure.
-
-        Other tasks may still be in progress, but the release will stop after they complete.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: RELEASE_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Release Admin
-    - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: RELEASE_COMPLETED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been completed."
-      roles:
-      - Release Admin
-    - notification: TASK_WAITING_FOR_INPUT
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release needs your input.
-
-        Please enter the required information so the release can continue.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_COMPLETED
-      priority: Normal
-      subject: "[Release] Report '${report.reportName}' is ready"
-      body: |-
-        **Your audit report is complete!**
-
-         '${report.reportName}' is ready for download.
-    - notification: RELEASE_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been started."
-      bulkSubject: "[Release] Multiple releases started"
-      bulkBody: |-
-        The following releases have been started:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: RELEASE_ABORTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been aborted."
-      bulkSubject: "[Release] Multiple releases aborted"
-      bulkBody: |-
-        The following releases have been aborted:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: ACTIVE_TASK_ASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: "The active task **${task.title}** in the **${release.title}** release\
-        \ is now assigned to ${task.ownerFullName}."
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
+- directory: subfolder2/grandchild2
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
 - directory: subfolder3
-  children:
-  - notifications:
-    - notification: TASK_OVERDUE
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is overdue.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: TASK_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Team
-    - notification: AUDIT_REPORT_JOB_ABORTED
-      priority: Normal
-      subject: "[Release] Audit report was aborted"
-      body: |-
-        **Your audit report was aborted!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: MANUAL_TASK_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Task Owner
-    - notification: TASK_FAILED
-      priority: High
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has failed.
-
-        Other tasks could still be in progress, but the release will stop after they complete.
-
-        You can retry the task, reassign it to somebody else or abort the release.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: USER_MENTIONED
-      priority: Normal
-      subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-        \ ${task.title}"
-      body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-        \ in the **${release.title}** release:"
-    - notification: COMMENT_ADDED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-        ${comment.text}
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_FAILED
-      priority: Normal
-      subject: "[Release] Audit report has failed"
-      body: |-
-        **Your audit report has failed!**
-
-         Please try to generate it again or contact your Release administrator for assistance.
-    - notification: RELEASE_FAILED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release has failed due to a task failure.
-
-        The release is now stopped.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: TASK_DUE_SOON
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-        After the task is completed, please mark it as Completed in Release.
-      roles:
-      - Watcher
-      - Release Admin
-      - Task Owner
-    - notification: ACTIVE_TASK_UNASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: RELEASE_FAILING
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The **${release.title}** release is failing due to a task failure.
-
-        Other tasks may still be in progress, but the release will stop after they complete.
-
-        You can retry the failed task, reassign it to somebody else or abort the release.
-      roles:
-      - Release Admin
-    - notification: RELEASE_FLAGGED
-      priority: High
-      subject: "[Release] ${release.title}"
-      body: |-
-        The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-        **${release.flagComment}**
-      roles:
-      - Release Admin
-    - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-        Please assign the task to a user or a team.
-      roles:
-      - Watcher
-      - Release Admin
-    - notification: RELEASE_COMPLETED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been completed."
-      roles:
-      - Release Admin
-    - notification: TASK_WAITING_FOR_INPUT
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: |-
-        The **${task.title}** task in the **${release.title}** release needs your input.
-
-        Please enter the required information so the release can continue.
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-    - notification: AUDIT_REPORT_JOB_COMPLETED
-      priority: Normal
-      subject: "[Release] Report '${report.reportName}' is ready"
-      body: |-
-        **Your audit report is complete!**
-
-         '${report.reportName}' is ready for download.
-    - notification: RELEASE_STARTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been started."
-      bulkSubject: "[Release] Multiple releases started"
-      bulkBody: |-
-        The following releases have been started:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: RELEASE_ABORTED
-      priority: Normal
-      subject: "[Release] ${release.title}"
-      body: "The **${release.title}** release has been aborted."
-      bulkSubject: "[Release] Multiple releases aborted"
-      bulkBody: |-
-        The following releases have been aborted:
-
-        ${#releases}
-        * [${title}](${url})
-        ${/releases}
-      roles:
-      - Release Admin
-    - notification: ACTIVE_TASK_ASSIGNED
-      priority: Normal
-      subject: "[Release] ${release.title}: ${task.title}"
-      body: "The active task **${task.title}** in the **${release.title}** release\
-        \ is now assigned to ${task.ownerFullName}."
-      roles:
-      - Watcher
-      - Task Team
-      - Task Owner
-- notifications:
-  - notification: TASK_OVERDUE
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is overdue.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Release Admin
-  - notification: TASK_FLAGGED
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The status of the **${task.title}** task in the **${release.title}** release was changed to **${task.flagStatus}** with the following comment:
-
-      **${release.flagComment}**
-    roles:
-    - Watcher
-    - Release Admin
-    - Task Team
-  - notification: AUDIT_REPORT_JOB_ABORTED
-    priority: Normal
-    subject: "[Release] Audit report was aborted"
-    body: |-
-      **Your audit report was aborted!**
-
-       Please try to generate it again or contact your Release administrator for assistance.
-  - notification: MANUAL_TASK_STARTED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has started and is assigned to you or your team.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Task Owner
-  - notification: TASK_FAILED
-    priority: High
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has failed.
-
-      Other tasks could still be in progress, but the release will stop after they complete.
-
-      You can retry the task, reassign it to somebody else or abort the release.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: USER_MENTIONED
-    priority: Normal
-    subject: "[Release] ${mentionedByFullName} mentioned you on ${release.title}:\
-      \ ${task.title}"
-    body: "**${mentionedByFullName}** mentioned you on the **${task.title}** task\
-      \ in the **${release.title}** release:"
-  - notification: COMMENT_ADDED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      **${comment.authorFullName}** commented on the **${task.title}** task in the **${release.title}** release:
-
-      ${comment.text}
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: AUDIT_REPORT_JOB_FAILED
-    priority: Normal
-    subject: "[Release] Audit report has failed"
-    body: |-
-      **Your audit report has failed!**
-
-       Please try to generate it again or contact your Release administrator for assistance.
-  - notification: RELEASE_FAILED
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The **${release.title}** release has failed due to a task failure.
-
-      The release is now stopped.
-
-      You can retry the failed task, reassign it to somebody else or abort the release.
-    roles:
-    - Release Admin
-  - notification: TASK_DUE_SOON
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is due in **${task.dueInHours}** hours and **${task.dueInMinutes}** minutes.
-
-      After the task is completed, please mark it as Completed in Release.
-    roles:
-    - Watcher
-    - Release Admin
-    - Task Owner
-  - notification: ACTIVE_TASK_UNASSIGNED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release is active but not assigned to anyone anymore.
-
-      Please assign the task to a user or a team.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: RELEASE_FAILING
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The **${release.title}** release is failing due to a task failure.
-
-      Other tasks may still be in progress, but the release will stop after they complete.
-
-      You can retry the failed task, reassign it to somebody else or abort the release.
-    roles:
-    - Release Admin
-  - notification: RELEASE_FLAGGED
-    priority: High
-    subject: "[Release] ${release.title}"
-    body: |-
-      The status of the **${release.title}** release was changed to **${release.flagStatus}** with the following comment:
-
-      **${release.flagComment}**
-    roles:
-    - Release Admin
-  - notification: MANUAL_TASK_STARTED_WITHOUT_OWNER
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release has started, but it is not assigned.
-
-      Please assign the task to a user or a team.
-    roles:
-    - Watcher
-    - Release Admin
-  - notification: RELEASE_COMPLETED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been completed."
-    roles:
-    - Release Admin
-  - notification: TASK_WAITING_FOR_INPUT
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: |-
-      The **${task.title}** task in the **${release.title}** release needs your input.
-
-      Please enter the required information so the release can continue.
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
-  - notification: AUDIT_REPORT_JOB_COMPLETED
-    priority: Normal
-    subject: "[Release] Report '${report.reportName}' is ready"
-    body: |-
-      **Your audit report is complete!**
-
-       '${report.reportName}' is ready for download.
-  - notification: RELEASE_STARTED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been started."
-    bulkSubject: "[Release] Multiple releases started"
-    bulkBody: |-
-      The following releases have been started:
-
-      ${#releases}
-      * [${title}](${url})
-      ${/releases}
-    roles:
-    - Release Admin
-  - notification: RELEASE_ABORTED
-    priority: Normal
-    subject: "[Release] ${release.title}"
-    body: "The **${release.title}** release has been aborted."
-    bulkSubject: "[Release] Multiple releases aborted"
-    bulkBody: |-
-      The following releases have been aborted:
-
-      ${#releases}
-      * [${title}](${url})
-      ${/releases}
-    roles:
-    - Release Admin
-  - notification: ACTIVE_TASK_ASSIGNED
-    priority: Normal
-    subject: "[Release] ${release.title}: ${task.title}"
-    body: "The active task **${task.title}** in the **${release.title}** release is\
-      \ now assigned to ${task.ownerFullName}."
-    roles:
-    - Watcher
-    - Task Team
-    - Task Owner
+  teams:
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#edit_security
+    - template#create_release
+    - template#edit_triggers
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_security
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#lock_task
+    - release#start
+    - release#edit_blackout
+    - release#edit_failure_handler
+    - folder#view
+    - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
