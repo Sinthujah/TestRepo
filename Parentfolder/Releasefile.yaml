@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Oct 26 18:44:16 IST 2021
+# Date created:         Tue Oct 26 18:47:23 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -68,11 +68,20 @@ spec:
   releaseTitle: Release created by trigger
   template: Parent template 1
   gitRepository: My git repo
-  commitId: b50eb2312bfa08f80465cfcdd558a19f04dfde12
+  commitId: 032deff71b1a77e32b26d5f71a211078cb437e0d
 - directory: subfolder1
   children:
+  - folderVariables:
+    - type: xlrelease.StringVariable
+      key: folder.subfoldervariable
+  - pattern: subfolderpattern
+    stages:
+    - stage: New Stage
   - template: subfolder_template
     scheduledStartDate: 2021-10-26T09:00:00+05:30
     phases:
     - phase: New Phase
     riskProfile: Default risk profile
+  - name: subfolderdashboard
+    type: xlrelease.BlankDashboard
+    owner: admin
