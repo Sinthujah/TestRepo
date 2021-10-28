@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Thu Oct 28 17:54:06 IST 2021
+# Date created:         Thu Oct 28 17:55:18 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -11,7 +11,7 @@ spec:
 - name: Folderlevel git config
   type: git.Repository
   variableMapping:
-    password: "${folder.github token}"
+    password: "${global.github token}"
   url: https://github.com/Sinthujah/TestRepo
   username: sinthujah
 - name: Samples folder Jira
