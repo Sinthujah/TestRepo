@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Oct 27 19:14:48 IST 2021
+# Date created:         Thu Oct 28 16:10:38 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,15 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
+- name: Folderlevel git config
+  type: git.Repository
+  variableMapping:
+    password: "${folder.github token}"
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
+- name: Samples folder Jira
+  type: jira.Server
+  url: https://digitalai.atlassian.net/
 - pattern: iyy
   stages:
   - stage: New Stage
