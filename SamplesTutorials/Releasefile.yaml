@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 10 16:08:04 IST 2021
+# Date created:         Wed Nov 10 16:14:05 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -1089,9 +1089,7 @@ spec:
     - template#lock_task
     - template#view
     - folder#view
-    - template#edit_security
     - template#create_release
-    - template#edit_triggers
     - template#edit_precondition
     - template#edit_failure_handler
   - name: Folder Owner
@@ -1123,14 +1121,6 @@ spec:
     permissions:
     - release#edit_precondition
     - release#edit
-    - release#edit_security
-    - release#lock_task
-    - folder#view
-    - release#edit_task_script
-    - release#edit_task_configuration_facet
-    - release#edit_task_flag
-    - release#edit_task_dates
-    - release#edit_task
     - release#edit_task_attachments
     - release#task_transition
     - trigger#view_trigger
@@ -1140,8 +1130,20 @@ spec:
     - release#edit_task_description
     - trigger#edit_trigger
     - release#view
+    - release#lock_task
     - release#start
     - release#edit_blackout
     - template#view
     - release#edit_failure_handler
+    - folder#view
     - release#abort
+    - release#edit_task_script
+    - release#edit_task_configuration_facet
+    - release#edit_task_flag
+    - release#edit_task_dates
+    - release#edit_task
+  - name: TeamA
+    users:
+    - admin
+    permissions:
+    - folder#view
