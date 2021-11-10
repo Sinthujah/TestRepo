@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 10 16:05:55 IST 2021
+# Date created:         Wed Nov 10 16:08:04 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -872,7 +872,7 @@ spec:
   template: Configure Release
   pollType: REPEAT
   periodicity: "500"
-  triggerTime: 2021-11-10T16:05:37.325000
+  triggerTime: 2021-11-10T16:06:18.286000
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
