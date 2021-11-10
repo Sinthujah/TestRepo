@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 10 16:14:05 IST 2021
+# Date created:         Wed Nov 10 17:19:09 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -872,7 +872,7 @@ spec:
   template: Configure Release
   pollType: REPEAT
   periodicity: "500"
-  triggerTime: 2021-11-10T16:06:18.286000
+  triggerTime: 2021-11-10T17:18:28.185000
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
@@ -1115,6 +1115,11 @@ spec:
     - folder#edit
     - dashboard#view
     - folder#generate_configuration
+  - name: TeamA
+    users:
+    - admin
+    permissions:
+    - folder#view
   - name: Release Admin
     users:
     - admin
@@ -1142,8 +1147,3 @@ spec:
     - release#edit_task_flag
     - release#edit_task_dates
     - release#edit_task
-  - name: TeamA
-    users:
-    - admin
-    permissions:
-    - folder#view
