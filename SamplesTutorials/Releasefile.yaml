@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Sat Nov 13 15:25:17 IST 2021
+# Date created:         Sat Nov 13 15:33:13 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,12 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- pattern: pattern 1
-  stages:
-  - stage: New Stage
+- name: My Git at folder level-edit
+  type: git.Repository
+  variableMapping:
+    password: "${global.github token}"
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
+- name: My Jenkins
+  type: jenkins.Server
+  url: https://localhost:8080
