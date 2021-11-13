@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Sat Nov 13 16:09:50 IST 2021
+# Date created:         Sat Nov 13 16:10:16 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,12 +8,34 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- name: My Git at folder level-edit
-  type: git.Repository
-  variableMapping:
-    password: "${global.github token}"
-  url: https://github.com/Sinthujah/TestRepo
-  username: sinthujah
-- name: My Jenkins
-  type: jenkins.Server
-  url: https://localhost:8080
+- name: Dashboard 12345
+  type: xlrelease.BlankDashboard
+  owner: admin
+  tiles:
+  - name: Active releases
+    type: live.ReleasesTile
+    row: 0
+    col: 0
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: ./
+  - name: Active releases by risk
+    type: live.ReleasesByRiskTile
+    row: 0
+    col: 2
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: ./
+  - name: Avg. task duration
+    type: xlrelease.AvgTaskDurationTile
+    row: 0
+    col: 4
+  columns: 3
