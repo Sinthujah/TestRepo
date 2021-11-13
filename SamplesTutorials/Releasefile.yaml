@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Sat Nov 13 15:11:56 IST 2021
+# Date created:         Sat Nov 13 15:14:27 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -736,7 +736,7 @@ spec:
   - type: xlrelease.StringVariable
     key: packageId
   riskProfile: Default risk profile
-- template: Template 1
+- template: Template 1-edit
   scheduledStartDate: 2021-11-13T09:00:00+05:30
   phases:
   - phase: New Phase
@@ -744,6 +744,8 @@ spec:
     - name: task1
       type: xlrelease.Task
     - name: task2
+      type: xlrelease.Task
+    - name: task3
       type: xlrelease.Task
   riskProfile: Default risk profile
 - template: Welcome to Release!
