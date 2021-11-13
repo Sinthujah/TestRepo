@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Sat Nov 13 15:33:13 IST 2021
+# Date created:         Sat Nov 13 15:53:57 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,12 +8,22 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- name: My Git at folder level-edit
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.variable1
+- name: My Git at folder level
   type: git.Repository
   variableMapping:
     password: "${global.github token}"
   url: https://github.com/Sinthujah/TestRepo
   username: sinthujah
-- name: My Jenkins
+- name: Jenkins
   type: jenkins.Server
   url: https://localhost:8080
+- name: Time trigger
+  type: time.Schedule
+  releaseTitle: Release created by trigger
+  template: Configure Release
+  pollType: REPEAT
+  periodicity: "500"
+  triggerTime: 2021-11-13T15:50:50.499000
