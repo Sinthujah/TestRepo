@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Nov 16 15:58:54 IST 2021
+# Date created:         Tue Nov 16 16:17:56 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -10,6 +10,7 @@ metadata:
 spec:
 - template: T2-edit
   scheduledStartDate: 2021-11-16T09:00:00+05:30
+  dueDate: 2021-11-16T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
@@ -17,4 +18,8 @@ spec:
       type: xlrelease.Task
     - name: task2
       type: xlrelease.Task
+    - name: Jenkins build task
+      type: jenkins.Build
+      jenkinsServer: Local Jenkins
+      jobName: XLR/job/hs1testrun/
   riskProfile: Default risk profile
