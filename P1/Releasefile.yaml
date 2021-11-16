@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Nov 16 15:42:16 IST 2021
+# Date created:         Tue Nov 16 15:44:39 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -11,7 +11,7 @@ spec:
 - name: Time trigger
   type: time.Schedule
   releaseTitle: R2
-  template: T2
+  template: T2-edit
   pollType: REPEAT
   periodicity: "50000"
   triggerTime: 2021-11-16T15:40:54.078000
