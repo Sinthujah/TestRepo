@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Nov 16 16:17:56 IST 2021
+# Date created:         Tue Nov 16 16:20:00 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -20,6 +20,10 @@ spec:
       type: xlrelease.Task
     - name: Jenkins build task
       type: jenkins.Build
-      jenkinsServer: Local Jenkins
+      jenkinsServer: Local Jenkins-nameedited
       jobName: XLR/job/hs1testrun/
+    - name: task3
+      type: xlrelease.Task
+    - name: task4
+      type: xlrelease.Task
   riskProfile: Default risk profile
