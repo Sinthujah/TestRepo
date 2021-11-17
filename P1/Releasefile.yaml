@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 17 15:30:05 IST 2021
+# Date created:         Wed Nov 17 15:51:40 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,9 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
+- pattern: pattern A
+  stages:
+  - stage: New Stage
 - template: T2-edit
   scheduledStartDate: 2021-11-16T09:00:00+05:30
   dueDate: 2021-11-16T10:00:00+05:30
