@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 17 15:51:40 IST 2021
+# Date created:         Wed Nov 17 16:01:59 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,25 +8,22 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
-- pattern: pattern A
-  stages:
-  - stage: New Stage
-- template: T2-edit
-  scheduledStartDate: 2021-11-16T09:00:00+05:30
-  dueDate: 2021-11-16T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: task1
-      type: xlrelease.Task
-    - name: task2
-      type: xlrelease.Task
-    - name: Jenkins build task
-      type: jenkins.Build
-      jenkinsServer: Local Jenkins-nameedited
-      jobName: XLR/job/hs1testrun/
-    - name: task3
-      type: xlrelease.Task
-    - name: task4
-      type: xlrelease.Task
-  riskProfile: Default risk profile
+- name: webhook event trigger
+  type: events.EventBasedTrigger
+  mappedProperties:
+  - type: xlrelease.StringValue
+    targetProperty: releaseTitle
+    value: r3
+  - type: xlrelease.StringValue
+    targetProperty: template
+    value: T2-edit
+  triggerActionType: xlrelease.CreateReleaseFromTemplateAction
+  eventSource: webhook config 1
+  eventType: events.HttpRequestEvent
+- name: Time trigger-edit
+  type: time.Schedule
+  releaseTitle: R2-release
+  template: T2-edit
+  pollType: REPEAT
+  periodicity: "50000"
+  triggerTime: 2021-11-17T15:23:49.662000
