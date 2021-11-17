@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Nov 16 16:20:00 IST 2021
+# Date created:         Wed Nov 17 15:21:23 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,22 +8,10 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
-- template: T2-edit
-  scheduledStartDate: 2021-11-16T09:00:00+05:30
-  dueDate: 2021-11-16T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: task1
-      type: xlrelease.Task
-    - name: task2
-      type: xlrelease.Task
-    - name: Jenkins build task
-      type: jenkins.Build
-      jenkinsServer: Local Jenkins-nameedited
-      jobName: XLR/job/hs1testrun/
-    - name: task3
-      type: xlrelease.Task
-    - name: task4
-      type: xlrelease.Task
-  riskProfile: Default risk profile
+- name: Time trigger-edit
+  type: time.Schedule
+  releaseTitle: R2-release
+  template: T2-edit
+  pollType: REPEAT
+  periodicity: "50000"
+  triggerTime: 2021-11-16T15:58:35.962000
