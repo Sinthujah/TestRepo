@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 17 16:01:59 IST 2021
+# Date created:         Wed Nov 17 16:02:52 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -20,10 +20,10 @@ spec:
   triggerActionType: xlrelease.CreateReleaseFromTemplateAction
   eventSource: webhook config 1
   eventType: events.HttpRequestEvent
-- name: Time trigger-edit
+- name: Time trigger
   type: time.Schedule
   releaseTitle: R2-release
   template: T2-edit
   pollType: REPEAT
   periodicity: "50000"
-  triggerTime: 2021-11-17T15:23:49.662000
+  triggerTime: 2021-11-17T16:02:41.566000
