@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 17 16:02:52 IST 2021
+# Date created:         Fri Nov 19 16:10:18 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,22 +8,9 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
-- name: webhook event trigger
-  type: events.EventBasedTrigger
-  mappedProperties:
-  - type: xlrelease.StringValue
-    targetProperty: releaseTitle
-    value: r3
-  - type: xlrelease.StringValue
-    targetProperty: template
-    value: T2-edit
-  triggerActionType: xlrelease.CreateReleaseFromTemplateAction
-  eventSource: webhook config 1
-  eventType: events.HttpRequestEvent
-- name: Time trigger
-  type: time.Schedule
-  releaseTitle: R2-release
-  template: T2-edit
-  pollType: REPEAT
-  periodicity: "50000"
-  triggerTime: 2021-11-17T16:02:41.566000
+- name: git poll trigger
+  type: git.Poll
+  releaseTitle: tttt
+  template: T4
+  gitRepository: Global Git repo
+  commitId: 37e89c180880cadeab019718689e5552df6406f0
