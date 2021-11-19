@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Nov 19 16:31:27 IST 2021
+# Date created:         Fri Nov 19 16:41:23 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -13,10 +13,17 @@ spec:
   releaseTitle: tttt
   template: T4
   gitRepository: Global Git repo
-  commitId: 4ad8376a3f54feecba3478f5c82d7312c8dbc381
-- name: Jira trigger
-  type: jira.IssueTrigger
+  commitId: 4837fc4a65920557df9cfd2cdfaea79e35f7bc71
+- name: Nexus trigger
+  type: nexus.PublishedArtifact
+  releaseTitle: dewd
+  template: T4
+  groupId: vv
+  artifactId: vv
+  server: Nexus server
+  repositoryId: ewe
+- name: svn trigger
+  type: svn.Poll
   releaseTitle: dd
   template: T4
-  jql: ddd
-  server: Jira
+  svnRepository: SVN server
