@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Nov 19 16:10:18 IST 2021
+# Date created:         Fri Nov 19 16:30:00 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -13,4 +13,10 @@ spec:
   releaseTitle: tttt
   template: T4
   gitRepository: Global Git repo
-  commitId: 37e89c180880cadeab019718689e5552df6406f0
+  commitId: 5344731ff8c90ceb763416fcaf92e840cb7225c8
+- name: Jira trigger
+  type: jira.IssueTrigger
+  releaseTitle: dd
+  template: T4
+  jql: ddd
+  server: Jira
