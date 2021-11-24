@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 24 16:58:42 IST 2021
+# Date created:         Wed Nov 24 17:01:08 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
-- name: webhook config 1
+- name: webhook config 2
   type: events.PostWebhookEndpoint
   path: webhookstestpath
   authentication:
