@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Wed Nov 24 17:01:08 IST 2021
+# Date created:         Wed Nov 24 17:06:04 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -28,6 +28,27 @@ spec:
 - name: SVN server
   type: svn.Repository
   url: https://subversion
+- name: git poll trigger
+  type: git.Poll
+  releaseTitle: tttt
+  template: T4
+  gitRepository: Global Git repo
+  commitId: 6f85b66e60b12c3d838c4922bb3f5fb9270aa671
+- name: eee
+  type: jira.IssueTrigger
+  releaseTitle: dewd
+  template: T4
+  jql: de
+  server: Jira
+- name: Nexus trigger
+  type: nexus.PublishedArtifact
+  enabled: false
+  releaseTitle: dewd
+  template: T4
+  groupId: vv
+  artifactId: vv
+  server: Nexus server
+  repositoryId: ewe
 - directory: sub folder
   children:
   - name: Sub folder Jenkins sever
