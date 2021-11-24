@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Nov 23 15:40:00 IST 2021
+# Date created:         Wed Nov 24 16:58:42 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,15 +8,31 @@ kind: Templates
 metadata:
   home: parent folder
 spec:
-- name: git poll trigger
-  type: git.Poll
-  releaseTitle: tttt
-  template: T4
-  gitRepository: Global Git repo
-  commitId: 17d54f305bc6f4dcf792b37b8b0259a5e05fc4ff
-- name: Jira trigger
-  type: jira.IssueTrigger
-  releaseTitle: dd
-  template: T4
-  jql: ddd
-  server: Jira
+- name: webhook config 1
+  type: events.PostWebhookEndpoint
+  path: webhookstestpath
+  authentication:
+    type: events.NoAuthentication
+- name: Local Jenkins-nameedited
+  type: jenkins.Server
+  url: http://192.168.1.16:8080/
+  username: ghgh
+- name: Jira
+  type: jira.Server
+  url: https://digitalai.atlassian.net/jira/
+- name: Nexus server
+  type: nexus.Server
+  variableMapping:
+    password: "${global.github token}"
+  url: https://localhost:8081
+- name: SVN server
+  type: svn.Repository
+  url: https://subversion
+- directory: sub folder
+  children:
+  - name: Sub folder Jenkins sever
+    type: jenkins.Server
+    variableMapping:
+      password: "${global.github token}"
+    url: http://192.168.1.16:8080/
+    username: testuser
