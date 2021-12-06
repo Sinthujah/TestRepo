@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 06 16:40:15 IST 2021
+# Date created:         Mon Dec 06 16:43:36 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -26,6 +26,7 @@ spec:
   riskProfile: Default risk profile
 - name: Trigger1
   type: events.EventBasedTrigger
+  enabled: false
   mappedProperties:
   - type: xlrelease.StringValue
     targetProperty: releaseTitle
@@ -38,6 +39,7 @@ spec:
   eventType: events.HttpRequestEvent
 - name: Trigger2
   type: events.EventBasedTrigger
+  enabled: false
   mappedProperties:
   - type: xlrelease.StringValue
     targetProperty: releaseTitle
