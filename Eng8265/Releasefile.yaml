@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Thu Dec 09 18:21:46 IST 2021
+# Date created:         Thu Dec 09 18:24:02 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,10 @@ kind: Templates
 metadata:
   home: ENG-8265
 spec:
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.variable1
+    value: !value "xlrelease_PasswordStringVariable_folder_variable1_value"
 - name: ForcedFailure2
   type: events.PostWebhookEndpoint
   path: forcedfailure
