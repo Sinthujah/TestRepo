@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Thu Dec 16 15:09:52 IST 2021
+# Date created:         Thu Dec 16 15:48:24 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -10,9 +10,9 @@ metadata:
 spec:
 - folderVariables:
   - type: xlrelease.PasswordStringVariable
-    key: folder.password123
+    key: folder.password1
     value: !value "xlrelease_PasswordStringVariable_folder_password1_value"
-- pattern: pattern123
+- pattern: pattern1
   stages:
   - stage: New Stage
 - name: My Dashboard
@@ -37,4 +37,4 @@ spec:
   releaseFolder: ./
   pollType: REPEAT
   periodicity: "600"
-  triggerTime: 2021-12-16T15:09:29.273000
+  triggerTime: 2021-12-16T15:47:47.502000
