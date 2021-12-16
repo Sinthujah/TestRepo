@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Thu Dec 16 17:43:23 IST 2021
+# Date created:         Thu Dec 16 17:44:13 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,8 +8,12 @@ kind: Templates
 metadata:
   home: Test folder
 spec:
+- pattern: pattern 56
+  stages:
+  - stage: New Stage
 - template: Template 2
   scheduledStartDate: 2021-12-16T09:00:00+05:30
+  dueDate: 2021-12-16T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
