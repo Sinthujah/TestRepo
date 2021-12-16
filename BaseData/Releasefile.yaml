@@ -10,9 +10,9 @@ metadata:
 spec:
 - folderVariables:
   - type: xlrelease.PasswordStringVariable
-    key: folder.password1
+    key: folder.password123
     value: !value "xlrelease_PasswordStringVariable_folder_password1_value"
-- pattern: pattern1
+- pattern: pattern123
   stages:
   - stage: New Stage
 - name: My Dashboard
