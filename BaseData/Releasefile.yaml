@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Dec 17 18:08:35 IST 2021
+# Date created:         Fri Dec 17 18:15:05 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,15 +8,6 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
-- folderVariables:
-  - type: xlrelease.PasswordStringVariable
-    key: folder.password1
-    value: !value "xlrelease_PasswordStringVariable_folder_password1_value"
-- name: Time trigger
-  type: time.Schedule
-  releaseTitle: Release created by trigger
-  template: Configure Release
-  releaseFolder: ./
-  pollType: REPEAT
-  periodicity: "600"
-  triggerTime: 2021-12-17T18:04:50.874000
+- name: test agility connection
+  type: versionone.Server
+  url: https://agility.com
