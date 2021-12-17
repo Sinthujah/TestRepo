@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Dec 17 18:15:05 IST 2021
+# Date created:         Fri Dec 17 18:15:29 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,12 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
+- name: Folder_level_git_repo
+  type: git.Repository
+  variableMapping:
+    password: "${global.github token}"
+  url: https://github.com/Sinthujah/TestRepo
+  username: sinthujah
 - name: test agility connection
   type: versionone.Server
   url: https://agility.com
