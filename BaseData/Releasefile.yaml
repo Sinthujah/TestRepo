@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Dec 17 16:59:14 IST 2021
+# Date created:         Fri Dec 17 18:08:35 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -12,24 +12,6 @@ spec:
   - type: xlrelease.PasswordStringVariable
     key: folder.password1
     value: !value "xlrelease_PasswordStringVariable_folder_password1_value"
-- pattern: pattern1
-  stages:
-  - stage: New Stage
-- name: My Dashboard
-  type: xlrelease.BlankDashboard
-  owner: admin
-  tiles:
-  - name: Avg. task duration
-    type: xlrelease.AvgTaskDurationTile
-    row: 0
-    col: 0
-  - name: Current applications
-    type: deployment.CurrentApplicationsTile
-    row: 0
-    col: 1
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
 - name: Time trigger
   type: time.Schedule
   releaseTitle: Release created by trigger
@@ -37,4 +19,4 @@ spec:
   releaseFolder: ./
   pollType: REPEAT
   periodicity: "600"
-  triggerTime: 2021-12-17T16:51:57.912000
+  triggerTime: 2021-12-17T18:04:50.874000
