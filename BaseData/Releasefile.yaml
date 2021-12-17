@@ -14,7 +14,7 @@ spec:
     value: !value "xlrelease_PasswordStringVariable_folder_password1_value"
 - pattern: pattern1
   stages:
-  - stage: New Stage
+  - stage: Stage1
 - template: Configure Release
   scheduledStartDate: 2021-12-16T09:00:00+05:30
   phases:
