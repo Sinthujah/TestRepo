@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 27 15:51:04 IST 2021
+# Date created:         Mon Dec 27 16:28:39 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,9 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
+- name: Local Jenkins
+  type: jenkins.Server
+  url: https://jenkins.com
 - pattern: pattern T
   stages:
   - stage: New Stage
