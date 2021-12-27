@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 27 16:50:28 IST 2021
+# Date created:         Mon Dec 27 18:23:31 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -8,6 +8,10 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.ddd
+    value: !value "xlrelease_PasswordStringVariable_folder_ddd_value"
 - name: Local Git repo
   type: git.Repository
   variableMapping:
@@ -20,9 +24,72 @@ spec:
     password: "${global.github token}"
   url: https://jenkins.com
   username: sinthuja
-- name: git trigger
-  type: git.Poll
-  releaseTitle: ccc
+- pattern: pattern H
+  stages:
+  - stage: New Stage
+- template: Template 2
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+  variables:
+  - type: xlrelease.IntegerVariable
+    key: Numbers trigger 3
+    value: 4
+  - type: xlrelease.BooleanVariable
+    key: Checkbox variable 2
+  - type: xlrelease.StringVariable
+    key: listbox variable
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ffff
+    value: ffff
+  - type: xlrelease.StringVariable
+    key: listbox variable 2
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ggg
+    value: ggg
+  - type: xlrelease.StringVariable
+    key: listbox variable 3
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - hh
+    value: hh
+  riskProfile: Default risk profile
+- template: Template 3
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+  variables:
+  - type: xlrelease.StringVariable
+    key: text
+    value: dddd
+  - type: xlrelease.StringVariable
+    key: text2
+    value: hhh
+  riskProfile: Default risk profile
+- template: Template 4
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: rel1
+      type: xlrelease.CreateReleaseTask
+    - name: dd
+      type: xlrelease.UserInputTask
+      description: Please enter the required information below.
+    - name: ff
+      type: delivery.CreateDelivery
+    - name: jenins
+      type: jenkins.Build
+      jenkinsServer: Local Jenkins
+      password: !value "jenkins_Build_jenins_password"
   variables:
   - type: xlrelease.ListStringVariable
     key: Multiselectvar4
@@ -45,7 +112,158 @@ spec:
       - oo
     value:
     - uu
-  template: Template 4
-  gitRepository: Local Git repo
-  username: sinthujah
-  password: !value "git_Poll_git_trigger_password"
+  riskProfile: Default risk profile
+- template: Template 5
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+  variables:
+  - type: xlrelease.StringVariable
+    key: Listbox5
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ww
+    value: ww
+  - type: xlrelease.StringVariable
+    key: Listbox6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - vv
+    value: vv
+  riskProfile: Default risk profile
+- template: Template1
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+  variables:
+  - type: xlrelease.StringVariable
+    key: text variable
+    value: textdefaultedited
+  - type: xlrelease.StringVariable
+    key: text variable 2
+    value: textdefault2
+  - type: xlrelease.StringVariable
+    key: listbox variable
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - val1
+  - type: xlrelease.ListStringVariable
+    key: multi select variable
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - t1
+      - t2
+    value:
+    - t2
+  scriptUserPassword: !value "xlrelease_Release_Template1_scriptUserPassword"
+  riskProfile: Default risk profile
+- name: Release statistics
+  type: xlrelease.ReleaseStatisticsDashboard
+  owner: admin
+  tiles:
+  - name: Longest task type
+    type: xlrelease.LongestTaskTypeTile
+    row: 0
+    col: 1
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Number of releases
+    type: xlrelease.ReleasesByMonthTile
+    row: 2
+    col: 3
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Release efficiency
+    type: xlrelease.ReleaseEfficiencyTile
+    row: 2
+    col: 0
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Avg. task duration
+    type: xlrelease.AvgTaskDurationTile
+    row: 1
+    col: 1
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Time spent by task category
+    type: xlrelease.TaskTimeSpentTile
+    row: 0
+    col: 4
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Completed releases
+    type: xlrelease.CompletedReleasesTile
+    row: 0
+    col: 0
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Avg. release duration
+    type: xlrelease.AvgReleaseDurationTile
+    row: 1
+    col: 0
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Task efficiency
+    type: xlrelease.TaskEfficiencyTile
+    row: 0
+    col: 2
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Top 10 longest releases
+    type: xlrelease.LongestReleasesTile
+    row: 4
+    col: 0
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Avg. release duration over time
+    type: xlrelease.AvgReleaseDurationByMonthTile
+    row: 4
+    col: 3
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Top 10 longest phases
+    type: xlrelease.LongestPhasesTile
+    row: 6
+    col: 0
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  - name: Top 10 longest tasks
+    type: xlrelease.LongestTasksTile
+    row: 6
+    col: 3
+    filters:
+    - type: xlrelease.FolderFilter
+      folder: ./
+    - type: xlrelease.DateFilter
+  filters:
+  - type: xlrelease.FolderFilter
+    folder: ./
+  - type: xlrelease.DateFilter
