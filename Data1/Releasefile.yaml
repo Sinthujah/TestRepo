@@ -11,7 +11,7 @@ spec:
 - pattern: pattern A
   stages:
   - stage: New Stage
-- pattern: pattern B
+- pattern: pattern C
   stages:
   - stage: New Stage
 
