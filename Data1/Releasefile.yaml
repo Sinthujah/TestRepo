@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 27 14:58:46 IST 2021
+# Date created:         Mon Dec 27 15:51:04 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -11,7 +11,3 @@ spec:
 - pattern: pattern A
   stages:
   - stage: New Stage
-- pattern: pattern D
-  stages:
-  - stage: New Stage
-
