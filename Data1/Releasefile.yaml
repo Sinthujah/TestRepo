@@ -24,7 +24,7 @@ spec:
     password: "${global.github token}"
   url: https://jenkins.com
   username: sinthuja
-- pattern: pattern H
+- pattern: pattern J
   stages:
   - stage: New Stage
 - template: Template 2
