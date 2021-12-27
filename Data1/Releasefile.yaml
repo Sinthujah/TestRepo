@@ -8,6 +8,6 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
-- pattern: pattern S
+- pattern: pattern T
   stages:
   - stage: New Stage
