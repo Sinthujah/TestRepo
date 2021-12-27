@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 27 16:29:27 IST 2021
+# Date created:         Mon Dec 27 16:50:28 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -16,7 +16,36 @@ spec:
   username: sinthujah
 - name: Local Jenkins
   type: jenkins.Server
+  variableMapping:
+    password: "${global.github token}"
   url: https://jenkins.com
-- pattern: pattern T
-  stages:
-  - stage: New Stage
+  username: sinthuja
+- name: git trigger
+  type: git.Poll
+  releaseTitle: ccc
+  variables:
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar4
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ee
+      - rr
+      - tt
+    value:
+    - ee
+    - rr
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar5
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - uu
+      - ii
+      - oo
+    value:
+    - uu
+  template: Template 4
+  gitRepository: Local Git repo
+  username: sinthujah
+  password: !value "git_Poll_git_trigger_password"
