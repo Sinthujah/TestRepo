@@ -10,7 +10,7 @@ metadata:
 spec:
 - folderVariables:
   - type: xlrelease.PasswordStringVariable
-    key: folder.ddd
+    key: folder.ggggg
     value: !value "xlrelease_PasswordStringVariable_folder_ddd_value"
 - name: Local Jenkins
   type: jenkins.Server
@@ -18,7 +18,7 @@ spec:
     password: "${global.github token}"
   url: https://jenkins.com
   username: sinthuja
-- pattern: pattern J
+- pattern: pattern K
   stages:
   - stage: New Stage
 - template: Template 2
