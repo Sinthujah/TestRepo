@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Mon Dec 27 18:23:31 IST 2021
+# Date created:         Thu Dec 30 15:07:45 IST 2021
 
 ---
 apiVersion: xl-release/v1
@@ -12,12 +12,6 @@ spec:
   - type: xlrelease.PasswordStringVariable
     key: folder.ddd
     value: !value "xlrelease_PasswordStringVariable_folder_ddd_value"
-- name: Local Git repo
-  type: git.Repository
-  variableMapping:
-    password: "${global.github token}"
-  url: https://github.com/Sinthujah/TestRepo
-  username: sinthujah
 - name: Local Jenkins
   type: jenkins.Server
   variableMapping:
@@ -32,6 +26,12 @@ spec:
   dueDate: 2021-12-23T10:00:00+05:30
   phases:
   - phase: New Phase
+    tasks:
+    - name: jenkins
+      type: jenkins.Build
+      jenkinsServer: Local Jenkins
+      password: !value "jenkins_Build_jenkins_password"
+      jobName: uu
   variables:
   - type: xlrelease.IntegerVariable
     key: Numbers trigger 3
@@ -89,7 +89,6 @@ spec:
     - name: jenins
       type: jenkins.Build
       jenkinsServer: Local Jenkins
-      password: !value "jenkins_Build_jenins_password"
   variables:
   - type: xlrelease.ListStringVariable
     key: Multiselectvar4
@@ -101,7 +100,7 @@ spec:
       - tt
     value:
     - ee
-    - rr
+    - tt
   - type: xlrelease.ListStringVariable
     key: Multiselectvar5
     valueProvider:
@@ -112,6 +111,16 @@ spec:
       - oo
     value:
     - uu
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - aa
+      - bb
+      - cc
+    value:
+    - bb
   riskProfile: Default risk profile
 - template: Template 5
   scheduledStartDate: 2021-12-23T09:00:00+05:30
@@ -119,13 +128,6 @@ spec:
   phases:
   - phase: New Phase
   variables:
-  - type: xlrelease.StringVariable
-    key: Listbox5
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - ww
-    value: ww
   - type: xlrelease.StringVariable
     key: Listbox6
     valueProvider:
@@ -161,6 +163,7 @@ spec:
       - t2
     value:
     - t2
+  scriptUsername: admin
   scriptUserPassword: !value "xlrelease_Release_Template1_scriptUserPassword"
   riskProfile: Default risk profile
 - name: Release statistics
@@ -267,3 +270,97 @@ spec:
   - type: xlrelease.FolderFilter
     folder: ./
   - type: xlrelease.DateFilter
+- name: Git
+  type: git.Poll
+  enabled: false
+  releaseTitle: eeee
+  variables:
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar4
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ee
+      - rr
+      - tt
+    value:
+    - ee
+    - rr
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar5
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - uu
+      - ii
+      - oo
+    value:
+    - uu
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - aa
+      - bb
+      - cc
+    value:
+    - bb
+  template: Template 4
+  gitRepository: Global Git repo
+  commitId: 8947a322819c610991be366b3707f320e5778f36
+- name: git trigger
+  type: git.Poll
+  releaseTitle: ccc
+  variables:
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar4
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ee
+      - rr
+      - tt
+    value:
+    - ee
+    - rr
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar5
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - uu
+      - ii
+      - oo
+    value:
+    - uu
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - aa
+      - bb
+      - cc
+    value:
+    - bb
+  template: Template 4
+  gitRepository: Local Git repo
+  username: sinthujah
+  password: !value "git_Poll_git_trigger_password"
+- name: Time trigger
+  type: time.Schedule
+  releaseTitle: rel1
+  variables:
+  - type: xlrelease.StringVariable
+    key: Listbox6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - vv
+    value: vv
+  template: Template 5
+  pollType: REPEAT
+  periodicity: "70"
+  enabled: false
+  triggerTime: 2021-12-27T18:51:14.293000
