@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Tue Jan 04 18:37:37 IST 2022
+# Date created:         Thu Jan 06 15:49:18 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -12,13 +12,6 @@ spec:
   - type: xlrelease.PasswordStringVariable
     key: folder.ddd
     value: !value "xlrelease_PasswordStringVariable_folder_ddd_value"
-- name: Local Jenkins
-  type: jenkins.Server
-  variableMapping:
-    password: "${global.github token}"
-  url: https://jenkins.com
-  username: sinthuja
-  apiToken: !value "jenkins_Server_Local_Jenkins_apiToken"
 - template: Template 2
   scheduledStartDate: 2021-12-23T09:00:00+05:30
   dueDate: 2021-12-23T10:00:00+05:30
@@ -164,110 +157,6 @@ spec:
   scriptUsername: admin
   scriptUserPassword: !value "xlrelease_Release_Template1_scriptUserPassword"
   riskProfile: Default risk profile
-- name: Release statistics
-  type: xlrelease.ReleaseStatisticsDashboard
-  owner: admin
-  tiles:
-  - name: Longest task type
-    type: xlrelease.LongestTaskTypeTile
-    row: 0
-    col: 1
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Number of releases
-    type: xlrelease.ReleasesByMonthTile
-    row: 2
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Release efficiency
-    type: xlrelease.ReleaseEfficiencyTile
-    row: 2
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. task duration
-    type: xlrelease.AvgTaskDurationTile
-    row: 1
-    col: 1
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Time spent by task category
-    type: xlrelease.TaskTimeSpentTile
-    row: 0
-    col: 4
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Completed releases
-    type: xlrelease.CompletedReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. release duration
-    type: xlrelease.AvgReleaseDurationTile
-    row: 1
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Task efficiency
-    type: xlrelease.TaskEfficiencyTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest releases
-    type: xlrelease.LongestReleasesTile
-    row: 4
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. release duration over time
-    type: xlrelease.AvgReleaseDurationByMonthTile
-    row: 4
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest phases
-    type: xlrelease.LongestPhasesTile
-    row: 6
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest tasks
-    type: xlrelease.LongestTasksTile
-    row: 6
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  filters:
-  - type: xlrelease.FolderFilter
-    folder: ./
-  - type: xlrelease.DateFilter
 - name: Git
   type: git.Poll
   enabled: false
@@ -309,6 +198,7 @@ spec:
   commitId: 8947a322819c610991be366b3707f320e5778f36
 - name: git trigger
   type: git.Poll
+  enabled: false
   releaseTitle: ccc
   variables:
   - type: xlrelease.ListStringVariable
