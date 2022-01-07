@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      10.4.0-SNAPSHOT
-# Date created:         Fri Jan 07 16:09:39 IST 2022
+# Date created:         Fri Jan 07 16:15:40 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -175,7 +175,6 @@ spec:
   riskProfile: Default risk profile
 - name: Git
   type: git.Poll
-  enabled: false
   releaseTitle: eeee
   variables:
   - type: xlrelease.ListStringVariable
@@ -211,7 +210,8 @@ spec:
     - bb
   template: Template 4
   gitRepository: Global Git repo
-  commitId: 8947a322819c610991be366b3707f320e5778f36
+  password: !value "git_Poll_Git_password"
+  commitId: d39f8f5b98332d37e6f1f77d281f97f5a436c84f
 - name: git trigger
   type: git.Poll
   enabled: false
