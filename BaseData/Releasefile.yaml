@@ -1,6 +1,6 @@
 # Exported from:        http://qe-centos-ha1:5516/
-# Release version:      22.0.0-104.113
-# Date created:         Tue Jan 11 11:55:40 CET 2022
+# Release version:      22.0.0-rc.1
+# Date created:         Thu Jan 13 11:41:08 CET 2022
 
 ---
 apiVersion: xl-release/v1
@@ -8,11 +8,21 @@ kind: Templates
 metadata:
   home: Sinthuja
 spec:
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.github token
+    value: !value "xlrelease_PasswordStringVariable_folder_github_token_value"
+  - type: xlrelease.PasswordStringVariable
+    key: folder.Jira token
+    value: !value "xlrelease_PasswordStringVariable_folder_Jira_token_value"
 - template: My Template
   scheduledStartDate: 2022-01-11T04:30:00+01:00
+  dueDate: 2022-01-11T05:30:00+01:00
   phases:
   - phase: New Phase
     tasks:
     - name: task1
       type: xlrelease.Task
+  scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_My_Template_scriptUserPassword"
   riskProfile: Default risk profile
