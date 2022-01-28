@@ -20,7 +20,7 @@ spec:
     tasks:
     - name: task21
       type: xlrelease.Task
-    - name: task2
+    - name: task22
       type: xlrelease.Task
   riskProfile: Default risk profile
 - name: dash1
