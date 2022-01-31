@@ -1,68 +1,208 @@
 # Exported from:        http://minserver:5516/
-# Release version:      22.0.0-rc.2
-# Date created:         Mon Jan 24 16:05:19 IST 2022
+# Release version:      22.1.0-SNAPSHOT
+# Date created:         Mon Jan 31 17:22:56 IST 2022
 
 ---
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: test123
+  home: Base Data
 spec:
-- pattern: pattern123
+- folderVariables:
+  - type: xlrelease.PasswordStringVariable
+    key: folder.github token
+  - type: xlrelease.PasswordStringVariable
+    key: folder.Jira token
+  - type: xlrelease.StringVariable
+    key: folder.textvariable
+  - type: xlrelease.ListStringVariable
+    key: folder.listvariable
+- pattern: My pattern 1
   stages:
-  - stage: stage1
+  - stage: First stage
+  - stage: Second stage
   trackedItems:
   - trackedItem: item1
-- template: temp123-edited (1)
-  scheduledStartDate: 2022-01-24T09:00:00+05:30
+- pattern: adv
+  stages:
+  - stage: New Stage
+- pattern: adv (1)
+  stages:
+  - stage: New Stage
+- template: My Template
+  scheduledStartDate: 2022-01-11T09:00:00+05:30
+  dueDate: 2022-01-11T10:00:00+05:30
   phases:
-  - phase: New Phase name
+  - phase: New Phase
     tasks:
-    - name: task21
+    - name: Manual
       type: xlrelease.Task
-    - name: task22
-      type: xlrelease.Task
+    - name: i
+      type: xlrelease.UserInputTask
+      description: Please enter the required information below.
+    - name: notify
+      type: xlrelease.NotificationTask
+  scriptUsername: admin
+  variableMapping:
+    scriptUserPassword: "${global.Admin password}"
   riskProfile: Default risk profile
-- name: dash1
-  type: xlrelease.BlankDashboard
-  owner: hs3
-  tiles:
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: ./
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: ./
-  - name: Active releases by risk
-    type: live.ReleasesByRiskTile
-    row: 0
-    col: 4
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: ./
-- name: trigger123
-  type: git.Poll
-  releaseTitle: ddd
-  template: temp123-edited (1)
-  gitRepository: Global Git repo
-  commitId: fdfa01da14210be7c09c7fafa6cb661fd3b4793b
+- template: My Template (1)
+  scheduledStartDate: 2022-01-11T09:00:00+05:30
+  dueDate: 2022-01-11T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Manual
+      type: xlrelease.Task
+  scriptUsername: admin
+  variableMapping:
+    scriptUserPassword: "${global.Admin password}"
+  riskProfile: Default risk profile
+- template: Template 4
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: rel1
+      type: xlrelease.CreateReleaseTask
+    - name: dd
+      type: xlrelease.UserInputTask
+      description: Please enter the required information below.
+    - name: ff
+      type: delivery.CreateDelivery
+    - name: jenins
+      type: jenkins.Build
+      jenkinsServer: Local Jenkins
+  variables:
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar4
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - ee
+      - rr
+      - tt
+    value:
+    - ee
+    - tt
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar5
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - uu
+      - ii
+      - oo
+    value:
+    - uu
+  - type: xlrelease.ListStringVariable
+    key: Multiselectvar6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - aa
+      - bb
+      - cc
+    value:
+    - bb
+  riskProfile: Default risk profile
+- template: Template 5
+  scheduledStartDate: 2021-12-23T09:00:00+05:30
+  dueDate: 2021-12-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+  variables:
+  - type: xlrelease.StringVariable
+    key: Listbox6
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - vv
+    value: vv
+  riskProfile: Default risk profile
+- template: XLR Deliveries template
+  scheduledStartDate: 2022-01-03T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Create Delivery
+      type: delivery.CreateDelivery
+      ^title: Delivery created by Release task
+      pattern: Patterns and Deliveries/XLR Delivery pattern
+      folder: XLR Deliveries Folder
+      description: This task is to create a delivery using the specified pattern
+      facets:
+      - type: udm.DeploymentTaskFacet
+        version: "1"
+        application: Application1
+        environment: Env1
+      precondition: "\"releaseVariables['Created_Delivery_ID'] != None\""
+      taskFailureHandlerEnabled: true
+      taskRecoverOp: SKIP_TASK
+      variableMapping:
+        pythonScript.startDate: "${folder.Start date}"
+        pythonScript.endDate: "${folder.End date}"
+        pythonScript.deliveryId: "${Created Delivery ID}"
+    - name: Find Delivery
+      type: delivery.FindDelivery
+      itemsFilter: Feature 1
+      description: Find a delivery based on the details provided
+      taskFailureHandlerEnabled: true
+      taskRecoverOp: SKIP_TASK
+      variableMapping:
+        pythonScript.deliveryId: "${Searched Delivery ID}"
+    - name: Find or Create Delivery
+      type: delivery.FindOrCreateDelivery
+      searchStrategy: Search by criteria
+      nameFilter: XLR Delivery
+      fallback: true
+      ^title: Delivery created after search
+      ^startDate: 2022-02-01T16:47:00+05:30
+      ^endDate: 2022-02-07T16:47:00+05:30
+      pattern: Patterns and Deliveries/XLR Delivery pattern
+      folder: XLR Deliveries Folder
+      description: "This task is to find a delivery and if not found, create a new\
+        \ delivery"
+    - name: Mark tracked items
+      type: delivery.MarkTrackedItems
+      trackedItems:
+      - Feature 1
+      - Feature 2
+      - Feature 3
+      stage: Regression testing
+      precedingStages: true
+      delivery: "${Created Delivery ID}"
+      pattern: Patterns and Deliveries/XLR Delivery pattern
+    - name: Register tracked items
+      type: delivery.RegisterTrackedItems
+      trackedItems:
+      - Feature 2
+      delivery: "${Created Delivery ID}"
+      description: This task is to test 'Register tracked items' task.
+    - name: Wait for tracked items
+      type: delivery.WaitForTrackedItems
+      trackedItems:
+      - Feature 1
+      stage: Code Freeze & Build Availability
+      ^status: NOT_READY
+      delivery: "${Created Delivery ID}"
+      pattern: Patterns and Deliveries/XLR Delivery pattern
+    - name: Wait for stage
+      type: delivery.WaitForStage
+      stage: Regression testing
+      delivery: "${Created Delivery ID}"
+      pattern: Patterns and Deliveries/XLR Delivery pattern
+  variables:
+  - type: xlrelease.StringVariable
+    key: Created Delivery ID
+    requiresValue: false
+    showOnReleaseStart: false
+  - type: xlrelease.StringVariable
+    key: Searched Delivery ID
+    requiresValue: false
+    showOnReleaseStart: false
+  scriptUsername: admin
+  variableMapping:
+    scriptUserPassword: "${global.Admin password}"
+  riskProfile: Default risk profile
