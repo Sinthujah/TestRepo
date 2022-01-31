@@ -20,7 +20,7 @@ spec:
 - pattern: My pattern 1
   stages:
   - stage: First stage
-  - stage: Second stage
+  - stage: Second stage-name
   trackedItems:
   - trackedItem: item1
 - pattern: adv
