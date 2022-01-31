@@ -16,7 +16,7 @@ spec:
 - template: temp123-edited (1)
   scheduledStartDate: 2022-01-24T09:00:00+05:30
   phases:
-  - phase: New Phase
+  - phase: New Phase name
     tasks:
     - name: task21
       type: xlrelease.Task
