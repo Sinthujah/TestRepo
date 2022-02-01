@@ -19,7 +19,7 @@ spec:
     key: folder.listvariable
 - pattern: My pattern 1
   stages:
-  - stage: First stage
+  - stage: First stage - name change
   - stage: Second stage-name
   trackedItems:
   - trackedItem: item1
