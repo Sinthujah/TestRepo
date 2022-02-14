@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Mon Feb 14 18:06:32 IST 2022
+# Date created:         Mon Feb 14 18:06:53 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -9,6 +9,11 @@ metadata:
   home: folderaa
 spec:
 - template: temp3
+  scheduledStartDate: 2022-02-14T09:00:00+05:30
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
+- template: temp4
   scheduledStartDate: 2022-02-14T09:00:00+05:30
   phases:
   - phase: New Phase
