@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Mon Feb 14 18:05:00 IST 2022
+# Date created:         Mon Feb 14 18:05:36 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -15,6 +15,11 @@ spec:
   stages:
   - stage: New Stage
 - template: temp1
+  scheduledStartDate: 2022-02-14T09:00:00+05:30
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
+- template: temp2
   scheduledStartDate: 2022-02-14T09:00:00+05:30
   phases:
   - phase: New Phase
