@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
-# Release version:      22.0.1
-# Date created:         Tue Feb 08 20:03:52 IST 2022
+# Release version:      22.1.0-SNAPSHOT
+# Date created:         Tue Feb 15 18:50:51 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -9,14 +9,14 @@ metadata:
   home: Base Data
 spec:
 - folderVariables:
-  - type: xlrelease.PasswordStringVariable
-    key: folder.github token
-  - type: xlrelease.PasswordStringVariable
-    key: folder.Jira token
-  - type: xlrelease.ListStringVariable
-    key: folder.listvariable
   - type: xlrelease.StringVariable
     key: folder.textvariable
+  - type: xlrelease.ListStringVariable
+    key: folder.listvariable
+  - type: xlrelease.PasswordStringVariable
+    key: folder.Jira token
+  - type: xlrelease.PasswordStringVariable
+    key: folder.github token
 - name: Local Git repo
   type: git.Repository
   variableMapping:
@@ -29,7 +29,6 @@ spec:
     password: "${global.github token}"
   url: https://jenkins.com
   username: sinthuja
-  apiToken: !value "jenkins_Server_Local_Jenkins_apiToken"
 - name: Jira1
   type: jira.Server
   url: https://jira.com
@@ -77,6 +76,17 @@ spec:
   scriptUsername: admin
   variableMapping:
     scriptUserPassword: "${global.Admin password}"
+  riskProfile: Default risk profile
+- template: Template 1
+  scheduledStartDate: 2022-02-15T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Manual task
+      type: xlrelease.Task
+    - name: "1111"
+      type: xlrelease.CreateReleaseTask
+      riskProfile: Default risk profile
   riskProfile: Default risk profile
 - template: Template 4
   scheduledStartDate: 2021-12-23T09:00:00+05:30
@@ -143,6 +153,7 @@ spec:
   riskProfile: Default risk profile
 - template: XLR Deliveries template
   scheduledStartDate: 2022-01-03T09:00:00+05:30
+  dueDate: 2022-01-03T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
@@ -155,8 +166,6 @@ spec:
       facets:
       - type: udm.DeploymentTaskFacet
         version: "1"
-        application: Application1
-        environment: Env1
       precondition: "\"releaseVariables['Created_Delivery_ID'] != None\""
       taskFailureHandlerEnabled: true
       taskRecoverOp: SKIP_TASK
@@ -228,6 +237,7 @@ spec:
   riskProfile: Default risk profile
 - template: groovy script task template
   scheduledStartDate: 2022-02-04T09:00:00+05:30
+  dueDate: 2022-02-04T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
