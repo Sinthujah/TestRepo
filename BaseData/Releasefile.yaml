@@ -12,7 +12,7 @@ spec:
   scheduledStartDate: 2022-01-11T09:00:00+05:30
   dueDate: 2022-01-11T10:00:00+05:30
   phases:
-  - phase: New Phase
+  - phase: Phase 1
     tasks:
     - name: Manual
       type: xlrelease.Task
