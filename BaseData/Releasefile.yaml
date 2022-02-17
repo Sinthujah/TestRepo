@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Thu Feb 17 14:44:02 IST 2022
+# Date created:         Thu Feb 17 14:46:43 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -8,27 +8,6 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
-- folderVariables:
-  - type: xlrelease.StringVariable
-    key: folder.textvariable
-  - type: xlrelease.ListStringVariable
-    key: folder.listvariable
-  - type: xlrelease.PasswordStringVariable
-    key: folder.Jira token
-  - type: xlrelease.PasswordStringVariable
-    key: folder.github token
-- pattern: My pattern 1
-  stages:
-  - stage: First stage
-  - stage: Second stage
-  trackedItems:
-  - trackedItem: item1
-- pattern: adv
-  stages:
-  - stage: New Stage
-- pattern: adv (1)
-  stages:
-  - stage: New Stage
 - template: My Template
   scheduledStartDate: 2022-01-11T09:00:00+05:30
   dueDate: 2022-01-11T10:00:00+05:30
@@ -61,6 +40,18 @@ spec:
   scriptUsername: admin
   variableMapping:
     scriptUserPassword: "${global.Admin password}"
+  riskProfile: Default risk profile
+- template: Template 1
+  scheduledStartDate: 2022-02-15T09:00:00+05:30
+  dueDate: 2022-02-15T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: Manual task
+      type: xlrelease.Task
+    - name: "1111"
+      type: xlrelease.CreateReleaseTask
+      riskProfile: Default risk profile
   riskProfile: Default risk profile
 - template: Template 4
   scheduledStartDate: 2021-12-23T09:00:00+05:30
@@ -244,133 +235,3 @@ spec:
   variableMapping:
     scriptUserPassword: "${global.Admin password}"
   riskProfile: Default risk profile
-- name: test dashboard
-  type: xlrelease.BlankDashboard
-  owner: admin
-  tiles:
-  - name: Active releases
-    type: live.ReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: ./
-  - name: Active releases by status
-    type: live.ReleasesByStatusTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.DateFilter
-      timeFrame: LAST_MONTH
-    - type: xlrelease.CompositeFilter
-      filters:
-      - type: xlrelease.FolderFilter
-        folder: ./
-- name: Release statistics
-  type: xlrelease.ReleaseStatisticsDashboard
-  owner: admin
-  tiles:
-  - name: Longest task type
-    type: xlrelease.LongestTaskTypeTile
-    row: 0
-    col: 1
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Number of releases
-    type: xlrelease.ReleasesByMonthTile
-    row: 2
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Release efficiency
-    type: xlrelease.ReleaseEfficiencyTile
-    row: 2
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. task duration
-    type: xlrelease.AvgTaskDurationTile
-    row: 1
-    col: 1
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Time spent by task category
-    type: xlrelease.TaskTimeSpentTile
-    row: 0
-    col: 4
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Completed releases
-    type: xlrelease.CompletedReleasesTile
-    row: 0
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. release duration
-    type: xlrelease.AvgReleaseDurationTile
-    row: 1
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Task efficiency
-    type: xlrelease.TaskEfficiencyTile
-    row: 0
-    col: 2
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest releases
-    type: xlrelease.LongestReleasesTile
-    row: 4
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Avg. release duration over time
-    type: xlrelease.AvgReleaseDurationByMonthTile
-    row: 4
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest phases
-    type: xlrelease.LongestPhasesTile
-    row: 6
-    col: 0
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  - name: Top 10 longest tasks
-    type: xlrelease.LongestTasksTile
-    row: 6
-    col: 3
-    filters:
-    - type: xlrelease.FolderFilter
-      folder: ./
-    - type: xlrelease.DateFilter
-  filters:
-  - type: xlrelease.FolderFilter
-    folder: ./
-  - type: xlrelease.DateFilter
