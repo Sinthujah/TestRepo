@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Thu Feb 17 14:14:21 IST 2022
+# Date created:         Thu Feb 17 14:15:35 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: Base Data
 spec:
-- name: test dashboard
+- name: test dashboard 1
   type: xlrelease.BlankDashboard
   owner: admin
   tiles:
