@@ -1,19 +1,26 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Tue Feb 15 19:10:11 IST 2022
+# Date created:         Thu Feb 17 16:48:07 IST 2022
 
 ---
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: Test3
+  home: Test
 spec:
 - folderVariables:
   - type: xlrelease.PasswordStringVariable
     key: folder.password
-- template: eee
-  scheduledStartDate: 2022-02-15T09:00:00+05:30
+- template: Template2
+  scheduledStartDate: 2022-02-17T09:00:00+05:30
   phases:
   - phase: New Phase
-  scriptUserPassword: !value "xlrelease_Release_eee_scriptUserPassword"
+  scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_Template2_scriptUserPassword"
+  riskProfile: Default risk profile
+- template: eee
+  scheduledStartDate: 2022-02-15T09:00:00+05:30
+  dueDate: 2022-02-15T10:00:00+05:30
+  phases:
+  - phase: New Phase
   riskProfile: Default risk profile
