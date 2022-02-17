@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Thu Feb 17 17:02:20 IST 2022
+# Date created:         Thu Feb 17 17:03:30 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -17,4 +17,5 @@ spec:
   phases:
   - phase: New Phase
   scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_Template2_scriptUserPassword"
   riskProfile: Default risk profile
