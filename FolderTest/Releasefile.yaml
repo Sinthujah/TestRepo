@@ -19,7 +19,6 @@ spec:
     roles:
     - Watcher
     - Release Admin
-    - Task Owner
   - notification: TASK_FLAGGED
     priority: High
     subject: "[Release] ${release.title}: ${task.title}"
