@@ -22,8 +22,8 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: test
+    - name: task 1
       type: xlrelease.Task
-    - name: rrr
+    - name: task 2
       type: xlrelease.Task
   riskProfile: Default risk profile
