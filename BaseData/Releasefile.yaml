@@ -1,237 +1,27 @@
-# Exported from:        http://minserver:5516/
-# Release version:      22.1.0-SNAPSHOT
-# Date created:         Thu Feb 17 14:46:43 IST 2022
+# Exported from:        http://de3468993a42:5516/
+# Release version:      22.1.0-302.113
+# Date created:         Thu Mar 03 09:24:27 GMT 2022
 
 ---
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: Base Data
+  home: Test folder1
 spec:
-- template: My Template
-  scheduledStartDate: 2022-01-11T09:00:00+05:30
-  dueDate: 2022-01-11T10:00:00+05:30
+- pattern: dsfd (1)
+  stages:
+  - stage: New Stage
+    transition:
+      name: New Transition
+      type: delivery.Transition
+  - stage: New Stage (1)
+  trackedItems:
+  - trackedItem: ddd
+- template: Template 1_old
+  scheduledStartDate: 2022-03-02T03:30:00Z
   phases:
-  - phase: Phase 1
+  - phase: New Phase
     tasks:
-    - name: Manual
+    - name: test
       type: xlrelease.Task
-    - name: i
-      type: xlrelease.UserInputTask
-      description: Please enter the required information below.
-    - name: notify
-      type: xlrelease.NotificationTask
-    - name: notification task
-      type: xlrelease.NotificationTask
-    - name: gate
-      type: xlrelease.GateTask
-  scriptUsername: admin
-  variableMapping:
-    scriptUserPassword: "${global.Admin password}"
-  riskProfile: Default risk profile
-- template: My Template (1)
-  scheduledStartDate: 2022-01-11T09:00:00+05:30
-  dueDate: 2022-01-11T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: Manual
-      type: xlrelease.Task
-  scriptUsername: admin
-  variableMapping:
-    scriptUserPassword: "${global.Admin password}"
-  riskProfile: Default risk profile
-- template: Template 1
-  scheduledStartDate: 2022-02-15T09:00:00+05:30
-  dueDate: 2022-02-15T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: Manual task
-      type: xlrelease.Task
-    - name: "1111"
-      type: xlrelease.CreateReleaseTask
-      riskProfile: Default risk profile
-  riskProfile: Default risk profile
-- template: Template 4
-  scheduledStartDate: 2021-12-23T09:00:00+05:30
-  dueDate: 2021-12-23T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: rel1
-      type: xlrelease.CreateReleaseTask
-    - name: dd
-      type: xlrelease.UserInputTask
-      description: Please enter the required information below.
-    - name: ff
-      type: delivery.CreateDelivery
-    - name: jenins
-      type: jenkins.Build
-      jenkinsServer: Local Jenkins
-  variables:
-  - type: xlrelease.ListStringVariable
-    key: Multiselectvar4
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - ee
-      - rr
-      - tt
-    value:
-    - ee
-    - tt
-  - type: xlrelease.ListStringVariable
-    key: Multiselectvar5
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - uu
-      - ii
-      - oo
-    value:
-    - uu
-  - type: xlrelease.ListStringVariable
-    key: Multiselectvar6
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - aa
-      - bb
-      - cc
-    value:
-    - bb
-  riskProfile: Default risk profile
-- template: Template 5
-  scheduledStartDate: 2021-12-23T09:00:00+05:30
-  dueDate: 2021-12-23T10:00:00+05:30
-  phases:
-  - phase: New Phase
-  variables:
-  - type: xlrelease.StringVariable
-    key: Listbox6
-    valueProvider:
-      type: xlrelease.ListOfStringValueProviderConfiguration
-      values:
-      - vv
-    value: vv
-  riskProfile: Default risk profile
-- template: XLR Deliveries template
-  scheduledStartDate: 2022-01-03T09:00:00+05:30
-  dueDate: 2022-01-03T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: Create Delivery
-      type: delivery.CreateDelivery
-      ^title: Delivery created by Release task
-      pattern: Patterns and Deliveries/XLR Delivery pattern
-      folder: XLR Deliveries Folder
-      description: This task is to create a delivery using the specified pattern
-      precondition: "\"releaseVariables['Created_Delivery_ID'] != None\""
-      taskFailureHandlerEnabled: true
-      taskRecoverOp: SKIP_TASK
-      variableMapping:
-        pythonScript.startDate: "${folder.Start date}"
-        pythonScript.endDate: "${folder.End date}"
-        pythonScript.deliveryId: "${Created Delivery ID}"
-    - name: Find Delivery
-      type: delivery.FindDelivery
-      itemsFilter: Feature 1
-      description: Find a delivery based on the details provided
-      taskFailureHandlerEnabled: true
-      taskRecoverOp: SKIP_TASK
-      variableMapping:
-        pythonScript.deliveryId: "${Searched Delivery ID}"
-    - name: Find or Create Delivery
-      type: delivery.FindOrCreateDelivery
-      searchStrategy: Search by criteria
-      nameFilter: XLR Delivery
-      fallback: true
-      ^title: Delivery created after search
-      ^startDate: 2022-02-01T16:47:00+05:30
-      ^endDate: 2022-02-07T16:47:00+05:30
-      pattern: Patterns and Deliveries/XLR Delivery pattern
-      folder: XLR Deliveries Folder
-      description: "This task is to find a delivery and if not found, create a new\
-        \ delivery"
-    - name: Mark tracked items
-      type: delivery.MarkTrackedItems
-      trackedItems:
-      - Feature 1
-      - Feature 2
-      - Feature 3
-      stage: Regression testing
-      precedingStages: true
-      delivery: "${Created Delivery ID}"
-      pattern: Patterns and Deliveries/XLR Delivery pattern
-    - name: Register tracked items
-      type: delivery.RegisterTrackedItems
-      trackedItems:
-      - Feature 2
-      delivery: "${Created Delivery ID}"
-      description: This task is to test 'Register tracked items' task.
-    - name: Wait for tracked items
-      type: delivery.WaitForTrackedItems
-      trackedItems:
-      - Feature 1
-      stage: Code Freeze & Build Availability
-      ^status: NOT_READY
-      delivery: "${Created Delivery ID}"
-      pattern: Patterns and Deliveries/XLR Delivery pattern
-    - name: Wait for stage
-      type: delivery.WaitForStage
-      stage: Regression testing
-      delivery: "${Created Delivery ID}"
-      pattern: Patterns and Deliveries/XLR Delivery pattern
-  variables:
-  - type: xlrelease.StringVariable
-    key: Created Delivery ID
-    requiresValue: false
-    showOnReleaseStart: false
-  - type: xlrelease.StringVariable
-    key: Searched Delivery ID
-    requiresValue: false
-    showOnReleaseStart: false
-  scriptUsername: admin
-  variableMapping:
-    scriptUserPassword: "${global.Admin password}"
-  riskProfile: Default risk profile
-- template: groovy script task template
-  scheduledStartDate: 2022-02-04T09:00:00+05:30
-  dueDate: 2022-02-04T10:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: groovy script to create release
-      type: xlrelease.GroovyScriptTask
-      ignoreScriptVariableInterpolation: true
-      script: |-
-        xlr {
-          release('No folder, but teams present') {
-          folder('Base Data2')
-            scheduledStartDate Date.parse("yyyy-MM-dd'T'HH:mm:ssZ", '2022-02-04T09:00:00+0530')
-            phases {
-              phase('New Phase') {
-                tasks {
-                  manual('Task1') {
-
-                  }
-                }
-              }
-            }
-            teams {
-              team('Template Owner') {
-                members 'admin'
-                permissions 'template#create_release_other_folder', 'template#edit', 'template#lock_task', 'template#view', 'template#edit_security', 'template#create_release', 'template#edit_triggers', 'template#edit_precondition', 'template#edit_failure_handler'
-              }
-              team('Release Admin') {
-                permissions 'release#edit_precondition', 'release#edit', 'release#task_transition', 'release#edit_task_attachments', 'trigger#view_trigger', 'release#reassign_task', 'release#edit_task_input_output_properties', 'release#edit_task_tags', 'release#edit_security', 'release#edit_task_description', 'trigger#edit_trigger', 'release#view', 'release#lock_task', 'release#start', 'release#edit_blackout', 'template#view', 'release#edit_failure_handler', 'release#abort', 'release#edit_task_script', 'release#edit_task_configuration_facet', 'release#edit_task_flag', 'release#edit_task_dates', 'release#edit_task'
-              }
-            }
-          }
-        }
-  scriptUsername: admin
-  variableMapping:
-    scriptUserPassword: "${global.Admin password}"
   riskProfile: Default risk profile
