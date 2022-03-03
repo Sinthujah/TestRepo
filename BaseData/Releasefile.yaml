@@ -1,6 +1,6 @@
 # Exported from:        http://de3468993a42:5516/
 # Release version:      22.1.0-302.113
-# Date created:         Thu Mar 03 09:24:27 GMT 2022
+# Date created:         Thu Mar 03 09:25:37 GMT 2022
 
 ---
 apiVersion: xl-release/v1
@@ -23,5 +23,7 @@ spec:
   - phase: New Phase
     tasks:
     - name: test
+      type: xlrelease.Task
+    - name: rrr
       type: xlrelease.Task
   riskProfile: Default risk profile
