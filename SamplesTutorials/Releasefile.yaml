@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- template: Configure Release
+- template: Configure Release 1
   scheduledStartDate: 2022-03-09T09:00:00+01:00
   phases:
   - phase: Setup mail server
