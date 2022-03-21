@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.2.0-SNAPSHOT
-# Date created:         Mon Mar 21 17:39:49 IST 2022
+# Date created:         Mon Mar 21 17:40:52 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -1031,5 +1031,4 @@ spec:
   scheduledStartDate: 2022-03-18T09:00:00+05:30
   phases:
   - phase: New Phase
-  archiveRelease: false
   riskProfile: Default risk profile
