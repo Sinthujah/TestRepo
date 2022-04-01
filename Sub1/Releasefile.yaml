@@ -19,7 +19,7 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: d
+    - name: delta
       type: xlrelease.UserInputTask
       description: Please enter the required information below.
   riskProfile: Default risk profile
