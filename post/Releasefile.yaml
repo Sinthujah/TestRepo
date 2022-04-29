@@ -1,6 +1,6 @@
 # Exported from:        http://56de1ea34a86:5516/
 # Release version:      22.2.0-425.1210
-# Date created:         Fri Apr 29 10:19:29 GMT 2022
+# Date created:         Fri Apr 29 10:20:03 GMT 2022
 
 ---
 apiVersion: xl-release/v1
@@ -26,6 +26,9 @@ spec:
           conditions:
           - type: delivery.ItemsCompletionCondition
   - stage: dddfrffef
+- pattern: pattern2
+  stages:
+  - stage: New Stage
 - template: Configure Release
   scheduledStartDate: 2022-04-28T09:00:00Z
   phases:
