@@ -1,0 +1,49 @@
+# Exported from:        http://minserver:5516/
+# Release version:      22.3.0-615.113
+# Date created:         Fri Jun 17 15:06:07 IST 2022
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: hfjewf
+spec:
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.jhfwelkf
+- pattern: hhh
+  stages:
+  - stage: New Stage
+  - stage: dewd
+    owner: admin
+    team: Release Admin
+- template: fwf
+  scheduledStartDate: 2022-06-17T09:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: wf
+      type: xlrelease.Task
+  riskProfile: Default risk profile
+- name: daash
+  type: xlrelease.BlankDashboard
+  owner: admin
+  tiles:
+  - name: Active releases
+    type: live.ReleasesTile
+    filters:
+    - type: xlrelease.DateFilter
+      timeFrame: LAST_MONTH
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: ./
+    width: 1
+  columns: 1
+- name: sd
+  type: time.Schedule
+  releaseTitle: rte
+  template: fwf
+  pollType: REPEAT
+  periodicity: "30"
+  triggerTime: 2022-06-17T15:05:55.946000
