@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.3.0-615.113
-# Date created:         Fri Jun 17 15:06:07 IST 2022
+# Date created:         Fri Jun 17 15:06:44 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -11,6 +11,9 @@ spec:
 - folderVariables:
   - type: xlrelease.StringVariable
     key: folder.jhfwelkf
+- pattern: gggg
+  stages:
+  - stage: New Stage
 - pattern: hhh
   stages:
   - stage: New Stage
@@ -46,4 +49,4 @@ spec:
   template: fwf
   pollType: REPEAT
   periodicity: "30"
-  triggerTime: 2022-06-17T15:05:55.946000
+  triggerTime: 2022-06-17T15:06:25.956000
