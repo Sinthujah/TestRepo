@@ -6,7 +6,7 @@
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: Test folder1
+  home: Test folder test
 spec:
 - pattern: dsfd
   stages:
