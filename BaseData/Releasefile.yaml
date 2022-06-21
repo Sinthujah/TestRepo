@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: Test folder1
 spec:
-- pattern: dsfd (1)
+- pattern: dsfd
   stages:
   - stage: New Stage
     transition:
