@@ -1,6 +1,6 @@
 # Exported from:        http://minserver:5516/
 # Release version:      22.1.0-SNAPSHOT
-# Date created:         Tue Feb 15 18:22:14 IST 2022
+# Date created:         Tue Feb 15 16:22:32 IST 2022
 
 ---
 apiVersion: xl-release/v1
@@ -8,14 +8,6 @@ kind: Templates
 metadata:
   home: foldera2
 spec:
-- template: test
-  scheduledStartDate: 2022-02-15T09:00:00+05:30
-  phases:
-  - phase: New Phase
-    tasks:
-    - name: Notification task
-      type: xlrelease.NotificationTask
-  riskProfile: Default risk profile
 - notifications:
   - notification: TASK_OVERDUE
     priority: High
@@ -27,7 +19,6 @@ spec:
     roles:
     - Watcher
     - Release Admin
-    - Task Owner
   - notification: TASK_FLAGGED
     priority: High
     subject: "[Release] ${release.title}: ${task.title}"
