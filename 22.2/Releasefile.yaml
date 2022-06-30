@@ -8,7 +8,7 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- pattern: pat 5555555
+- pattern: pat 55555556
   stages:
   - stage: New Stage
 - template: Configure Release
