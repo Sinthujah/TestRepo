@@ -8,10 +8,10 @@ kind: Templates
 metadata:
   home: Samples & Tutorials
 spec:
-- pattern: pat 5555555
+- pattern: pat 6767
   stages:
   - stage: New Stage
-- template: Configure Release
+- template: Configure Release 1
   scheduledStartDate: 2022-06-30T09:00:00+05:30
   dueDate: 2022-06-30T10:00:00+05:30
   phases:
