@@ -13,7 +13,7 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: Task 1
+    - name: Task 123
       type: xlrelease.Task
   riskProfile: Default risk profile
 - template: Template91
