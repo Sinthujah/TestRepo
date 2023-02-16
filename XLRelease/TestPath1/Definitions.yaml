@@ -9,7 +9,7 @@ metadata:
   home: Versioning test folder
 spec:
 - notifications:
-  - notification: TASK_OVERDUE
+  - notification: TASK_OVERDUE 
     priority: High
     subject: "[Release] ${release.title}: ${task.title}"
     body: |-
@@ -18,7 +18,7 @@ spec:
       After the task is completed, please mark it as Completed in Release.
     roles:
     - Watcher
-    - Release Admin ede khfkhwkf fdsfdsf
+    - Release Admin ede khfkhwkf fdsfdsf dewdewd
     - Task Owner
   - notification: TASK_FLAGGED
     priority: High
