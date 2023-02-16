@@ -18,7 +18,7 @@ spec:
       After the task is completed, please mark it as Completed in Release.
     roles:
     - Watcher
-    - Release Admin ede khfkhwkf
+    - Release Admin ede khfkhwkf fdsfdsf
     - Task Owner
   - notification: TASK_FLAGGED
     priority: High
