@@ -29,7 +29,7 @@ spec:
       **${release.flagComment}**
     roles:
     - Watcher
-    - Release Admin
+    - Release Admin my admin
     - Task Team
   - notification: AUDIT_REPORT_JOB_ABORTED
     priority: Normal
