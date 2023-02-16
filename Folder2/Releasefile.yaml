@@ -16,7 +16,7 @@ spec:
 - template: temp1
   scheduledStartDate: 2021-09-02T03:30:00Z
   phases:
-  - phase: New Phase
+  - phase: First Phase
   riskProfile: Default risk profile
 - notifications:
   - notification: TASK_OVERDUE
