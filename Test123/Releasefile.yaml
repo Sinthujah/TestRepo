@@ -1,6 +1,6 @@
 # Exported from:        https://qe-release-controller1.xebialabs.com:5516/
 # Release version:      23.1.0-SNAPSHOT
-# Date created:         Fri Feb 24 12:06:39 UTC 2023
+# Date created:         Fri Feb 24 12:07:31 UTC 2023
 
 ---
 apiVersion: xl-release/v1
@@ -12,9 +12,6 @@ spec:
   - type: xlrelease.StringVariable
     key: folder.myvar1
     value: test
-- pattern: Pattern 2
-  stages:
-  - stage: New Stage
 - pattern: Pattern A
   description: test pattern
   stages:
@@ -22,6 +19,9 @@ spec:
   trackedItems:
   - trackedItem: item 1
   - trackedItem: item 2
+- pattern: Pattern B
+  stages:
+  - stage: New Stage
 - template: Sample
   scheduledStartDate: 2023-02-24T03:30:00Z
   phases:
