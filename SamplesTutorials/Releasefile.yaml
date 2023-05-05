@@ -1,17 +1,12 @@
-# Exported from:        http://qe-centos-ha1:5516/
-# Release version:      22.1.0-316.341
-# Date created:         Thu Mar 17 11:40:47 CET 2022
+# Exported from:        http://minserver:5516/
+# Release version:      23.1.0-rc.3
+# Date created:         Fri May 05 16:03:24 IST 2023
 
 ---
 apiVersion: xl-release/v1
-kind: Templates
-metadata:
-  home: Samples & Tutorials
+kind: Import
 spec:
-- name: time trigger test
-  type: time.Schedule
-  releaseTitle: Test release
-  template: Configure Release
-  pollType: REPEAT
-  periodicity: "10"
-  triggerTime: 2022-03-17T11:39:57.780000
+  imports:
+  - Triggers.yaml
+  - Notifications.yaml
+  - Templates.yaml

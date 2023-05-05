@@ -1,0 +1,367 @@
+# Exported from:        http://minserver:5516/
+# Release version:      23.1.0-rc.3
+# Date created:         Fri May 05 16:03:24 IST 2023
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: Samples & Tutorials
+spec:
+- template: Configure Release
+  scheduledStartDate: 2023-05-04T09:00:00+05:30
+  phases:
+  - phase: Setup mail server
+    tasks:
+    - name: Configure email address and mail server
+      type: xlrelease.Task
+      description: |-
+        In order to use Digital.ai Release effectively, a mail server has to be configured.
+
+        This task consists of two steps:
+
+        1. To check if mails are sent correctly, configure the email address of the `admin` user. Go to the [Profile](#/profile) and enter the email address. Then press the **Save** button.
+        2. Configure the SMTP server. Go to the [SMTP Server](#/smtp) screen and enter the relevant settings. Press **Save** to confirm.
+
+        Now complete this task by pressing the **Complete** button and confirming. An email will be sent and we will confirm its delivery in the next task.
+      owner: admin
+      waitForScheduledStartDate: false
+    - name: Check email
+      type: xlrelease.GateTask
+      description: |-
+        After correctly configuring the SMTP server and email address for 'admin', the admin user should have received an email that announces the start of this task, 'Check email'.
+
+        If this is the case, check the box below and Complete this task.
+
+        If not, here are some ways to troubleshoot.
+        * Check the logs in `[DIGITAL_AI_RELEASE_SERVER]/log/xl-release.log` for errors
+        * Reconfigure the SMTP server settings in Digital.ai Release
+        * Fail this task and Retry it. Both actions should trigger an email.
+      owner: admin
+      waitForScheduledStartDate: false
+      conditions:
+      - name: Got email that 'Check email' task was started
+        type: xlrelease.GateCondition
+    color: '#3D6C9E'
+  - phase: Setup Users & Security
+    tasks:
+    - name: Configure users
+      type: xlrelease.Task
+      description: |-
+        Digital.ai Release is a collaboration tool, so we need to get some users into the system. There are two ways to set up the users. This task explains how to configure users directly in Release.
+
+        It is also possible to integrate with Active Directory or another type of LDAP server. See the [Administration Manual](https://docs.xebialabs.com/xl-release/how-to/configure-ldap-security-for-xl-release.html) for more details on this subject.
+
+        ### Creating users
+
+        Go to the [Users](#/users) screen and add a user. You can specify the email address right away.
+
+        After pressing Save, the newly created user can log in.
+      owner: admin
+      waitForScheduledStartDate: false
+    - name: Define roles & global permissions
+      type: xlrelease.Task
+      description: |-
+        ### Roles
+
+        Users can be grouped in **Roles** to assign them fine-grained permissions.
+
+        Go to the [Roles](#/roles) screen to create roles and assign users to them. If you are connected to Active Directory or LDAP, you can also add LDAP groups to roles.
+
+        Define a role **Release Managers**, and add all users that will be using Release as a release manager.
+
+        Please use the name "Release Managers", so the standard templates will be available to them.
+
+        After defining the role, press **Save**
+
+        ### Global permissions
+
+        Go the [Permissions](#/permissions) screen to assign global permissions to the roles.
+
+        To the Release Managers role, assign the permissions **Create Template** and **Create Release** (at least).
+
+        Press Save to apply the changes.
+
+        ### Release permissions
+
+        On the release level, permissions are defined on **teams**. Teams are like roles, but specific to a particular release. Teams and team permissions can be configured on a release or on a release template.
+
+        Teams may contain both users and roles.
+      owner: admin
+      waitForScheduledStartDate: false
+    color: '#3D6C9E'
+  - phase: Deploy integration
+    tasks:
+    - name: Define Digital.ai Deploy Servers
+      type: xlrelease.Task
+      description: |-
+        _Skip this task if no Deploy integration is needed_
+
+        To enable Deploy integration, go to the [Digital.ai Deploy Servers](#/configuration) screen and add a new Server.
+
+        Enter the URL of the Deploy server and provide credentials of a Deploy user with at least read permissions (in Deploy).
+
+        When done, press the **Test** button to validate the connection.
+
+        If the connection is valid, press **Save** so this Deploy server can be used in Release.
+      owner: admin
+      waitForScheduledStartDate: false
+    color: '#498500'
+  tags:
+  - tutorial
+  riskProfile: Default risk profile
+- template: "Deployment pattern: Blue / Green"
+  description: |-
+    This Digital.ai Release template shows the **Blue/Green Deployment Pattern**.
+
+    Blue-green deployment is a pattern in which identical production environments known as Blue and Green are maintained, one of which is live at all times.
+    If the Blue is the live environment, applications or features are deployed to and tested on the non-live Green environment before user traffic is diverted to it.
+
+    For more information, please read [Perform Blue/Green deployments](https://docs.xebialabs.com/xl-release/how-to/perform-blue-green-deployments.html) on our documentation site.
+  scheduledStartDate: 2018-01-23T13:30:00+05:30
+  phases:
+  - phase: Select new environment
+    tasks:
+    - name: What is currently live?
+      type: xlrelease.ScriptTask
+      description: |-
+        This script inspects what environment is currently live and determines what will be the new environment to deploy to.
+
+        It uses global variables to maintain the state.
+      script: |-
+        missingGlobalVarsMessage = """
+
+        ### Missing global variables
+
+        Please add the following global variables:
+
+        1. `global.blue-green.environments` of type **List** that contains the names of the Blue/Green environments in Digital.ai Deploy.
+        2. `global.blue-green.live-environment` of type **List Box** that takes its values from **global.blue-green.environments**.
+        3. `global.blue-green.live-version` of type **Text** that contains the current running version.
+
+        These global variables are required to track environment status.
+
+        ---
+
+        """
+
+        # Check if global variables are defined
+        if ('global.blue-green.live-environment' not in globalVariables
+            or 'global.blue-green.live-environment' not in globalVariables
+            or 'global.blue-green.live-version' not in globalVariables):
+
+            print missingGlobalVarsMessage
+            raise Exception("Missing global variables")
+
+        # Switch environments
+        if globalVariables['global.blue-green.live-environment'] == globalVariables['global.blue-green.environments'][0]:
+            releaseVariables['new-environment'] = globalVariables['global.blue-green.environments'][1]
+        else:
+            releaseVariables['new-environment'] = globalVariables['global.blue-green.environments'][0]
+    - name: Confirm new environment
+      type: xlrelease.UserInputTask
+      description: |-
+        **Live version:** `${global.blue-green.live-version}`
+        **Current live environment:** `${global.blue-green.live-environment}`
+
+        ---
+
+        **New version:** `${application}/${version}`.
+      variables:
+      - new-environment
+    color: '#3D6C9E'
+  - phase: Deploy and test
+    tasks:
+    - name: "Deploy ${application}/${version} to ${new-environment}"
+      type: xldeploy.Deploy
+      deploymentPackage: "${application}/${version}"
+      deploymentEnvironment: "${new-environment}"
+      numberOfContinueRetrials: 0
+      pollingInterval: 10
+      numberOfPollingTrials: 0
+      displayStepLogs: true
+      connectionRetries: 10
+      description: |-
+        Use Digital.ai Deploy to do the actual deployment.
+
+        Configure the Digital.ai Deploy server in **Connections**.
+      owner: admin
+    - name: "Run tests on ${new-environment}"
+      type: xlrelease.Task
+      description: |-
+        ### Run acceptance tests
+
+        Perform the acceptance tests before taking this version into production.
+
+        **Application version:** `${application}/${version}`
+        **Environment:** `${new-environment}`
+    - name: OK to switch?
+      type: xlrelease.GateTask
+      description: |-
+        **Current environment:** `${global.blue-green.live-environment}`
+        **Current version:** `${global.blue-green.live-version}`
+
+        ---
+
+        **New environment:** `${new-environment}`
+        **New version:** `${application}/${version}`
+
+        The new version has been tested and the environment is ready to be switched over.
+
+
+        ###  >> Please confirm the switch by completing this task <<
+    color: '#FF9E49'
+  - phase: Switch to live
+    tasks:
+    - name: Reconfigure load balancer
+      type: xlrelease.Task
+      description: |-
+        Configure the load balancer to point to the environment running the new version.
+
+        **New environment:** `${new-environment}`
+        **New version:** `${application}/${version}`
+
+        Complete this task when the switch has been made.
+    - name: Update registry with live environment
+      type: xlrelease.ScriptTask
+      description: This script updates the global variables that keep track of the
+        live environment and live version.
+      script: |-
+        globalVariables['global.blue-green.live-environment'] = '${new-environment}'
+        globalVariables['global.blue-green.live-version'] = '${application}/${version}'
+    - name: Send notification that new version is live
+      type: xlrelease.NotificationTask
+      description: Send out a notification to announce the new version being live.
+      precondition: "False ## Remove this line to send the email"
+      subject: "${application}/${version} is now live!"
+      body: "**${application}/${version}** has been deployed to **${new-environment}**\
+        \ and is now live!"
+    color: '#498500'
+  variables:
+  - type: xlrelease.StringVariable
+    key: application
+    label: Application name
+    description: The name of the application in Digital.ai Deploy.
+    value: PetClinic-war
+  - type: xlrelease.StringVariable
+    key: version
+    label: Version
+    description: The version of the application in Digital.ai Deploy that will be
+      deployed in this release.
+  - type: xlrelease.StringVariable
+    key: new-environment
+    requiresValue: false
+    showOnReleaseStart: false
+    label: Environment to deploy to
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      variableMapping:
+        values: "${global.blue-green.environments}"
+  scriptUsername: admin
+  scriptUserPassword: !value "xlrelease_Release_Deployment_pattern__Blue___Green_scriptUserPassword"
+  riskProfile: Default risk profile
+- template: Welcome to Release!
+  scheduledStartDate: 2023-05-04T09:00:00+05:30
+  phases:
+  - phase: Introduction
+    tasks:
+    - name: Welcome! Click me to get started
+      type: xlrelease.Task
+      description: |-
+        ## Welcome to Digital.ai Release!
+
+        This introduction will help you to understand the Digital.ai Release product.
+
+        This card is the first task in the **Welcome to Digital.ai Release!** procedure. It has been assigned to '${user}', and that's why you are seeing it now.
+
+        When you have read this, click on **Complete** to advance to the next task.
+
+        Please note - if you would no longer like to have new users receive this welcome release, you can simply delete the **Welcome to Digital.ai Release** template from your **Samples & Tutorials** folder.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+    - name: Understanding tasks and releases. (Click me to continue)
+      type: xlrelease.Task
+      description: |-
+        The **Tasks** screen shows a list of all active tasks for the current user -- presenting a list of "to do" items.
+
+        All tasks are steps in a **release**.
+
+        Releases are at the heart of Digital.ai Release. A release represents a number of tasks with people working on it. Release allows you to plan, track and execute releases automatically and acts as a single source of truth for all people involved to make the release a success.
+
+        A **task** can be either some activity done by a person, or an automated task that will integrate with other systems or run a script. Release makes it easy to model your current process and to transition gradually to a more automated procedure.
+
+        There are two types of tasks that are assigned to people: the manual task (such as this one), which indicates that something has to be done by somebody.
+
+        The other one is a **Gate**, which indicates a checkpoint in the release, i.e. a set of conditions that need to be met for the release to continue.
+
+        Click on **Complete** on this task to see an example of a Gate task.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+    - name: "Gates: checkpoints in a release"
+      type: xlrelease.GateTask
+      description: |-
+        This task is a 'gate': a set of conditions that need to be completed before we can continue.
+
+        Gates are similar to manual tasks, but have some additional properties
+        * You can add conditions
+        * You can add dependencies on other releases
+        * Gates are colored red to stand out in the Release Flow editor and overviews.
+
+        Tick the boxes below to indicate the progress on this Gate task. When all boxes are ticked, you may complete the task.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+      conditions:
+      - name: Step 1
+        type: xlrelease.GateCondition
+      - name: Step 2
+        type: xlrelease.GateCondition
+    - name: Task assignment & teams
+      type: xlrelease.Task
+      description: |-
+        Tasks are assigned to users. If a task is assigned to you and it is active (ie. needs to be done now) it will show up in the Tasks overview screen that is shown when you log in.
+
+        Tasks can also be assigned to **Teams**. The release manager defines the teams in a release. As the name implies, there can be several people in a team. If a task is assigned to a team, it means that it is a joint responsibility to complete the task.
+
+        If a task is assigned to a team you're in, but not to you directly, it will still show up in your task overview.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+    - name: Skipping and failing a task
+      type: xlrelease.Task
+      description: |-
+        There are three ways to finish a task.
+
+        * **Complete**. Marks the task as done and advances to the next task in the release.
+        * **Skip**. No work has been done to complete this task, but it can be ignored. The release flow advances to the next task in the release. The user must comment on why this task was skipped.
+        * **Fail**. The task can't be completed for some reason. The release is stalled and the task is now assigned to the Release Admin, the person responsible for this release. The Release Admin has to decide what to do next: skip this task or assign it to somebody else and retry it.
+
+        Now press **Skip** to go to the next topic.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+    - name: Continue with the tour
+      type: xlrelease.Task
+      description: |-
+        We're now at the end of the general introduction for Digital.ai Release users.
+
+        You're now all set to work on tasks in Release.
+
+        If you're interested in using Digital.ai Release as a release manager, please continue with the guided tour. Like this introduction, the guided tour is an actual release in Release.
+
+        To start the tour, do the following:
+        * Go to the [Templates](#/templates) page. (If the Templates page is not accessible, please consult with the administrator of the Digital.ai Release installation.)
+        * Locate the template called **Guided tour for release managers**
+        * Click on **New release from template**
+        * In the **Create new release** page, enter a release name and your login name for the `user` variable at the bottom of the page.
+        * Press **Create**
+
+        You will be taken to the Release Flow editor, showing all tasks in the Guided Tour release. The tour is now ready to be started.
+
+        * Click on **Start Release** and the tour will begin.
+      owner: "${user}"
+      waitForScheduledStartDate: false
+    color: '#3D6C9E'
+  tags:
+  - tutorial
+  variables:
+  - type: xlrelease.StringVariable
+    key: user
+  riskProfile: Default risk profile

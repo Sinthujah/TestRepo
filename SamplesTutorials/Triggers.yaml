@@ -1,0 +1,38 @@
+# Exported from:        http://minserver:5516/
+# Release version:      23.1.0-rc.3
+# Date created:         Fri May 05 16:03:24 IST 2023
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: Samples & Tutorials
+spec:
+- name: Git trigger test
+  type: git.Poll
+  enabled: false
+  periodicity: "60"
+  releaseTitle: ddd
+  variables:
+  - type: xlrelease.StringVariable
+    key: application
+    label: Application name
+    description: The name of the application in Digital.ai Deploy.
+    value: PetClinic-war
+  - type: xlrelease.StringVariable
+    key: version
+    label: Version
+    description: The version of the application in Digital.ai Deploy that will be
+      deployed in this release.
+    value: a
+  template: "Deployment pattern: Blue / Green"
+  gitRepository: My Git repo
+  branch: main
+- name: time trigger test
+  type: time.Schedule
+  releaseTitle: Test release
+  template: Configure Release
+  pollType: REPEAT
+  periodicity: "120"
+  enabled: false
+  triggerTime: 2022-03-15T10:01:34.224Z
