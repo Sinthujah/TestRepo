@@ -28,11 +28,11 @@ spec:
   template: "Deployment pattern: Blue / Green"
   gitRepository: My Git repo
   branch: main
-- name: time trigger test
+- name: time trigger test - old
   type: time.Schedule
   releaseTitle: Test release
   template: Configure Release
   pollType: REPEAT
   periodicity: "120"
-  enabled: false
+  enabled: true
   triggerTime: 2022-03-15T10:01:34.224Z
