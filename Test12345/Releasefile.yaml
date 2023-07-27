@@ -6,9 +6,9 @@
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: test 123
+  home: test 12345
 spec:
-- template: Workflow template 123
+- template: Workflow template 12345
   description: Test workflow template creation
   scheduledStartDate: 2023-05-12T14:02:29.678+05:30
   phases:
