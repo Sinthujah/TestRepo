@@ -15,7 +15,7 @@ spec:
   phases:
   - phase: New Phase
     tasks:
-    - name: task2
+    - name: task2345
       type: xlrelease.Task
     - name: task3
       type: xlrelease.Task
@@ -29,7 +29,7 @@ spec:
   - category1
   riskProfile: Default risk profile
   author: hero
-- template: normal template1
+- template: normal template1234
   scheduledStartDate: 2023-08-14T09:00:00+05:30
   dueDate: 2023-08-14T10:00:00+05:30
   phases:
