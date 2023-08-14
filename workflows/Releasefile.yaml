@@ -1,0 +1,14 @@
+# Exported from:        http://Jagan-lt10:5516/
+# Release version:      23.3.0-beta.5
+# Date created:         Mon Aug 14 14:52:11 IST 2023
+
+---
+apiVersion: xl-release/v1
+kind: Import
+spec:
+  imports:
+  - Template_Folder427f005bb4f940aeb45b9a25c9f24978.yaml
+  - Template_Folderd4f04640858546e983001396f311eda0.yaml
+  - Workflow_Folder427f005bb4f940aeb45b9a25c9f24978.yaml
+  - Workflow_Folderd4f04640858546e983001396f311eda0.yaml
+  - Workflow_intro.yaml
