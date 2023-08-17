@@ -6,9 +6,9 @@
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home: Digital.ai - Official
+  home:
 spec:
-- template: workflow1
+- template: workflow78
   scheduledStartDate: 2023-08-17T09:00:00+05:30
   phases:
   - phase: New Phase
@@ -17,8 +17,4 @@ spec:
       type: xlrelease.Task
   kind: WORKFLOW
   riskProfile: Default risk profile
-- directory: Workflow Executions
-- directory: Workflows
-  children:
-  - directory: ArgoCD
-  - directory: Digital.ai Deploy
+
