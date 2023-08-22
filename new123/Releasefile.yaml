@@ -1,15 +1,21 @@
 # Exported from:        http://Jagan-lt10:5516/
 # Release version:      23.3.0-SNAPSHOT
-# Date created:         Thu Aug 17 16:57:25 IST 2023
+# Date created:         Tue Aug 22 15:43:18 IST 2023
 
 ---
 apiVersion: xl-release/v1
 kind: Templates
 metadata:
-  home:
+  home: Digital.ai - Official
 spec:
+- template: template1
+  scheduledStartDate: 2023-08-17T09:00:00+05:30
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
 - template: workflow78
   scheduledStartDate: 2023-08-17T09:00:00+05:30
+  dueDate: 2023-08-17T10:00:00+05:30
   phases:
   - phase: New Phase
     tasks:
@@ -17,4 +23,37 @@ spec:
       type: xlrelease.Task
   kind: WORKFLOW
   riskProfile: Default risk profile
-
+- directory: Workflow Executions
+- directory: Workflows
+  children:
+  - template: ggg
+    scheduledStartDate: 2023-08-22T09:00:00+05:30
+    phases:
+    - phase: New Phase
+    riskProfile: Default risk profile
+  - template: workflow now
+    scheduledStartDate: 2023-08-22T09:00:00+05:30
+    dueDate: 2023-08-22T10:00:00+05:30
+    phases:
+    - phase: New Phase
+      tasks:
+      - name: test1
+        type: xlrelease.Task
+      - name: test2
+        type: xlrelease.Task
+    kind: WORKFLOW
+    riskProfile: Default risk profile
+  - template: workflow89
+    scheduledStartDate: 2023-08-22T09:00:00+05:30
+    dueDate: 2023-08-22T10:00:00+05:30
+    phases:
+    - phase: New Phase
+      tasks:
+      - name: test1
+        type: xlrelease.Task
+      - name: test2
+        type: xlrelease.Task
+    kind: WORKFLOW
+    riskProfile: Default risk profile
+  - directory: ArgoCD
+  - directory: Digital.ai Deploy
