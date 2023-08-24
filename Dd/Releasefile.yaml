@@ -33,5 +33,6 @@ spec:
     tasks:
     - name: task1
       type: xlrelease.Task
+      locked: true
   kind: WORKFLOW
   riskProfile: Default risk profile
