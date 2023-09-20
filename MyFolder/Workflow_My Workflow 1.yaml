@@ -16,7 +16,7 @@ spec:
     - name: task1
       type: xlrelease.Task
     - name: task2
-      type: xlrelease.Task
+      type: xlrelease.CreateReleaseTask
   kind: WORKFLOW
   disableNotifications: true
   author: admin
