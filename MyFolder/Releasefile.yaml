@@ -23,7 +23,7 @@ spec:
       type: xlrelease.Task
     - name: "5"
       type: xlrelease.Task
-    - name: "6"
+    - name: "7"
       type: xlrelease.Task
   kind: WORKFLOW
   disableNotifications: true
