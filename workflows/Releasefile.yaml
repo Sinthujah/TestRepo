@@ -1,11 +1,26 @@
 # Exported from:        http://Jagan-lt10:5516/
-# Release version:      23.3.0-beta.5
-# Date created:         Mon Aug 14 15:01:49 IST 2023
+# Release version:      23.3.0-SNAPSHOT
+# Date created:         Tue Sep 26 17:40:48 IST 2023
 
 ---
 apiVersion: xl-release/v1
-kind: Import
+kind: Templates
+metadata:
+  home: Digital.ai - Official/Workflows
 spec:
-  imports:
-  - Templates.yaml
-  - Workflows.yaml
+- template: Workflow 1
+  scheduledStartDate: 2023-09-26T09:00:00+05:30
+  phases:
+  - phase: Workflow tasks
+    tasks:
+    - name: task1
+      type: xlrelease.Task
+  kind: WORKFLOW
+  disableNotifications: true
+  author: admin
+  defaultTargetFolder: ./
+- directory: AWS
+- directory: ArgoCD
+- directory: Digital.ai Deploy
+- directory: Secret Management
+- directory: Terraform
