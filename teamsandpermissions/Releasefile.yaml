@@ -1,6 +1,6 @@
 # Exported from:        http://Sinthuja:5516/
 # Release version:      24.1.0-SNAPSHOT
-# Date created:         Wed Feb 07 11:01:30 IST 2024
+# Date created:         Wed Feb 07 11:24:03 IST 2024
 
 ---
 apiVersion: xl-release/v1
@@ -17,20 +17,24 @@ spec:
     - folder#edit_security
   - name: Release mgmt.
     permissions:
-    - release#edit_task
-    - template#edit
-    - release#view
-    - release#reassign_task
-    - release#abort
     - release#start
+    - release#edit_task
     - release#edit
+    - release#abort
+    - release#reassign_task
+    - release#view
+    - template#edit
   - name: Team A
     users:
     - hs1
     permissions:
-    - folder#view
+    - folder#apply_changes
+    - folder#generate_configuration
+    - folder#edit_versions
+    - folder#view_versions
     - template#view
     - folder#edit_teams
+    - folder#view
     - folder#edit
   - name: Release Manager
     users:
@@ -65,6 +69,7 @@ spec:
     users:
     - admin
     permissions:
+    - folder#edit_versions
     - folder#view_versions
     - delivery#view
     - folder#edit_configuration
@@ -73,34 +78,34 @@ spec:
     - dashboard#edit
     - group#view
     - delivery_pattern#edit
-    - folder#edit
     - delivery#edit_tracked_item
     - folder#generate_configuration
+    - folder#edit
     - delivery#edit
     - group#edit
     - folder#apply_changes
     - app_pipelines#edit
     - folder#edit_notifications
     - delivery_pattern#view
-    - folder#edit_versions
-    - app_pipelines#view
     - folder#view
+    - folder#edit_variables
+    - app_pipelines#view
   - name: Template Owner
     users:
     - admin
     permissions:
+    - template#edit_precondition
+    - folder#view
+    - template#lock_task
+    - template#edit_failure_handler
+    - template#edit_triggers
+    - template#create_release
     - trigger#view_trigger
     - template#create_release_other_folder
     - template#edit_security
     - app_pipelines#view
-    - template#edit_triggers
-    - template#create_release
-    - template#edit
-    - template#edit_failure_handler
     - template#view
-    - template#edit_precondition
-    - template#lock_task
-    - folder#view
+    - template#edit
   - name: Release Admin
     users:
     - admin
