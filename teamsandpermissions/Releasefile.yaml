@@ -76,7 +76,6 @@ spec:
     - folder#edit_variables
     - delivery#edit_tracked_item
     - folder#generate_configuration
-    - folder#edit
     - delivery#edit
     - group#edit
     - folder#apply_changes
