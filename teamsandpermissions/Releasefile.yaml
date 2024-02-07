@@ -13,6 +13,7 @@ spec:
   - name: Team B
     users:
     - hs2
+    - admin
     permissions:
     - folder#edit_security
   - name: Release mgmt.
@@ -27,6 +28,7 @@ spec:
   - name: Team A
     users:
     - hs1
+    - admin
     permissions:
     - folder#apply_changes
     - folder#generate_configuration
