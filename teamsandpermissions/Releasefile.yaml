@@ -81,6 +81,8 @@ spec:
     - folder#generate_configuration
     - delivery#edit
     - group#edit
+    - folder#edit_security
+    - folder#edit
     - folder#apply_changes
     - app_pipelines#edit
     - folder#edit_notifications
