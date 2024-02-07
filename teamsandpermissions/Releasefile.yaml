@@ -74,7 +74,6 @@ spec:
     - delivery#view
     - folder#edit_configuration
     - dashboard#view
-    - folder#edit_security
     - dashboard#edit
     - group#view
     - delivery_pattern#edit
