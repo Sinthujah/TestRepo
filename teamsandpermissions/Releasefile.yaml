@@ -73,7 +73,7 @@ spec:
     - dashboard#edit
     - group#view
     - delivery_pattern#edit
-    - folder#edit_variables
+    - folder#edit
     - delivery#edit_tracked_item
     - folder#generate_configuration
     - delivery#edit
