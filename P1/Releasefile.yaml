@@ -17,7 +17,7 @@ spec:
   type: jenkins.Server
   url: http://192.168.1.16:8080/
   username: ghgh
-- name: Jira
+- name: Jira new
   type: jira.Server
   url: https://digitalai.atlassian.net/jira/
 - name: Nexus server
