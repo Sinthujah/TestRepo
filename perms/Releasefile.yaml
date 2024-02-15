@@ -82,7 +82,7 @@ spec:
     - folder#edit_variables
     - release#view
   - name: Release Admin
-  users:
+    users:
     - admin
     permissions:
     - release#edit_task_flag
