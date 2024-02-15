@@ -1,0 +1,150 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      24.1.0-SNAPSHOT
+# Date created:         Thu Feb 15 14:21:12 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Permissions
+metadata:
+  home: Samples & Tutorials
+spec:
+- directory: "."
+  teams:
+  - name: Release mgmt.
+    permissions:
+    - release#edit_task
+    - release#abort
+    - template#edit
+    - release#start
+    - release#view
+    - release#edit
+    - release#reassign_task
+  - name: Dev
+    permissions:
+    - release#view
+    - release#edit_task
+  - name: Ops
+    permissions:
+    - release#view
+    - release#edit_task
+  - name: teamABCD
+    roles:
+    - Authenticated Users
+    users:
+    - hs1
+    permissions:
+    - folder#edit_teams
+  - name: Team A
+    users:
+    - hs2
+    - admin
+    - hs1
+    permissions:
+    - folder#view
+    - folder#edit_teams
+    - template#lock_task
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_notifications
+    - delivery#view
+    - group#view
+    - folder#edit_variables
+    - folder#edit_versions
+    - app_pipelines#view
+    - folder#edit_security
+    - dashboard#edit
+    - delivery_pattern#edit
+    - delivery#edit
+    - folder#view
+    - folder#edit
+    - folder#generate_configuration
+    - delivery_pattern#view
+    - app_pipelines#edit
+    - folder#view_versions
+    - group#edit
+    - delivery#edit_tracked_item
+    - folder#edit_configuration
+    - dashboard#view
+    - folder#apply_changes
+  - name: Team B
+    roles:
+    - Digital.ai Analytics Service User
+    users:
+    - hs2
+    permissions:
+    - folder#edit_security
+  - name: QA
+    users:
+    - admin
+    permissions:
+    - release#edit_task
+    - folder#edit_teams
+    - folder#edit_variables
+    - folder#edit_security
+    - release#view
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_task_flag
+    - release#edit_failure_handler
+    - app_pipelines#view
+    - release#start
+    - workflow#view_execution
+    - workflow#abort_execution
+    - release#edit_blackout
+    - template#view
+    - release#lock_task
+    - folder#view
+    - release#task_transition
+    - release#edit_task_script
+    - release#edit_task_tags
+    - release#edit_task_configuration_facet
+    - release#advance_task_transition
+    - release#edit_security
+    - release#edit_task
+    - trigger#view_trigger
+    - release#view
+    - release#edit_task_attachments
+    - trigger#edit_trigger
+    - release#edit_task_dates
+    - release#edit
+    - release#edit_task_input_output_properties
+    - workflow#start_execution
+    - release#reassign_task
+    - release#edit_precondition
+    - release#abort
+    - release#restart_phase
+    - release#edit_task_description
+  - name: Release Manager
+    users:
+    - admin
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - trigger#view_trigger
+    - template#create_release_other_folder
+    - template#view
+    - template#edit_failure_handler
+    - app_pipelines#view
+    - template#lock_task
+    - template#edit_triggers
+    - folder#view
+    - template#edit_precondition
+    - template#create_release
+    - template#edit
+    - template#edit_security
+  - name: Release Managers
+    permissions:
+    - release#edit_task
+    - release#view
+    - template#view
+    - template#create_release
+    - release#abort
+    - release#start
+    - release#edit
+    - release#reassign_task
+    - release#edit_security
