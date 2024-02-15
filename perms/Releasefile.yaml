@@ -36,7 +36,6 @@ spec:
     - folder#edit_teams
   - name: Team A
     users:
-    - hs2
     - admin
     - hs1
     permissions:
@@ -80,12 +79,10 @@ spec:
     - admin
     permissions:
     - release#edit_task
-    - folder#edit_teams
     - folder#edit_variables
-    - folder#edit_security
     - release#view
   - name: Release Admin
-    users:
+  users:
     - admin
     permissions:
     - release#edit_task_flag
