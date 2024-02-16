@@ -1,0 +1,136 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      23.3.0
+# Date created:         Fri Feb 16 15:28:09 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Permissions
+metadata:
+  home: Samples & Tutorials
+spec:
+- directory: "."
+  teams:
+  - name: TeamA
+    users:
+    - hs1
+    - hs2
+    permissions:
+    - folder#edit_teams
+    - template#view
+    - folder#view
+    - folder#view_versions
+    - folder#apply_changes
+    - folder#edit_versions
+    - folder#generate_configuration
+  - name: Template Owner
+    users:
+    - admin
+    permissions:
+    - template#create_release_other_folder
+    - template#edit
+    - trigger#view_trigger
+    - template#lock_task
+    - template#view
+    - folder#view
+    - template#create_release
+    - template#edit_precondition
+    - template#edit_failure_handler
+  - name: Dev
+    permissions:
+    - release#view
+    - release#edit_task
+  - name: Release Managers
+    permissions:
+    - release#edit
+    - release#start
+    - release#reassign_task
+    - template#view
+    - template#create_release
+    - release#abort
+    - release#view
+    - release#edit_task
+  - name: Release Admin
+    users:
+    - admin
+    permissions:
+    - release#edit_precondition
+    - release#edit
+    - workflow#view_execution
+    - release#advance_task_transition
+    - workflow#abort_execution
+    - release#restart_phase
+    - release#lock_task
+    - folder#view
+    - release#edit_task_script
+    - release#edit_task_flag
+    - release#edit_task_configuration_facet
+    - release#edit_task_dates
+    - workflow#start_execution
+    - release#edit_task
+    - release#edit_task_attachments
+    - release#task_transition
+    - trigger#view_trigger
+    - release#reassign_task
+    - release#edit_task_input_output_properties
+    - release#edit_task_tags
+    - release#edit_task_description
+    - trigger#edit_trigger
+    - release#view
+    - release#start
+    - release#edit_blackout
+    - template#view
+    - release#edit_failure_handler
+    - release#abort
+  - name: Ops
+    permissions:
+    - release#view
+    - release#edit_task
+  - name: Release mgmt.
+    permissions:
+    - release#edit
+    - template#edit
+    - release#start
+    - release#reassign_task
+    - template#view
+    - template#create_release
+    - release#abort
+    - release#view
+    - release#edit_task
+  - name: TeamB
+    users:
+    - hs2
+    permissions:
+    - folder#edit_security
+  - name: QA
+    users:
+    - admin
+    permissions:
+    - folder#edit_security
+    - release#view
+    - release#edit_task
+  - name: Release Manager
+    users:
+    - admin
+  - name: Folder Owner
+    users:
+    - admin
+    permissions:
+    - folder#edit_variables
+    - delivery_pattern#edit
+    - folder#edit_configuration
+    - delivery#edit
+    - folder#view_versions
+    - folder#apply_changes
+    - group#view
+    - folder#edit_versions
+    - folder#edit_notifications
+    - delivery_pattern#view
+    - group#edit
+    - delivery#view
+    - delivery#edit_tracked_item
+    - folder#view
+    - folder#edit_security
+    - dashboard#edit
+    - folder#edit
+    - dashboard#view
+    - folder#generate_configuration
