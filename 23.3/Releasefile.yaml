@@ -13,7 +13,6 @@ spec:
   - name: TeamA
     users:
     - hs1
-    - hs2
     permissions:
     - folder#edit_teams
     - template#view
@@ -85,6 +84,7 @@ spec:
     permissions:
     - release#view
     - release#edit_task
+    - folder#edit_security
   - name: Release mgmt.
     permissions:
     - release#edit
@@ -99,6 +99,7 @@ spec:
   - name: TeamB
     users:
     - hs2
+    - admin
     permissions:
     - folder#edit_security
   - name: QA
