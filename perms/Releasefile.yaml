@@ -23,6 +23,7 @@ spec:
     permissions:
     - release#view
     - release#edit_task
+    - folder#edit_teams
   - name: Ops
     permissions:
     - release#view
@@ -36,7 +37,6 @@ spec:
     - folder#edit_teams
   - name: Team A
     users:
-    - admin
     - hs1
     permissions:
     - folder#view
