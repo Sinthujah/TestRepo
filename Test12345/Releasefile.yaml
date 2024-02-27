@@ -85,8 +85,6 @@ spec:
     - hs2
     - hs1
   - name: teamA
-  - name: dd
-  - name: dew
   - name: MyTeam2
     roles:
     - Template owner
