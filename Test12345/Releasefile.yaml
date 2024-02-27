@@ -34,11 +34,14 @@ spec:
     - folder#generate_configuration
     - folder#view
   - name: MyTeam12345
+    roles:
+    - Template owner
+    - Applications team access
     users:
     - hs2
-    - hs1
     permissions:
     - folder#view
+    - folder#edit_versions
   - name: Release Admin
     users:
     - admin
