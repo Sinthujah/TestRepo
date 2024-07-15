@@ -1,0 +1,13 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      24.3.0-SNAPSHOT
+# Date created:         Mon Jul 15 18:09:33 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Import
+spec:
+  imports:
+  - Connections.yaml
+  - Dashboard_dashboard.yaml
+  - Notifications.yaml
+  - Template_find folder id.yaml

@@ -1,0 +1,43 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      24.3.0-SNAPSHOT
+# Date created:         Mon Jul 15 18:09:33 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: Fol1/Fol3
+spec:
+- name: dashboard
+  type: xlrelease.BlankDashboard
+  owner: admin
+  tiles:
+  - name: Active releases
+    type: live.ReleasesTile
+    row: 0
+    col: 0
+    filters:
+    - type: xlrelease.DateFilter
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: Fol1/Fol3
+  - name: Active releases
+    type: live.ReleasesTile
+    row: 0
+    col: 2
+    filters:
+    - type: xlrelease.DateFilter
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: Fol1/Fol3
+  - name: Active releases by status
+    type: live.ReleasesByStatusTile
+    filters:
+    - type: xlrelease.DateFilter
+    - type: xlrelease.CompositeFilter
+      filters:
+      - type: xlrelease.FolderFilter
+        folder: Fol1/Fol3
