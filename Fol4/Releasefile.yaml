@@ -1,0 +1,11 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      24.3.0-SNAPSHOT
+# Date created:         Tue Jul 16 12:33:56 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Import
+spec:
+  imports:
+  - Dashboard_dashboard - subfolder4.yaml
+  - Notifications.yaml
