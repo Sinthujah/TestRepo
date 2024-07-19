@@ -11,4 +11,4 @@ metadata:
 spec:
 - folderVariables:
   - type: xlrelease.StringVariable
-    key: folder.fol1
+    key: folder.fol1variable
