@@ -1,0 +1,26 @@
+# Exported from:        http://Sinthuja:5516/
+# Release version:      24.3.0-SNAPSHOT
+# Date created:         Fri Jul 19 10:56:02 IST 2024
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: fol1/subfol2
+spec:
+- template: workflow1
+  scheduledStartDate: 2024-07-19T09:00:00+05:30
+  phases:
+  - phase: Workflow tasks
+    tasks:
+    - name: manual
+      type: xlrelease.Task
+    - name: create delivery
+      type: delivery.CreateDelivery
+      ^title: delivery created by release
+      pattern: fol1/subfol2/pattern 1
+  kind: WORKFLOW
+  disableNotifications: true
+  author: admin
+  defaultTargetFolder: fol1/subfol2
