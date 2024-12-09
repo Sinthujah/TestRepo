@@ -1,0 +1,17 @@
+# Exported from:        http://xl-release-nightly.xebialabs.com:5516/
+# Release version:      25.1.0-1209.113
+# Date created:         Mon Dec 09 12:07:21 CET 2024
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: test345
+spec:
+- template: test
+  scheduledStartDate: 2024-12-09T04:30:00+01:00
+  phases:
+  - phase: New Phase
+  riskProfile: Default risk profile
+  author: admin
