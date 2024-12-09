@@ -1,0 +1,141 @@
+# Exported from:        http://xl-release-nightly.xebialabs.com:5516/
+# Release version:      25.1.0-1209.113
+# Date created:         Mon Dec 09 12:00:34 CET 2024
+
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  path: /
+  home: test123
+spec:
+- template: "Deployment pattern: Canary Release"
+  description: |-
+    This Digital.ai Release template shows the **Canary Deployment Pattern**
+
+    The Canary Release deployment pattern is a pattern where a small subset on your production environment is used to test out new features. The environment is split into a 'canary' part and a 'main' part. The canary part is typically small and allows for fast deployments. A load balancer is used to direct traffic to all parts of the application, deciding which users go to the new version in the canary section and which users remain on the stable main section.
+
+    For more information, please read [Perform canary deployments](https://docs.digital.ai/bundle/devops-release-version-v.25.1/page/release/how-to/perform-canary-deployments.html) on our documentation site.
+  scheduledStartDate: 2018-01-23T09:00:00+01:00
+  phases:
+  - phase: Canary phase
+    tasks:
+    - name: Deploy to Canary environment
+      type: xldeploy.Deploy
+      deploymentPackage: "${application}/${newVersion}"
+      deploymentEnvironment: "${canaryEnvironment}"
+      numberOfContinueRetrials: 0
+      pollingInterval: 10
+      numberOfPollingTrials: 0
+      displayStepLogs: true
+      connectionRetries: 10
+      description: |-
+        Use Digital.ai Deploy to deploy to the Canary environment.
+
+        Configure the Digital.ai Deploy server in **Connections**.
+    - name: Run tests
+      type: xlrelease.Task
+      description: |-
+        ### Run acceptance tests
+
+        Perform the acceptance tests before taking this version into production.
+
+        **Application version:** `${application}/${newVersion}`
+        **Environment:** `${canaryEnvironment}`
+    - name: Confirm full deployment
+      type: xlrelease.UserInputTask
+      description: |-
+        **Main environment:** `${mainEnvironment}`
+        **Current version:** `${application}/${currentVersion}`
+        **New version:** `${application}/${newVersion}`
+
+        The new version has been tested on the Canary environment and is ready to be deployed to the Main environment.
+
+        If tests were not successful, the Canary environment can be rolled back.
+
+        Please confirm the switch by selecting the action below and completing this task
+      variables:
+      - action
+    color: "#FF9E49"
+  - phase: Rollout phase
+    tasks:
+    - name: Deploy to Main environment
+      type: xlrelease.SequentialGroup
+      description: This block is executed only if tests were successful and the new
+        version can be deployed to the Main environment.
+      precondition: "releaseVariables['action'] == 'Deploy to Main'"
+      tasks:
+      - name: Deploy to Main environment
+        type: xldeploy.Deploy
+        deploymentPackage: "${application}/${newVersion}"
+        deploymentEnvironment: "${mainEnvironment}"
+        numberOfContinueRetrials: 0
+        pollingInterval: 10
+        numberOfPollingTrials: 0
+        displayStepLogs: true
+        connectionRetries: 10
+        description: Use Digital.ai Deploy to deploy to the Main environment.
+      - name: Send notification that new version is live
+        type: xlrelease.NotificationTask
+        precondition: "False"
+        subject: "${application}/${newVersion} is now live!"
+        body: "**${application}/${newVersion}** has been deployed to **${mainEnvironment}**\
+          \ and is now live!"
+    - name: Rollback Canary environment
+      type: xlrelease.SequentialGroup
+      description: This block is executed only if tests failed and the Canary environment
+        needs to be rolled back.
+      precondition: "releaseVariables['action'] == 'Rollback Canary environment'"
+      tasks:
+      - name: Rollback Canary environment
+        type: xldeploy.Deploy
+        deploymentPackage: "${application}/${currentVersion}"
+        deploymentEnvironment: "${canaryEnvironment}"
+        numberOfContinueRetrials: 0
+        pollingInterval: 10
+        numberOfPollingTrials: 0
+        displayStepLogs: true
+        connectionRetries: 10
+        description: Use Digital.ai Deploy to rollback the Canary environment to the
+          original version.
+    color: "#498500"
+  variables:
+  - type: xlrelease.StringVariable
+    key: application
+    label: Application name
+    description: The name of the application in Digital.ai Deploy.
+    value: PetClinic-war
+  - type: xlrelease.StringVariable
+    key: newVersion
+    label: New version
+    description: The version of the application in Digital.ai Deploy that will be
+      deployed.
+  - type: xlrelease.StringVariable
+    key: currentVersion
+    label: Current version
+    description: The version of the application in Digital.ai Deploy that is currently
+      running.
+  - type: xlrelease.StringVariable
+    key: canaryEnvironment
+    label: Canary environment
+    description: "The name of the Canary environment in Digital.ai Deploy, without\
+      \ the 'Environments/' prefix."
+    value: Canary Deployment/Canary
+  - type: xlrelease.StringVariable
+    key: mainEnvironment
+    label: Main environment
+    description: "The name of the Main environment in Digital.ai Deploy, without the\
+      \ 'Environments/' prefix."
+    value: Canary Deployment/Main
+  - type: xlrelease.StringVariable
+    key: action
+    requiresValue: false
+    showOnReleaseStart: false
+    label: Action
+    valueProvider:
+      type: xlrelease.ListOfStringValueProviderConfiguration
+      values:
+      - Deploy to Main
+      - Rollback Canary environment
+    value: Deploy to Main
+  riskProfile: Default risk profile
