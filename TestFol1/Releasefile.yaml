@@ -1,0 +1,13 @@
+# Exported from:        http://qe-release-controller1.xebialabs.com:5516/
+# Release version:      25.3.0-422.756
+# Date created:         Wed Apr 30 08:59:39 UTC 2025
+
+---
+apiVersion: xl-release/v1
+kind: Import
+spec:
+  imports:
+  - Notifications.yaml
+  - Template_Configure Release.yaml
+  - Template_Sample Release Template.yaml
+  - Template_Test Template1.yaml
