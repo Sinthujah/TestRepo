@@ -12,7 +12,7 @@ spec:
 - template: Configure Release
   scheduledStartDate: 2025-04-28T09:00:00Z
   phases:
-  - phase: Setup mail server
+  - phase: Setup mail server test
     tasks:
     - name: Configure email address and mail server
       type: xlrelease.Task
