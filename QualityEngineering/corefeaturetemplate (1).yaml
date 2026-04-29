@@ -1,0 +1,144 @@
+---
+apiVersion: xl-release/v1
+kind: Templates
+metadata:
+  home: Core feature test template folder
+spec:
+- folderVariables:
+  - type: xlrelease.StringVariable
+    key: folder.foldervar
+    value: Applications/Foldera4540c9fa120477abb1cda00c4427647/Release9ab96014c1194409a5f68bbf0aa02512
+- template: core feature test template
+  scheduledStartDate: 2022-02-23T09:00:00+05:30
+  dueDate: 2022-02-23T10:00:00+05:30
+  phases:
+  - phase: Manual Phase
+    tasks:
+    - name: test manual task
+      type: xlrelease.Task
+      description: Give complete for the release to proceed
+      owner: admin
+      precondition: "releaseVariables['release-variable-id'] == ''"
+    color: '#3d6c9e'
+  - phase: Sequential Phase
+    tasks:
+    - name: test sequential task
+      type: xlrelease.SequentialGroup
+      tasks:
+      - name: Print task
+        type: xlrelease.ScriptTask
+        taskFailureHandlerEnabled: true
+        taskRecoverOp: SKIP_TASK
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+      - name: Print task1
+        type: xlrelease.ScriptTask
+        failureHandler: "taskApi.retryTask(getCurrentTask().getId(), \"Retrying task\
+          \ from failure handler.\")"
+        taskFailureHandlerEnabled: true
+        taskRecoverOp: RUN_SCRIPT
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+      - name: Print task 2
+        type: xlrelease.ScriptTask
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+    - name: Parallel task
+      type: xlrelease.ParallelGroup
+      tasks:
+      - name: test parallel inside sequence
+        type: xlrelease.ScriptTask
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+    color: '#3d6c9e'
+  - phase: Parallel Phase
+    tasks:
+    - name: test Parallel task
+      type: xlrelease.ParallelGroup
+      tasks:
+      - name: Print task
+        type: xlrelease.ScriptTask
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+      - name: Print task 1
+        type: xlrelease.ScriptTask
+        script: print("Hello world")
+      - name: Print task 3
+        type: xlrelease.ScriptTask
+        script: |-
+          print("Hello World")
+          for i in range (1, 10):
+               print(i)
+      - name: sequential task
+        type: xlrelease.SequentialGroup
+        tasks:
+        - name: test sequence inside parallel
+          type: xlrelease.ScriptTask
+          script: |-
+            print("Hello World")
+            for i in range (1, 10):
+                 print(i)
+    color: '#3d6c9e'
+  - phase: Create Release Phase
+    tasks:
+    - name: test create release task
+      type: xlrelease.CreateReleaseTask
+      description: Uses the template inside this folder to create release
+      newReleaseTitle: release created from template
+      createdReleaseId: "${release-variable-id}"
+      riskProfile: Default risk profile
+      template: ./template-for-create-release
+      folder: ./
+    - name: update the folder variable
+      type: xlrelease.ScriptTask
+      script: "folderVariables['folder.foldervar'] = releaseVariables['release-variable-id']"
+    color: '#3d6c9e'
+  - phase: Gate Phase
+    tasks:
+    - name: test gate task
+      type: xlrelease.GateTask
+      description: Waits for the completion of release
+      dependencies:
+      - type: xlrelease.Dependency
+        targetId: "${release-variable-id}"
+    color: '#3d6c9e'
+  - phase: User Input Phase
+    tasks:
+    - name: test user input task
+      type: xlrelease.UserInputTask
+      description: Please verify if the folder ID is fetched as variable and give
+        complete to complete the release
+      owner: admin
+      variables:
+      - release-variable-id
+    color: '#3d6c9e'
+  variables:
+  - type: xlrelease.StringVariable
+    key: release-variable-id
+    requiresValue: false
+    label: myrelease
+  scriptUsername: admin
+  scriptUserPassword: "admin"
+  riskProfile: Default risk profile
+- template: template-for-create-release
+  scheduledStartDate: 2022-02-23T09:00:00+05:30
+  dueDate: 2022-02-23T10:00:00+05:30
+  phases:
+  - phase: New Phase
+    tasks:
+    - name: test task
+      type: xlrelease.ScriptTask
+      script: print ("Hello")
+  scriptUsername: admin
+  scriptUserPassword: "admin"
+  riskProfile: Default risk profile
